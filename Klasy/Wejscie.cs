@@ -9,7 +9,7 @@ using SFML.System;
 
 namespace ProjektObiektowe
 {
-	static class Input
+	static class Wejscie
 	{
 	}
 }

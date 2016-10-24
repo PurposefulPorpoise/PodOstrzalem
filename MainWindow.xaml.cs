@@ -25,38 +25,35 @@ namespace ProjektObiektowe
 	/// </summary>
 	public partial class MainWindow : System.Windows.Window
 	{
-		private readonly CircleShape Kolko;
-		private Sprite Sprite = new Sprite();
+		private Sprite PlayerSprite = new Sprite();
 		//private readonly DispatcherTimer Timer = new DispatcherTimer(DispatcherPriority.Send);
 
 		public MainWindow()
 		{
 			InitializeComponent();
-			Rendering.Surface = DrawSurface;
-			Rendering.ToDraw.Add(Sprite);
-			Rendering.Initialize();
+			Rysowanie.PowierzchniaRys = DrawSurface;
+			Rysowanie.Rysowane.Add(PlayerSprite);
+			Rysowanie.Start();
 			DrawSurface.MouseMove += DrawSurface_MouseMove;
 			this.KeyDown += MainWindow_KeyDown;
 			this.KeyUp += MainWindow_KeyUp;
-			DebugLabel.Content = "Start";
-			Kolko = new CircleShape(40f);
-			Kolko.FillColor = SFML.Graphics.Color.Black;
-			Texture tex = new Texture("obrazek.png");
-			tex.Smooth = true;
-			Sprite.Texture = tex;
-			Sprite.Scale = new Vector2f(0.1f, 0.1f);
-			Sprite.Origin = (Vector2f)tex.Size / 2;
-			Sprite.Position = new Vector2f(80f, 580f);
+			this.Closed += MainWindow_Closed;
+			TestLabel.Content = "Start";
+		}
+
+		private void MainWindow_Closed(object sender, EventArgs e)
+		{
+			Rysowanie.Zakoncz();
 		}
 
 		private void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
 		{
-			if (e.Key == Key.D) Rendering.MoveSprite(Sprite, new Vector2f(400f,0f));
-			else if(e.Key == Key.A) Rendering.MoveSprite(Sprite, new Vector2f(-400f, 0f));
+			if (e.Key == Key.D) Rysowanie.PrzesunSprite(PlayerSprite, new Vector2f(300f,0f));
+			else if(e.Key == Key.A) Rysowanie.PrzesunSprite(PlayerSprite, new Vector2f(-300f, 0f));
 		}
 		private void MainWindow_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
 		{
-			if (e.Key == Key.D || e.Key == Key.A) Rendering.StopSprite(Sprite);
+			if (e.Key == Key.D || e.Key == Key.A) Rysowanie.ZatrzymajSprite(PlayerSprite);
 		}
 
 		private void DrawSurface_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -64,12 +61,11 @@ namespace ProjektObiektowe
 			//Sprite.Position = GetMousePosition();
 		}
 
-		private Vector2f GetMousePosition()
+		private Vector2f PozycjaMyszy()
 		{
 			Vector2i ScreenMouse = SFML.Window.Mouse.GetPosition();
 			return new Vector2f((float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).X,
 				(float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).Y);
 		}
-
 	}
 }
