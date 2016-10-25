@@ -83,7 +83,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Klasy\Wejscie.cs" />
     <Compile Include="Interfejsy\Smiertelny.cs" />
     <Compile Include="Klasy\PostacGracza.cs" />
     <Compile Include="Klasy\Rysowanie.cs" />
@@ -151,6 +150,8 @@
     </Content>
     <Content Include="libsndfile-1.dll" />
     <Content Include="openal32.dll" />
+    <None Include="SpriteSheetDebug.png" />
+    <None Include="testowySpriteSheet.png" />
     <None Include="stickman.png" />
     <None Include="Resources\Obrazek.png" />
   </ItemGroup>

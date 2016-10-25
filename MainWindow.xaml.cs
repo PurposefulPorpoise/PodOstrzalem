@@ -25,18 +25,14 @@ namespace ProjektObiektowe
 	/// </summary>
 	public partial class MainWindow : System.Windows.Window
 	{
-		private Sprite PlayerSprite = new Sprite();
-		//private readonly DispatcherTimer Timer = new DispatcherTimer(DispatcherPriority.Send);
-
-		public MainWindow()
+		PostacGracza Gracz;
+		public MainWindow() //poczatek programu
 		{
 			InitializeComponent();
+			Gracz = new PostacGracza(Properties.Resources.testowySpriteSheet,5, 2)
+			{ PredkoscChodzenia = 300f };
 			Rysowanie.PowierzchniaRys = DrawSurface;
-			Rysowanie.Rysowane.Add(PlayerSprite);
 			Rysowanie.Start();
-			DrawSurface.MouseMove += DrawSurface_MouseMove;
-			this.KeyDown += MainWindow_KeyDown;
-			this.KeyUp += MainWindow_KeyUp;
 			this.Closed += MainWindow_Closed;
 			TestLabel.Content = "Start";
 		}
@@ -44,21 +40,6 @@ namespace ProjektObiektowe
 		private void MainWindow_Closed(object sender, EventArgs e)
 		{
 			Rysowanie.Zakoncz();
-		}
-
-		private void MainWindow_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-		{
-			if (e.Key == Key.D) Rysowanie.PrzesunSprite(PlayerSprite, new Vector2f(300f,0f));
-			else if(e.Key == Key.A) Rysowanie.PrzesunSprite(PlayerSprite, new Vector2f(-300f, 0f));
-		}
-		private void MainWindow_KeyUp(object sender, System.Windows.Input.KeyEventArgs e)
-		{
-			if (e.Key == Key.D || e.Key == Key.A) Rysowanie.ZatrzymajSprite(PlayerSprite);
-		}
-
-		private void DrawSurface_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
-		{
-			//Sprite.Position = GetMousePosition();
 		}
 
 		private Vector2f PozycjaMyszy()

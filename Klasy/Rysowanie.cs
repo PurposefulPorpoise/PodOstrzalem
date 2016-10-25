@@ -13,19 +13,19 @@ namespace ProjektObiektowe
 	static class Rysowanie
 	{
 		static public List<Drawable> Rysowane = new List<Drawable>();
-		static private Dictionary<Transformable, Vector2f> DoPrzesuniecia = new Dictionary<Transformable, Vector2f>();
 		static private RenderWindow RenderWindow;
-		static private System.Windows.Forms.Timer Timer = new System.Windows.Forms.Timer();
-		static private Stopwatch DeltaCzasu = new Stopwatch();
+		static public System.Windows.Forms.Timer LicznikRysowania = new System.Windows.Forms.Timer();
+		static public Stopwatch DeltaCzasu = new Stopwatch();
+		static public ulong NrKlatki = 0;
 		static public SfmlDrawingSurface PowierzchniaRys;
 
 		public static void Start()
 		{
 			StworzRenderWindow();
-			Timer.Interval = 1000 / 60;
-			Timer.Tick += Render;
+			LicznikRysowania.Interval = 1000 / 60; //dla czestotliwosci odswiezania 60Hz
+			LicznikRysowania.Tick += Rysuj;
 			PowierzchniaRys.SizeChanged += Surface_SizeChanged;
-			Timer.Start();
+			LicznikRysowania.Start();
 			DeltaCzasu.Start();
 		}
 		private static void StworzRenderWindow()
@@ -33,12 +33,13 @@ namespace ProjektObiektowe
 			if (RenderWindow != null)
 			{
 				RenderWindow.SetActive(false);
-				RenderWindow.Dispose(); //usuwa obecne okno
+				RenderWindow.Dispose(); //usuwa obecne okno, np przy zmianie rozmiaru
 			}
 
-			var Context = new ContextSettings(24,8,4); //{ AntialiasingLevel = 4 };
+			ContextSettings Context = new ContextSettings(); //{ AntialiasingLevel = 4 };
 			RenderWindow = new RenderWindow(PowierzchniaRys.Handle, Context);
 			RenderWindow.SetVerticalSyncEnabled(true);
+			//RenderWindow.SetFramerateLimit(30);
 
 			RenderWindow.SetActive(true);
 		}
@@ -47,29 +48,22 @@ namespace ProjektObiektowe
 			StworzRenderWindow(); //tworzy nowe okno renderowania przy zmianie rozmiaru okna
 												//zeby uniknac bledow
 		}
-		static private void Render(object s, EventArgs e)
+		static private void Rysuj(object s, EventArgs e)
 		{
 			RenderWindow.DispatchEvents(); //przetwarza wydarzenia
 			//Trace.WriteLine(DeltaTime.Elapsed.TotalSeconds);
 			//DebugLabel.Content = DeltaTime.Elapsed.TotalSeconds;
 			RenderWindow.Clear(SFML.Graphics.Color.White); //czysci ekran
-			foreach(KeyValuePair<Transformable, Vector2f> para in DoPrzesuniecia) //przesuwa wszystkie zadane dla tej klatki
-				para.Key.Position += para.Value*(float)DeltaCzasu.Elapsed.TotalSeconds;
-			for(int i=0; i<Rysowane.Count; i++) //rysuje
-				RenderWindow.Draw(Rysowane[i]);
+
+			foreach (Drawable d in Rysowane) //rysuje
+			{
+				if (d != null) RenderWindow.Draw(d);
+				Trace.WriteLine("Drawing d");
+			}
 			RenderWindow.Display();
 			DeltaCzasu.Reset();
 			DeltaCzasu.Start();
-			//ToMove.Clear();
-			//PrevTime = TimeSinceStart.ElapsedTime;
-		}
-		static public void PrzesunSprite(Transformable obj, Vector2f speed)
-		{
-			if(!DoPrzesuniecia.ContainsKey(obj)) DoPrzesuniecia.Add(obj, speed);
-		}
-		static public void ZatrzymajSprite(Transformable obj)
-		{
-			if(DoPrzesuniecia.ContainsKey(obj)) DoPrzesuniecia.Remove(obj);
+			NrKlatki++;
 		}
 		public static byte[] BitmapaNaByte(System.Drawing.Bitmap img)
 		{
@@ -78,8 +72,8 @@ namespace ProjektObiektowe
 		}
 		public static void Zakoncz()
 		{
-			Timer.Stop();
-			Timer.Dispose();
+			LicznikRysowania.Stop();
+			LicznikRysowania.Dispose(); //zeby nie wywolywal rysowania po zamknieciu okna
 			RenderWindow.Close();
 		}
 
