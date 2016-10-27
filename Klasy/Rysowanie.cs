@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Diagnostics;
 using SFML.Window;
 using SFML.Graphics;
@@ -27,7 +28,20 @@ namespace ProjektObiektowe
 			PowierzchniaRys.SizeChanged += Surface_SizeChanged;
 			LicznikRysowania.Start();
 			DeltaCzasu.Start();
+			Application.Current.MainWindow.Deactivated += Zminimalizowano;
+			Application.Current.MainWindow.Activated += Powrot;
 		}
+
+		private static void Powrot(object sender, EventArgs e)
+		{
+			LicznikRysowania.Start();
+		}
+
+		private static void Zminimalizowano(object sender, EventArgs e)
+		{
+			LicznikRysowania.Stop();
+		}
+
 		private static void StworzRenderWindow()
 		{
 			if (RenderWindow != null)
@@ -39,7 +53,7 @@ namespace ProjektObiektowe
 			ContextSettings Context = new ContextSettings(); //{ AntialiasingLevel = 4 };
 			RenderWindow = new RenderWindow(PowierzchniaRys.Handle, Context);
 			RenderWindow.SetVerticalSyncEnabled(true);
-			//RenderWindow.SetFramerateLimit(30);
+			//RenderWindow.SetFramerateLimit(6);
 
 			RenderWindow.SetActive(true);
 		}

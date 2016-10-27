@@ -11,8 +11,6 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using System.Diagnostics;
 using SFML.Window;
 using SFML.Graphics;
@@ -29,12 +27,17 @@ namespace ProjektObiektowe
 		public MainWindow() //poczatek programu
 		{
 			InitializeComponent();
-			Gracz = new PostacGracza(Properties.Resources.testowySpriteSheet,5, 2)
-			{ PredkoscChodzenia = 300f };
+			Gracz = new PostacGracza(Properties.Resources.clayman, 4, 2)
+			{ PredkoscChodzenia = 200f };
 			Rysowanie.PowierzchniaRys = DrawSurface;
 			Rysowanie.Start();
 			this.Closed += MainWindow_Closed;
-			TestLabel.Content = "Start";
+			Rysowanie.LicznikRysowania.Tick += LicznikRysowania_Tick;	
+		}
+
+		private void LicznikRysowania_Tick(object sender, EventArgs e)
+		{
+			TestLabel.Content = Gracz.KierunekSprita.ToString();
 		}
 
 		private void MainWindow_Closed(object sender, EventArgs e)
@@ -47,6 +50,10 @@ namespace ProjektObiektowe
 			Vector2i ScreenMouse = SFML.Window.Mouse.GetPosition();
 			return new Vector2f((float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).X,
 				(float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).Y);
+		}
+		public void SetTestLabel()
+		{
+
 		}
 	}
 }
