@@ -80,7 +80,7 @@ namespace ProjektObiektowe
 					SpriteGlowny.Rotation = 0f;
 					break;
 				case Kierunek.NE:
-					SpriteGlowny.Position += new Vector2f(odlegloscPrzesuniecia, -odlegloscPrzesuniecia);
+					SpriteGlowny.Position += new Vector2f(odlegloscPrzesuniecia, -odlegloscPrzesuniecia)/1.41f;
 					SpriteGlowny.Rotation = 45f; //w stopniach
 					break;
 				case Kierunek.E:
@@ -88,7 +88,7 @@ namespace ProjektObiektowe
 					SpriteGlowny.Rotation = 90f;
 					break;
 				case Kierunek.SE:
-					SpriteGlowny.Position += new Vector2f(odlegloscPrzesuniecia, odlegloscPrzesuniecia);
+					SpriteGlowny.Position += new Vector2f(odlegloscPrzesuniecia, odlegloscPrzesuniecia) / 1.41f;
 					SpriteGlowny.Rotation = 135f;
 					break;
 				case Kierunek.S:
@@ -96,7 +96,7 @@ namespace ProjektObiektowe
 					SpriteGlowny.Rotation = 180f;
 					break;
 				case Kierunek.SW:
-					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, odlegloscPrzesuniecia);
+					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, odlegloscPrzesuniecia) / 1.41f;
 					SpriteGlowny.Rotation = 225f;
 					break;
 				case Kierunek.W:
@@ -104,7 +104,7 @@ namespace ProjektObiektowe
 					SpriteGlowny.Rotation = 270f;
 					break;
 				case Kierunek.NW:
-					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, -odlegloscPrzesuniecia);
+					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, -odlegloscPrzesuniecia) / 1.41f;
 					SpriteGlowny.Rotation = 315f;
 					break;
 				}
