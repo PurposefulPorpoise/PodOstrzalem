@@ -133,6 +133,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="zgory.png" />
     <None Include="clayman.jpg" />
     <None Include="clayman.png" />
     <Content Include="csfml-audio-2.dll">
@@ -150,6 +151,7 @@
     <Content Include="csfml-window-2.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="debugZGory.png" />
     <Content Include="libsndfile-1.dll" />
     <Content Include="openal32.dll" />
     <None Include="SpriteSheetDebug.png" />

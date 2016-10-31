@@ -27,7 +27,7 @@ namespace ProjektObiektowe
 		public MainWindow() //poczatek programu
 		{
 			InitializeComponent();
-			Gracz = new PostacGracza(Properties.Resources.clayman, 4, 2)
+			Gracz = new PostacGracza(Properties.Resources.zgory, 4, 5)
 			{ PredkoscChodzenia = 200f };
 			Rysowanie.PowierzchniaRys = DrawSurface;
 			Rysowanie.Start();

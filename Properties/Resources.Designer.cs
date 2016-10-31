@@ -73,6 +73,16 @@ namespace ProjektObiektowe.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap debugZGory {
+            get {
+                object obj = ResourceManager.GetObject("debugZGory", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SpriteSheetDebug {
             get {
                 object obj = ResourceManager.GetObject("SpriteSheetDebug", resourceCulture);
@@ -96,6 +106,16 @@ namespace ProjektObiektowe.Properties {
         internal static System.Drawing.Bitmap testowySpriteSheet {
             get {
                 object obj = ResourceManager.GetObject("testowySpriteSheet", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zgory {
+            get {
+                object obj = ResourceManager.GetObject("zgory", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

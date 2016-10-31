@@ -11,15 +11,15 @@ using SFML.System;
 namespace ProjektObiektowe
 {
 	//enum StanPostaci { Stoi, Idzie };
-	//enum Kierunek { N, NE, E, SE, S, SW, W , NW };
+	enum Kierunek { N, NE, E, SE, S, SW, W, NW };
 	class PostacGracza
 	{
 		/// <summary>
 		/// Gracz
 		/// </summary
-		
+
 		public bool Idzie;
-		//public Kierunek KierunekSprita;
+		public Kierunek KierunekPostaci;
 		Sprite SpriteGlowny;
 		//Sprite SpriteBroni; //na przyszlosc
 		Image Animacja;
@@ -27,7 +27,7 @@ namespace ProjektObiektowe
 		uint wierszyAnim;
 		uint LicznikKlatekAnim = 0;
 		public float PredkoscChodzenia;
-		int DzielnikPredkosciAnim = 20; //szybkosc zmiany klatek = 1/Dzielnik
+		int DzielnikPredkosciAnim = 2; //szybkosc zmiany klatek = 1/Dzielnik
 		public PostacGracza(System.Drawing.Bitmap bitmapa, uint kolumny, uint wiersze) //konstruktor
 		{
 			//Stan = StanPostaci.Stoi;
@@ -39,14 +39,15 @@ namespace ProjektObiektowe
 			SpriteGlowny.Origin = new Vector2f(Animacja.Size.X / kolumny / 2, Animacja.Size.Y / wiersze / 2);
 			SpriteGlowny.Texture.Smooth = true; // filtrowanie tekstury
 			SpriteGlowny.Position = new Vector2f(400, 500);
+			SpriteGlowny.Scale = new Vector2f(0.4f, 0.4f);
 			SpriteGlowny.TextureRect = KolejnaKlatkaAnim(); //pierwsza klatka
 			if (!Rysowanie.Rysowane.Contains(SpriteGlowny)) Rysowanie.Rysowane.Add(SpriteGlowny);
 			Rysowanie.LicznikRysowania.Tick += CoKlatke; //wywolywanie CoKlatke co okolo 16ms
 		}
-		
+
 		private void CoKlatke(object s, EventArgs e)
 		{
-			//StanZKlawiatury();
+			StanZKlawiatury();
 			Rusz();
 			if (Idzie) //pauzuje animacje jesli stoi
 			{
@@ -59,39 +60,79 @@ namespace ProjektObiektowe
 		}
 		public void Rusz()
 		{
-			//TODO: tu podmienic spritesheet na animacje chodzenia ze stania
-			SpriteGlowny.Position +=
-			new Vector2f((Convert.ToSingle(Keyboard.IsKeyDown(Key.D)) //x
-							 - Convert.ToSingle(Keyboard.IsKeyDown(Key.A))) * PredkoscChodzenia 
-							 * (float)Rysowanie.DeltaCzasu.Elapsed.TotalSeconds,
-							 (Convert.ToSingle(Keyboard.IsKeyDown(Key.S)) //y
-							 - Convert.ToSingle(Keyboard.IsKeyDown(Key.W))) * PredkoscChodzenia
-							 * (float)Rysowanie.DeltaCzasu.Elapsed.TotalSeconds);
-
-			Idzie = (Keyboard.IsKeyDown(Key.D) || Keyboard.IsKeyDown(Key.D)
+			//SpriteGlowny.Position +=
+			//new Vector2f((Convert.ToSingle(Keyboard.IsKeyDown(Key.D)) //x
+			//				 - Convert.ToSingle(Keyboard.IsKeyDown(Key.A))) * PredkoscChodzenia
+			//				 * (float)Rysowanie.DeltaCzasu.Elapsed.TotalSeconds,
+			//				 (Convert.ToSingle(Keyboard.IsKeyDown(Key.S)) //y
+			//				 - Convert.ToSingle(Keyboard.IsKeyDown(Key.W))) * PredkoscChodzenia
+			//				 * (float)Rysowanie.DeltaCzasu.Elapsed.TotalSeconds)
+			Idzie = (Keyboard.IsKeyDown(Key.D) || Keyboard.IsKeyDown(Key.A)
 			|| Keyboard.IsKeyDown(Key.S) || Keyboard.IsKeyDown(Key.W));
-				//	new Vector2f((float)(PredkoscChodzenia * Rysowanie.DeltaCzasu.Elapsed.TotalSeconds), 0f); //przesuniecie proporcjonalne do czasu od ostatniej klatki (rowne przy niestablinym fps)
-				//if (KierunekSprita == Kierunek.Lewo)
-				//{
-				//	OdwrocSpritePoziomo();
-				//	KierunekSprita = Kierunek.Prawo;
-				//}
-				//SpriteGlowny.Position +=
-				//	new Vector2f((float)(-PredkoscChodzenia * Rysowanie.DeltaCzasu.Elapsed.TotalSeconds), 0f);
-				//if (KierunekSprita == Kierunek.Prawo)
-				//{
-				//	OdwrocSpritePoziomo();
-				//	KierunekSprita = Kierunek.Lewo;
-				//}
+
+			float odlegloscPrzesuniecia = PredkoscChodzenia *
+						(float)Rysowanie.DeltaCzasu.Elapsed.TotalSeconds;
+			if (Idzie)
+				switch (KierunekPostaci)
+				{
+				case Kierunek.N:
+					SpriteGlowny.Position += new Vector2f(0f, -odlegloscPrzesuniecia);
+					SpriteGlowny.Rotation = 0f;
+					break;
+				case Kierunek.NE:
+					SpriteGlowny.Position += new Vector2f(odlegloscPrzesuniecia, -odlegloscPrzesuniecia);
+					SpriteGlowny.Rotation = 45f; //w stopniach
+					break;
+				case Kierunek.E:
+					SpriteGlowny.Position += new Vector2f(odlegloscPrzesuniecia, 0f);
+					SpriteGlowny.Rotation = 90f;
+					break;
+				case Kierunek.SE:
+					SpriteGlowny.Position += new Vector2f(odlegloscPrzesuniecia, odlegloscPrzesuniecia);
+					SpriteGlowny.Rotation = 135f;
+					break;
+				case Kierunek.S:
+					SpriteGlowny.Position += new Vector2f(0f, odlegloscPrzesuniecia);
+					SpriteGlowny.Rotation = 180f;
+					break;
+				case Kierunek.SW:
+					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, odlegloscPrzesuniecia);
+					SpriteGlowny.Rotation = 225f;
+					break;
+				case Kierunek.W:
+					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, 0f);
+					SpriteGlowny.Rotation = 270f;
+					break;
+				case Kierunek.NW:
+					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, -odlegloscPrzesuniecia);
+					SpriteGlowny.Rotation = 315f;
+					break;
+				}
 		}
-		//private void StanZKlawiatury()
-		//{
+		private void StanZKlawiatury()
+		{
+			if (Keyboard.IsKeyDown(Key.D))
+			{
+				if (Keyboard.IsKeyDown(Key.W))
+					KierunekPostaci = Kierunek.NE;
+				else if (Keyboard.IsKeyDown(Key.S))
+					KierunekPostaci = Kierunek.SE;
+				else KierunekPostaci = Kierunek.E;
+			}
+			else if (Keyboard.IsKeyDown(Key.A))
+			{
+				if (Keyboard.IsKeyDown(Key.W))
+					KierunekPostaci = Kierunek.NW;
+				else if (Keyboard.IsKeyDown(Key.S))
+					KierunekPostaci = Kierunek.SW;
+				else KierunekPostaci = Kierunek.W;
+			}
+			else if (Keyboard.IsKeyDown(Key.W))
+				KierunekPostaci = Kierunek.N;
+			else KierunekPostaci = Kierunek.S;
 
-		//	if (!(Stan == StanPostaci.IdzieLewo) && Keyboard.IsKeyDown(Key.D)) Stan = StanPostaci.IdziePrawo;
-		//	else if (!(Stan == StanPostaci.IdziePrawo) && Keyboard.IsKeyDown(Key.A)) Stan = StanPostaci.IdzieLewo;
-		//	else Stan = StanPostaci.Stoi;
 
-		//}
+		}
 
 		private IntRect KolejnaKlatkaAnim()
 		{
