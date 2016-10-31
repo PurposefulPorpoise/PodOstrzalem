@@ -14,7 +14,7 @@ namespace ProjektObiektowe
 	static class Rysowanie
 	{
 		static public List<Drawable> Rysowane = new List<Drawable>();
-		static private RenderWindow RenderWindow;
+		static private RenderWindow OknoRenderowania;
 		static public System.Windows.Forms.Timer LicznikRysowania = new System.Windows.Forms.Timer();
 		static public Stopwatch DeltaCzasu = new Stopwatch();
 		static public ulong NrKlatki = 0;
@@ -22,7 +22,7 @@ namespace ProjektObiektowe
 
 		public static void Start()
 		{
-			StworzRenderWindow();
+			StworzOknoRenderowania();
 			LicznikRysowania.Interval = 1000 / 60; //dla czestotliwosci odswiezania 60Hz
 			LicznikRysowania.Tick += Rysuj;
 			PowierzchniaRys.SizeChanged += Surface_SizeChanged;
@@ -42,39 +42,34 @@ namespace ProjektObiektowe
 			LicznikRysowania.Stop();
 		}
 
-		private static void StworzRenderWindow()
+		private static void StworzOknoRenderowania()
 		{
-			if (RenderWindow != null)
+			if (OknoRenderowania != null)
 			{
-				RenderWindow.SetActive(false);
-				RenderWindow.Dispose(); //usuwa obecne okno, np przy zmianie rozmiaru
+				OknoRenderowania.SetActive(false);
+				OknoRenderowania.Dispose(); //usuwa obecne okno, np przy zmianie rozmiaru
 			}
 
 			ContextSettings Context = new ContextSettings(); //{ AntialiasingLevel = 4 };
-			RenderWindow = new RenderWindow(PowierzchniaRys.Handle, Context);
-			RenderWindow.SetVerticalSyncEnabled(true);
-			//RenderWindow.SetFramerateLimit(6);
-
-			RenderWindow.SetActive(true);
+			OknoRenderowania = new RenderWindow(PowierzchniaRys.Handle, Context);
+			//OknoRenderowania.SetVerticalSyncEnabled(true);
+			OknoRenderowania.SetFramerateLimit(60);
 		}
 		static private void Surface_SizeChanged(object s, EventArgs e)
 		{
-			StworzRenderWindow(); //tworzy nowe okno renderowania przy zmianie rozmiaru okna
-												//zeby uniknac bledow
+			StworzOknoRenderowania(); //tworzy nowe okno renderowania przy zmianie rozmiaru okna
+											  //zeby uniknac bledow
 		}
 		static private void Rysuj(object s, EventArgs e)
 		{
-			RenderWindow.DispatchEvents(); //przetwarza wydarzenia
+			OknoRenderowania.DispatchEvents(); //przetwarza wydarzenia
 			//Trace.WriteLine(DeltaTime.Elapsed.TotalSeconds);
 			//DebugLabel.Content = DeltaTime.Elapsed.TotalSeconds;
-			RenderWindow.Clear(SFML.Graphics.Color.White); //czysci ekran
+			OknoRenderowania.Clear(SFML.Graphics.Color.White); //czysci ekran
 
 			foreach (Drawable d in Rysowane) //rysuje
-			{
-				if (d != null) RenderWindow.Draw(d);
-				Trace.WriteLine("Drawing d");
-			}
-			RenderWindow.Display();
+				if (d != null) OknoRenderowania.Draw(d);
+			OknoRenderowania.Display();
 			DeltaCzasu.Reset();
 			DeltaCzasu.Start();
 			NrKlatki++;
@@ -88,7 +83,8 @@ namespace ProjektObiektowe
 		{
 			LicznikRysowania.Stop();
 			LicznikRysowania.Dispose(); //zeby nie wywolywal rysowania po zamknieciu okna
-			RenderWindow.Close();
+			DeltaCzasu.Stop();
+			OknoRenderowania.Close();
 		}
 
 	}

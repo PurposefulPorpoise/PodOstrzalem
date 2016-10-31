@@ -10,23 +10,27 @@ using SFML.System;
 
 namespace ProjektObiektowe
 {
+	//enum StanPostaci { Stoi, Idzie };
+	//enum Kierunek { N, NE, E, SE, S, SW, W , NW };
 	class PostacGracza
 	{
-		public enum StanPostaci { Stoi, IdziePrawo, IdzieLewo };
-		public enum Kierunek { Prawo, Lewo};
-		public StanPostaci Stan;
-		public Kierunek KierunekSprita;
+		/// <summary>
+		/// Gracz
+		/// </summary
+		
+		public bool Idzie;
+		//public Kierunek KierunekSprita;
 		Sprite SpriteGlowny;
-		Sprite SpriteBroni; //na przyszlosc
+		//Sprite SpriteBroni; //na przyszlosc
 		Image Animacja;
 		uint kolumnAnim;
 		uint wierszyAnim;
 		uint LicznikKlatekAnim = 0;
 		public float PredkoscChodzenia;
-		int DzielnikPredkosciAnim = 4;
-		public PostacGracza(System.Drawing.Bitmap bitmapa, uint kolumny, uint wiersze)
+		int DzielnikPredkosciAnim = 20; //szybkosc zmiany klatek = 1/Dzielnik
+		public PostacGracza(System.Drawing.Bitmap bitmapa, uint kolumny, uint wiersze) //konstruktor
 		{
-			Stan = StanPostaci.Stoi;
+			//Stan = StanPostaci.Stoi;
 			kolumnAnim = kolumny;
 			wierszyAnim = wiersze;
 			Animacja = new Image(Rysowanie.BitmapaNaByte(bitmapa)); //konwersja Bitmapy .net na Image sfml'a
@@ -36,19 +40,15 @@ namespace ProjektObiektowe
 			SpriteGlowny.Texture.Smooth = true; // filtrowanie tekstury
 			SpriteGlowny.Position = new Vector2f(400, 500);
 			SpriteGlowny.TextureRect = KolejnaKlatkaAnim(); //pierwsza klatka
-			KierunekSprita = Kierunek.Prawo; //domyslny obrot sprite'a
 			if (!Rysowanie.Rysowane.Contains(SpriteGlowny)) Rysowanie.Rysowane.Add(SpriteGlowny);
 			Rysowanie.LicznikRysowania.Tick += CoKlatke; //wywolywanie CoKlatke co okolo 16ms
-			//Application.Current.MainWindow.KeyDown += Wcisnieto;
-			//Application.Current.MainWindow.KeyUp += Puszczono;
-			Application.Current.MainWindow.Deactivated += Zminimalizowano;
 		}
 		
 		private void CoKlatke(object s, EventArgs e)
 		{
-			StanZKlawiatury();
+			//StanZKlawiatury();
 			Rusz();
-			if (Stan != StanPostaci.Stoi) //HACK: pauzuje animacje jesli stoi
+			if (Idzie) //pauzuje animacje jesli stoi
 			{
 				if (Rysowanie.NrKlatki % (ulong)DzielnikPredkosciAnim == 0) //nastepka klatka anim co np 4 klatki gry
 					SpriteGlowny.TextureRect = KolejnaKlatkaAnim();
@@ -60,35 +60,38 @@ namespace ProjektObiektowe
 		public void Rusz()
 		{
 			//TODO: tu podmienic spritesheet na animacje chodzenia ze stania
-			if (Stan == StanPostaci.IdziePrawo)
-			{
-				SpriteGlowny.Position +=
-					new Vector2f((float)(PredkoscChodzenia * Rysowanie.DeltaCzasu.Elapsed.TotalSeconds), 0f);
-				if (KierunekSprita == Kierunek.Lewo)
-				{
-					OdwrocSpritePoziomo();
-					KierunekSprita = Kierunek.Prawo;
-				}
-			}
-			else if (Stan == StanPostaci.IdzieLewo)
-			{
-				SpriteGlowny.Position +=
-					new Vector2f((float)(-PredkoscChodzenia * Rysowanie.DeltaCzasu.Elapsed.TotalSeconds), 0f);
-				if (KierunekSprita == Kierunek.Prawo)
-				{
-					OdwrocSpritePoziomo();
-					KierunekSprita = Kierunek.Lewo;
-				}
-			}
-		}
-		private void StanZKlawiatury()
-		{
+			SpriteGlowny.Position +=
+			new Vector2f((Convert.ToSingle(Keyboard.IsKeyDown(Key.D)) //x
+							 - Convert.ToSingle(Keyboard.IsKeyDown(Key.A))) * PredkoscChodzenia 
+							 * (float)Rysowanie.DeltaCzasu.Elapsed.TotalSeconds,
+							 (Convert.ToSingle(Keyboard.IsKeyDown(Key.S)) //y
+							 - Convert.ToSingle(Keyboard.IsKeyDown(Key.W))) * PredkoscChodzenia
+							 * (float)Rysowanie.DeltaCzasu.Elapsed.TotalSeconds);
 
-			if (!(Stan == StanPostaci.IdzieLewo) && Keyboard.IsKeyDown(Key.D)) Stan = StanPostaci.IdziePrawo;
-			else if (!(Stan == StanPostaci.IdziePrawo) && Keyboard.IsKeyDown(Key.A)) Stan = StanPostaci.IdzieLewo;
-			else Stan = StanPostaci.Stoi;
-
+			Idzie = (Keyboard.IsKeyDown(Key.D) || Keyboard.IsKeyDown(Key.D)
+			|| Keyboard.IsKeyDown(Key.S) || Keyboard.IsKeyDown(Key.W));
+				//	new Vector2f((float)(PredkoscChodzenia * Rysowanie.DeltaCzasu.Elapsed.TotalSeconds), 0f); //przesuniecie proporcjonalne do czasu od ostatniej klatki (rowne przy niestablinym fps)
+				//if (KierunekSprita == Kierunek.Lewo)
+				//{
+				//	OdwrocSpritePoziomo();
+				//	KierunekSprita = Kierunek.Prawo;
+				//}
+				//SpriteGlowny.Position +=
+				//	new Vector2f((float)(-PredkoscChodzenia * Rysowanie.DeltaCzasu.Elapsed.TotalSeconds), 0f);
+				//if (KierunekSprita == Kierunek.Prawo)
+				//{
+				//	OdwrocSpritePoziomo();
+				//	KierunekSprita = Kierunek.Lewo;
+				//}
 		}
+		//private void StanZKlawiatury()
+		//{
+
+		//	if (!(Stan == StanPostaci.IdzieLewo) && Keyboard.IsKeyDown(Key.D)) Stan = StanPostaci.IdziePrawo;
+		//	else if (!(Stan == StanPostaci.IdziePrawo) && Keyboard.IsKeyDown(Key.A)) Stan = StanPostaci.IdzieLewo;
+		//	else Stan = StanPostaci.Stoi;
+
+		//}
 
 		private IntRect KolejnaKlatkaAnim()
 		{
@@ -96,17 +99,12 @@ namespace ProjektObiektowe
 				(int)((Animacja.Size.X / kolumnAnim) * (LicznikKlatekAnim % kolumnAnim)),
 				(int)((Animacja.Size.Y / wierszyAnim) * ((LicznikKlatekAnim / kolumnAnim) % wierszyAnim)),
 				(int)(Animacja.Size.X / kolumnAnim), (int)(Animacja.Size.Y / wierszyAnim));
-			//0, 700, 700, 555);
 			LicznikKlatekAnim = (LicznikKlatekAnim + 1) % (kolumnAnim * wierszyAnim);
 			return NowyObszar;
 		}
 		private void OdwrocSpritePoziomo()
 		{
 			SpriteGlowny.Scale = new Vector2f(-SpriteGlowny.Scale.X, 1f);
-		}
-		private void Zminimalizowano(object sender, EventArgs e)
-		{
-			Stan = StanPostaci.Stoi;
 		}
 	}
 }

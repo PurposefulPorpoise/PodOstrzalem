@@ -134,6 +134,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="clayman.jpg" />
+    <None Include="clayman.png" />
     <Content Include="csfml-audio-2.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

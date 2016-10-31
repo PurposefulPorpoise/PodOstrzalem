@@ -37,7 +37,7 @@ namespace ProjektObiektowe
 
 		private void LicznikRysowania_Tick(object sender, EventArgs e)
 		{
-			TestLabel.Content = Gracz.KierunekSprita.ToString();
+			//TestLabel.Content = Gracz.KierunekSprita.ToString();
 		}
 
 		private void MainWindow_Closed(object sender, EventArgs e)
@@ -50,10 +50,6 @@ namespace ProjektObiektowe
 			Vector2i ScreenMouse = SFML.Window.Mouse.GetPosition();
 			return new Vector2f((float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).X,
 				(float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).Y);
-		}
-		public void SetTestLabel()
-		{
-
 		}
 	}
 }

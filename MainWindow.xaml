@@ -6,19 +6,19 @@
         xmlns:local="clr-namespace:ProjektObiektowe"
         xmlns:wpfSfmlHost="clr-namespace:ProjektObiektowe"
         mc:Ignorable="d"    
-        Title="Pod Ostrzałem" Height="720" Width="1280">
-    <Grid>
+        Title="Pod Ostrzałem"  Width="Auto" Height="Auto" SizeToContent="WidthAndHeight" ResizeMode="CanMinimize">
+    <Grid Width="1280" x:Name="ID">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="720"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <WindowsFormsHost Grid.Row="0">
             <WindowsFormsHost.Child>
                 <wpfSfmlHost:SfmlDrawingSurface x:Name="DrawSurface"/>
             </WindowsFormsHost.Child>
-        </WindowsFormsHost> 
-        <Label x:Name="TestLabel" Content="Label" Grid.Row="1"/>
-        <Button x:Name="button" Content="Nie klikać" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="75" Margin="50,0,0,0"/>
+        </WindowsFormsHost>
+        <Label x:Name="TestLabel" Content="Label" Grid.Row="1" Background="#FF9C9C9C" FontSize="20"/>
+        <Button x:Name="button" Content="Nie klikać" Grid.Row="1" HorizontalAlignment="Left"  VerticalAlignment="Center" Width="75" Margin="50,0,0,0" Background="Red" Height="39.4"/>
 
     </Grid>
 </Window>
