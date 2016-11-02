@@ -27,10 +27,11 @@ namespace ProjektObiektowe
 		uint wierszyAnim;
 		uint LicznikKlatekAnim = 0;
 		public float PredkoscChodzenia;
-		int DzielnikPredkosciAnim = 2; //szybkosc zmiany klatek = 1/Dzielnik
+		int DzielnikPredkosciAnim = 1; //szybkosc zmiany klatek = 1/Dzielnik
 		public PostacGracza(System.Drawing.Bitmap bitmapa, uint kolumny, uint wiersze) //konstruktor
 		{
 			//Stan = StanPostaci.Stoi;
+			PredkoscChodzenia = 220f;
 			kolumnAnim = kolumny;
 			wierszyAnim = wiersze;
 			Animacja = new Image(Rysowanie.BitmapaNaByte(bitmapa)); //konwersja Bitmapy .net na Image sfml'a
@@ -38,11 +39,13 @@ namespace ProjektObiektowe
 			//ustawia oś transformacji na srodek //domyslne to lewy gorny rog, co przesuwa przy odbiciu lustrzanym
 			SpriteGlowny.Origin = new Vector2f(Animacja.Size.X / kolumny / 2, Animacja.Size.Y / wiersze / 2);
 			SpriteGlowny.Texture.Smooth = true; // filtrowanie tekstury
-			SpriteGlowny.Position = new Vector2f(400, 500);
-			SpriteGlowny.Scale = new Vector2f(0.4f, 0.4f);
+			SpriteGlowny.Position = new Vector2f(560, 560);
+			//SpriteGlowny.Scale = new Vector2f(0.3f, 0.3f);
 			SpriteGlowny.TextureRect = KolejnaKlatkaAnim(); //pierwsza klatka
 			if (!Rysowanie.Rysowane.Contains(SpriteGlowny)) Rysowanie.Rysowane.Add(SpriteGlowny);
+			System.Diagnostics.Debug.WriteLine("ctor gracza" + Rysowanie.Rysowane.Count);
 			Rysowanie.LicznikRysowania.Tick += CoKlatke; //wywolywanie CoKlatke co okolo 16ms
+			
 		}
 
 		private void CoKlatke(object s, EventArgs e)

@@ -7,18 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjektObiektowe", "Projekt
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
-		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8F66E31A-D25D-4521-91F8-D694A433C0E3}.Debug|x64.ActiveCfg = Debug|x64
-		{8F66E31A-D25D-4521-91F8-D694A433C0E3}.Debug|x64.Build.0 = Debug|x64
 		{8F66E31A-D25D-4521-91F8-D694A433C0E3}.Debug|x86.ActiveCfg = Debug|x86
 		{8F66E31A-D25D-4521-91F8-D694A433C0E3}.Debug|x86.Build.0 = Debug|x86
-		{8F66E31A-D25D-4521-91F8-D694A433C0E3}.Release|x64.ActiveCfg = Release|x64
-		{8F66E31A-D25D-4521-91F8-D694A433C0E3}.Release|x64.Build.0 = Release|x64
 		{8F66E31A-D25D-4521-91F8-D694A433C0E3}.Release|x86.ActiveCfg = Release|x86
 		{8F66E31A-D25D-4521-91F8-D694A433C0E3}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection

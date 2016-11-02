@@ -119,6 +119,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Plansza.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -149,6 +150,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="sciana.png" />
+    <None Include="zgory_niskarozdz.png" />
     <EmbeddedResource Include="zgory.png" />
     <None Include="clayman.png" />
     <Content Include="csfml-audio-2.dll">
@@ -172,11 +175,11 @@
     <Content Include="lib\sfmlnet-graphics-2.dll" />
     <Content Include="lib\sfmlnet-system-2.dll" />
     <Content Include="lib\sfmlnet-window-2.dll" />
+    <None Include="mapa.bmp" />
     <Content Include="openal32.dll" />
     <None Include="SpriteSheetDebug.png" />
     <None Include="testowySpriteSheet.png" />
     <None Include="stickman.png" />
-    <None Include="Resources\Obrazek.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -190,7 +193,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

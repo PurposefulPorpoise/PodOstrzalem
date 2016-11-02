@@ -27,12 +27,12 @@ namespace ProjektObiektowe
 		public MainWindow() //poczatek programu
 		{
 			InitializeComponent();
-			Gracz = new PostacGracza(Properties.Resources.zgory, 4, 5)
-			{ PredkoscChodzenia = 200f };
+			Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5);
+			Plansza Plansza1 = new Plansza(Properties.Resources.mapa, Properties.Resources.sciana);
 			Rysowanie.PowierzchniaRys = DrawSurface;
 			Rysowanie.Start();
 			this.Closed += MainWindow_Closed;
-			Rysowanie.LicznikRysowania.Tick += LicznikRysowania_Tick;	
+			Rysowanie.LicznikRysowania.Tick += LicznikRysowania_Tick;
 		}
 
 		private void LicznikRysowania_Tick(object sender, EventArgs e)

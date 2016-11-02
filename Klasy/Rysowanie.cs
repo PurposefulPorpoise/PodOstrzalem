@@ -54,6 +54,7 @@ namespace ProjektObiektowe
 			OknoRenderowania = new RenderWindow(PowierzchniaRys.Handle, Context);
 			//OknoRenderowania.SetVerticalSyncEnabled(true);
 			OknoRenderowania.SetFramerateLimit(60);
+			System.Diagnostics.Debug.WriteLine(String.Format("Rozmiar renderwindow: {0}x{1}", OknoRenderowania.Size.X, OknoRenderowania.Size.Y));
 		}
 		static private void Surface_SizeChanged(object s, EventArgs e)
 		{
