@@ -12,7 +12,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <WindowsFormsHost Grid.Row="0" HorizontalAlignment="Right" Width="1280">
+        <WindowsFormsHost Grid.Row="0" HorizontalAlignment="Right" Width="1280" x:Name="Host">
             <WindowsFormsHost.Child>
                 <wpfSfmlHost:SfmlDrawingSurface x:Name="DrawSurface"/>
             </WindowsFormsHost.Child>

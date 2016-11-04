@@ -43,7 +43,6 @@ namespace ProjektObiektowe
 			//SpriteGlowny.Scale = new Vector2f(0.3f, 0.3f);
 			SpriteGlowny.TextureRect = KolejnaKlatkaAnim(); //pierwsza klatka
 			if (!Rysowanie.Rysowane.Contains(SpriteGlowny)) Rysowanie.Rysowane.Add(SpriteGlowny);
-			System.Diagnostics.Debug.WriteLine("ctor gracza" + Rysowanie.Rysowane.Count);
 			Rysowanie.LicznikRysowania.Tick += CoKlatke; //wywolywanie CoKlatke co okolo 16ms
 			
 		}

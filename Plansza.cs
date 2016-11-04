@@ -31,7 +31,6 @@ namespace ProjektObiektowe
 						temp.Position = new SFML.System.Vector2f(j * TeksturaSciany.Size.X, i * TeksturaSciany.Size.Y);
 						Rysowanie.Rysowane.Add(temp);
 						Sciany.Add(temp);
-						System.Diagnostics.Debug.WriteLine(szerokoscMapy);
 					}
 
 		}

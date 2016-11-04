@@ -8,6 +8,7 @@ using System.Diagnostics;
 using SFML.Window;
 using SFML.Graphics;
 using SFML.System;
+using System.IO;
 
 namespace ProjektObiektowe
 {
@@ -20,11 +21,12 @@ namespace ProjektObiektowe
 		static public ulong NrKlatki = 0;
 		static public SfmlDrawingSurface PowierzchniaRys;
 
+
 		public static void Start()
 		{
 			StworzOknoRenderowania();
 			LicznikRysowania.Interval = 1000 / 60; //dla czestotliwosci odswiezania 60Hz
-			LicznikRysowania.Tick += Rysuj;
+			LicznikRysowania.Tick += Rysuj; //na tyle niedokładne że wychodzi średnio 22ms zamiast 16
 			PowierzchniaRys.SizeChanged += Surface_SizeChanged;
 			LicznikRysowania.Start();
 			DeltaCzasu.Start();
@@ -52,9 +54,9 @@ namespace ProjektObiektowe
 
 			ContextSettings Context = new ContextSettings(); //{ AntialiasingLevel = 4 };
 			OknoRenderowania = new RenderWindow(PowierzchniaRys.Handle, Context);
-			//OknoRenderowania.SetVerticalSyncEnabled(true);
-			OknoRenderowania.SetFramerateLimit(60);
-			System.Diagnostics.Debug.WriteLine(String.Format("Rozmiar renderwindow: {0}x{1}", OknoRenderowania.Size.X, OknoRenderowania.Size.Y));
+			OknoRenderowania.SetVerticalSyncEnabled(true);
+			//OknoRenderowania.SetFramerateLimit(60);
+			OknoRenderowania.SetView(new View(new Vector2f(1280/2,720/2),new Vector2f(1280,720)));
 		}
 		static private void Surface_SizeChanged(object s, EventArgs e)
 		{
@@ -64,13 +66,16 @@ namespace ProjektObiektowe
 		static private void Rysuj(object s, EventArgs e)
 		{
 			OknoRenderowania.DispatchEvents(); //przetwarza wydarzenia
-			//Trace.WriteLine(DeltaTime.Elapsed.TotalSeconds);
-			//DebugLabel.Content = DeltaTime.Elapsed.TotalSeconds;
 			OknoRenderowania.Clear(SFML.Graphics.Color.White); //czysci ekran
 
 			foreach (Drawable d in Rysowane) //rysuje
 				if (d != null) OknoRenderowania.Draw(d);
 			OknoRenderowania.Display();
+
+			//if (!File.Exists("DeltaCzasu.csv"))
+			//	File.CreateText("DeltaCzasu.csv").Close();
+			//File.AppendAllText("DeltaCzasu.csv", String.Format("{0};{1}\n", NrKlatki, DeltaCzasu.Elapsed.TotalSeconds));
+
 			DeltaCzasu.Reset();
 			DeltaCzasu.Start();
 			NrKlatki++;
@@ -83,7 +88,6 @@ namespace ProjektObiektowe
 		public static void Zakoncz()
 		{
 			LicznikRysowania.Stop();
-			LicznikRysowania.Dispose(); //zeby nie wywolywal rysowania po zamknieciu okna
 			DeltaCzasu.Stop();
 			OknoRenderowania.Close();
 		}
