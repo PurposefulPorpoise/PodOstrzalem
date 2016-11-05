@@ -44,7 +44,6 @@ namespace ProjektObiektowe
 			SpriteGlowny.TextureRect = KolejnaKlatkaAnim(); //pierwsza klatka
 			if (!Rysowanie.Rysowane.Contains(SpriteGlowny)) Rysowanie.Rysowane.Add(SpriteGlowny);
 			Rysowanie.LicznikRysowania.Tick += CoKlatke; //wywolywanie CoKlatke co okolo 16ms
-			
 		}
 
 		private void CoKlatke(object s, EventArgs e)
@@ -56,6 +55,10 @@ namespace ProjektObiektowe
 				if (Rysowanie.NrKlatki % (ulong)DzielnikPredkosciAnim == 0) //nastepka klatka anim co np 4 klatki gry
 					SpriteGlowny.TextureRect = KolejnaKlatkaAnim();
 			}
+			if (Plansza.KolizjaZeSciana(SpriteGlowny.GetGlobalBounds()))
+				SpriteGlowny.Color = Color.Red;
+			else SpriteGlowny.Color = Color.White;
+
 
 			//if(System.Windows.Input.Keyboard.IsKeyDown(System.Windows.Input.Key.A))
 

@@ -27,7 +27,7 @@ namespace ProjektObiektowe
 		public MainWindow() //poczatek programu
 		{
 			InitializeComponent();
-			Plansza Plansza1 = new Plansza(Properties.Resources.mapa, Properties.Resources.sciana);
+			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
 			Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5);
 			Rysowanie.PowierzchniaRys = DrawSurface;
 			Rysowanie.Start();

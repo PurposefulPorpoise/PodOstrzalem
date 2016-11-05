@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjektObiektowe"
         xmlns:wpfSfmlHost="clr-namespace:ProjektObiektowe"
         mc:Ignorable="d"    
-        Title="Pod Ostrzałem" Height="720" SizeToContent="Width" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen">
+        Title="Pod Ostrzałem" Height="720" SizeToContent="Width" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize">
     <Grid Width="1280">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -19,7 +19,7 @@
         </WindowsFormsHost>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Height="Auto">
-            <Label x:Name="TestLabel" Content="Label" VerticalAlignment="Center" FontSize="20"/>
+            <Label x:Name="TestLabel" Content="{Binding  }" VerticalAlignment="Center" FontSize="20"/>
             <Button x:Name="button" Content="Nie klikać"  VerticalAlignment="Center" Background="Red" />
         </StackPanel>
 
