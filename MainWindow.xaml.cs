@@ -27,8 +27,8 @@ namespace ProjektObiektowe
 		public MainWindow() //poczatek programu
 		{
 			InitializeComponent();
-			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
 			Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5);
+			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
 			Rysowanie.PowierzchniaRys = DrawSurface;
 			Rysowanie.Start();
 			this.Closed += MainWindow_Closed;
