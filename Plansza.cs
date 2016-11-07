@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
 using SFML.Graphics;
+using SFML.System;
 
 namespace ProjektObiektowe
 {
@@ -28,17 +29,47 @@ namespace ProjektObiektowe
 						Sciany.Add(temp);
 					}
 		}
-		static public bool KolizjaZeSciana(FloatRect A)
+		static public bool KolizjaZeSciana(FloatRect A, out Vector2f przesuniecie)
 		{
-			bool kolizja = false;
+			przesuniecie = new Vector2f(0f, 0f);
+			float[] Odleglosci = new float[4];
+			int IndeksNajwiekszej;
 			foreach (var sciana in Sciany)
 			{
 				FloatRect B = sciana.GetGlobalBounds();
-				if(!((A.Left+A.Width)<B.Left || (B.Left+B.Width)<A.Left 
-					|| (A.Top+A.Height)<B.Top || (B.Top+B.Height)<A.Top))
-						kolizja = true;
+				if (!((A.Left + A.Width) < B.Left || (B.Left + B.Width) < A.Left
+					|| (A.Top + A.Height) < B.Top || (B.Top + B.Height) < A.Top)) //jesli prostokaty na siebie nachodza
+				{
+
+					Odleglosci[0] = Math.Abs((A.Left + A.Width) - B.Left); //-
+					Odleglosci[1] = Math.Abs(A.Left - (B.Left + B.Width));
+					Odleglosci[2] = Math.Abs((A.Top + A.Height) - B.Top); //-
+					Odleglosci[3] = Math.Abs(A.Top - (B.Top + B.Height));
+					IndeksNajwiekszej = Array.IndexOf(Odleglosci, Odleglosci.Max());
+					System.Diagnostics.Debug.WriteLine(IndeksNajwiekszej);
+					switch(IndeksNajwiekszej)
+					{
+					case 0:
+						przesuniecie = new Vector2f(-Odleglosci[0], 0f);
+						break;
+					case 1:
+						przesuniecie = new Vector2f(Odleglosci[1], 0f);
+						break;
+					case 2:
+						przesuniecie = new Vector2f(0f, Odleglosci[2]);
+						break;
+					case 3:
+						przesuniecie = new Vector2f(0f, -Odleglosci[3]);
+						break;
+					default:
+						throw new ArgumentOutOfRangeException();
+							
+					}
+					return true;
+				}
+
 			}
-			return kolizja;
+			return false;
 		}
 	}
 }

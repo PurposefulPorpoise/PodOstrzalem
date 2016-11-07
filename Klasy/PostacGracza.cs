@@ -51,9 +51,9 @@ namespace ProjektObiektowe
 			StanZKlawiatury();
 			Rusz();
 			
-			if (Plansza.KolizjaZeSciana(SkalowanyProstokat(SpriteGlowny.GetGlobalBounds(),0.7f) ))
-				SpriteGlowny.Color = Color.Red;
-			else SpriteGlowny.Color = Color.White;
+			//if (Plansza.KolizjaZeSciana(SkalowanyProstokat(SpriteGlowny.GetGlobalBounds(),0.7f) ))
+			//	SpriteGlowny.Color = Color.Red;
+			//else SpriteGlowny.Color = Color.White;
 
 		}
 		public void Rusz()
@@ -91,19 +91,17 @@ namespace ProjektObiektowe
 				case Kierunek.NW:
 					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, -odlegloscPrzesuniecia) / 1.41f;
 					break;
-				}
-			if (Plansza.KolizjaZeSciana(SkalowanyProstokat(SpriteGlowny.GetGlobalBounds(), 0.7f)))
-				SpriteGlowny.Position = PozycjaPoprzednia;
-			float ObrotPoprzedni = SpriteGlowny.Rotation;
-			SpriteGlowny.Rotation = (int)KierunekPostaci * 45f;
-			if (Plansza.KolizjaZeSciana(SkalowanyProstokat(SpriteGlowny.GetGlobalBounds(), 0.7f)))
+				} // zmienic: nie cofniecie o klatke, tylko wybranie najmniejszego kierunku do usuniecia nachodzenia BB i przesunąć w tą strone
+				  //float ObrotPoprzedni = SpriteGlowny.Rotation;
+				  SpriteGlowny.Rotation = (int)KierunekPostaci * 45f;
+			Vector2f Przesuniecie;
+			if (Plansza.KolizjaZeSciana(SkalowanyProstokat(SpriteGlowny.GetGlobalBounds(), 0.7f), out Przesuniecie))
 			{
-				SpriteGlowny.Rotation = ObrotPoprzedni;
-				SpriteGlowny.Position = PozycjaPoprzednia;
+				SpriteGlowny.Position += Przesuniecie;
 			}
 			if (Idzie) //nastepna klatka jesli nie stoi
 			{
-				if (Rysowanie.NrKlatki % (ulong)DzielnikPredkosciAnim == 0) //nastepka klatka anim co np 4 klatki gry
+				if (Rysowanie.NrKlatki % (ulong)DzielnikPredkosciAnim == 0) //nastepka klatka anim co np 2 klatki gry
 					SpriteGlowny.TextureRect = KolejnaKlatkaAnim();
 			}
 		}
