@@ -15,6 +15,7 @@ namespace ProjektObiektowe
 		static public void StworzZBitmapy(Bitmap mapaPlanszy, Bitmap teksturaSciany) //mapa 32x16
 		{
 			Texture TeksturaSciany = new Texture(Rysowanie.BitmapaNaByte(teksturaSciany));
+			TeksturaSciany.Smooth = true;
 			Sprite temp;
 			Sciany = new List<Sprite>();
 			int wysokoscMapy = mapaPlanszy.Size.Height;
@@ -29,47 +30,53 @@ namespace ProjektObiektowe
 						Sciany.Add(temp);
 					}
 		}
-		static public bool KolizjaZeSciana(FloatRect A, out Vector2f przesuniecie)
+		static public bool KolizjaZeSciana(FloatRect A, out Kierunek Wyzeruj)
 		{
-			przesuniecie = new Vector2f(0f, 0f);
+			//przesuniecie = new Vector2f(0f, 0f);
+			bool kolizja = false;
+			Wyzeruj = Kierunek.NE; //niewazne
 			float[] Odleglosci = new float[4];
-			int IndeksNajwiekszej;
+			int IndeksNajmniejszej;
 			foreach (var sciana in Sciany)
 			{
 				FloatRect B = sciana.GetGlobalBounds();
 				if (!((A.Left + A.Width) < B.Left || (B.Left + B.Width) < A.Left
 					|| (A.Top + A.Height) < B.Top || (B.Top + B.Height) < A.Top)) //jesli prostokaty na siebie nachodza
 				{
-
+					kolizja = true;
 					Odleglosci[0] = Math.Abs((A.Left + A.Width) - B.Left); //-
 					Odleglosci[1] = Math.Abs(A.Left - (B.Left + B.Width));
 					Odleglosci[2] = Math.Abs((A.Top + A.Height) - B.Top); //-
 					Odleglosci[3] = Math.Abs(A.Top - (B.Top + B.Height));
-					IndeksNajwiekszej = Array.IndexOf(Odleglosci, Odleglosci.Max());
-					System.Diagnostics.Debug.WriteLine(IndeksNajwiekszej);
-					switch(IndeksNajwiekszej)
+					IndeksNajmniejszej = Array.IndexOf(Odleglosci, Odleglosci.Min());
+					//System.Diagnostics.Debug.WriteLine(IndeksNajmniejszej);
+					switch(IndeksNajmniejszej)
 					{
 					case 0:
-						przesuniecie = new Vector2f(-Odleglosci[0], 0f);
+						//przesuniecie = new Vector2f(-Odleglosci[0], 0f);
+						Wyzeruj = Kierunek.W;
 						break;
 					case 1:
-						przesuniecie = new Vector2f(Odleglosci[1], 0f);
+						//przesuniecie = new Vector2f(Odleglosci[1], 0f);
+						Wyzeruj = Kierunek.E;
 						break;
 					case 2:
-						przesuniecie = new Vector2f(0f, Odleglosci[2]);
+						//przesuniecie = new Vector2f(0f, Odleglosci[2]);
+						Wyzeruj = Kierunek.N;
 						break;
 					case 3:
-						przesuniecie = new Vector2f(0f, -Odleglosci[3]);
+						//przesuniecie = new Vector2f(0f, -Odleglosci[3]);
+						Wyzeruj = Kierunek.S;
 						break;
 					default:
 						throw new ArgumentOutOfRangeException();
 							
 					}
-					return true;
+					//return true;
 				}
 
 			}
-			return false;
+			return kolizja;
 		}
 	}
 }

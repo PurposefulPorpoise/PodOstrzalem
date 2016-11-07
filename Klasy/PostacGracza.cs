@@ -64,40 +64,56 @@ namespace ProjektObiektowe
 			float odlegloscPrzesuniecia = PredkoscChodzenia *
 						(float)Rysowanie.DeltaCzasu.Elapsed.TotalSeconds;
 			Vector2f PozycjaPoprzednia = SpriteGlowny.Position;
+			Vector2f Przesuniecie = new Vector2f(0f,0f);
 			if (Idzie)
 				switch (KierunekPostaci)
 				{
 				case Kierunek.N:
-					SpriteGlowny.Position += new Vector2f(0f, -odlegloscPrzesuniecia);
+					Przesuniecie = new Vector2f(0f, -odlegloscPrzesuniecia);
 					break;
 				case Kierunek.NE:
-					SpriteGlowny.Position += new Vector2f(odlegloscPrzesuniecia, -odlegloscPrzesuniecia)/1.41f;
+					Przesuniecie = new Vector2f(odlegloscPrzesuniecia, -odlegloscPrzesuniecia)/1.41f;
 					break;
 				case Kierunek.E:
-					SpriteGlowny.Position += new Vector2f(odlegloscPrzesuniecia, 0f);
+					Przesuniecie = new Vector2f(odlegloscPrzesuniecia, 0f);
 					break;
 				case Kierunek.SE:
-					SpriteGlowny.Position += new Vector2f(odlegloscPrzesuniecia, odlegloscPrzesuniecia) / 1.41f;
+					Przesuniecie = new Vector2f(odlegloscPrzesuniecia, odlegloscPrzesuniecia) / 1.41f;
 					break;
 				case Kierunek.S:
-					SpriteGlowny.Position += new Vector2f(0f, odlegloscPrzesuniecia);
+					Przesuniecie = new Vector2f(0f, odlegloscPrzesuniecia);
 					break;
 				case Kierunek.SW:
-					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, odlegloscPrzesuniecia) / 1.41f;
+					Przesuniecie = new Vector2f(-odlegloscPrzesuniecia, odlegloscPrzesuniecia) / 1.41f;
 					break;
 				case Kierunek.W:
-					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, 0f);
+					Przesuniecie = new Vector2f(-odlegloscPrzesuniecia, 0f);
 					break;
 				case Kierunek.NW:
-					SpriteGlowny.Position += new Vector2f(-odlegloscPrzesuniecia, -odlegloscPrzesuniecia) / 1.41f;
+					Przesuniecie = new Vector2f(-odlegloscPrzesuniecia, -odlegloscPrzesuniecia) / 1.41f;
 					break;
 				} // zmienic: nie cofniecie o klatke, tylko wybranie najmniejszego kierunku do usuniecia nachodzenia BB i przesunąć w tą strone
 				  //float ObrotPoprzedni = SpriteGlowny.Rotation;
-				  SpriteGlowny.Rotation = (int)KierunekPostaci * 45f;
-			Vector2f Przesuniecie;
-			if (Plansza.KolizjaZeSciana(SkalowanyProstokat(SpriteGlowny.GetGlobalBounds(), 0.7f), out Przesuniecie))
+				  //SpriteGlowny.Rotation = (int)KierunekPostaci * 45f;
+			Kierunek DoWyzerowania;
+			SpriteGlowny.Position += Przesuniecie;
+			if (Plansza.KolizjaZeSciana(SpriteGlowny.GetGlobalBounds(), out DoWyzerowania)) //(Plansza.KolizjaZeSciana(SkalowanyProstokat(SpriteGlowny.GetGlobalBounds(), 0.7f), out DoWyzerowania))
 			{
-				SpriteGlowny.Position += Przesuniecie;
+				//SpriteGlowny.Position += new V;
+				switch(DoWyzerowania)
+				{
+				case Kierunek.N:
+				case Kierunek.S:
+					Przesuniecie = new Vector2f(Przesuniecie.X, 0f);
+					break;
+				case Kierunek.W:
+				case Kierunek.E:
+					Przesuniecie = new Vector2f(0f, Przesuniecie.Y);
+					break;
+				default:
+					throw new ArgumentOutOfRangeException();
+				}
+				SpriteGlowny.Position = PozycjaPoprzednia + Przesuniecie;
 			}
 			if (Idzie) //nastepna klatka jesli nie stoi
 			{

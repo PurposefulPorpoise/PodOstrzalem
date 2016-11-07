@@ -119,7 +119,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Plansza.cs" />
+    <Compile Include="Klasy\Plansza.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -170,6 +170,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="debugZGory.png" />
+    <None Include="kwadrat.png" />
     <Content Include="libsndfile-1.dll" />
     <Content Include="lib\sfmlnet-audio-2.dll" />
     <Content Include="lib\sfmlnet-graphics-2.dll" />
