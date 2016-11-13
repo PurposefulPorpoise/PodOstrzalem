@@ -31,7 +31,7 @@ namespace ProjektObiektowe
 		public PostacGracza(System.Drawing.Bitmap bitmapa, uint kolumny, uint wiersze) //konstruktor
 		{
 			//Stan = StanPostaci.Stoi;
-			PredkoscChodzenia = 220f;
+			PredkoscChodzenia = 80f;
 			kolumnAnim = kolumny;
 			wierszyAnim = wiersze;
 			Animacja = new Image(Rysowanie.BitmapaNaByte(bitmapa)); //konwersja Bitmapy .net na Image sfml'a
@@ -64,6 +64,7 @@ namespace ProjektObiektowe
 			float odlegloscPrzesuniecia = PredkoscChodzenia *
 						(float)Rysowanie.DeltaCzasu.Elapsed.TotalSeconds;
 			Vector2f PozycjaPoprzednia = SpriteGlowny.Position;
+			FloatRect Przed = SpriteGlowny.GetGlobalBounds();
 			Vector2f Przesuniecie = new Vector2f(0f,0f);
 			if (Idzie)
 				switch (KierunekPostaci)
@@ -97,7 +98,8 @@ namespace ProjektObiektowe
 				  //SpriteGlowny.Rotation = (int)KierunekPostaci * 45f;
 			Kierunek DoWyzerowania;
 			SpriteGlowny.Position += Przesuniecie;
-			if (Plansza.KolizjaZeSciana(SpriteGlowny.GetGlobalBounds(), out DoWyzerowania)) //(Plansza.KolizjaZeSciana(SkalowanyProstokat(SpriteGlowny.GetGlobalBounds(), 0.7f), out DoWyzerowania))
+			Vector2f V = SpriteGlowny.Position - PozycjaPoprzednia;
+			if (Plansza.KolizjaZeSciana(SpriteGlowny.GetGlobalBounds(), V, Przed, out DoWyzerowania)) //(Plansza.KolizjaZeSciana(SkalowanyProstokat(SpriteGlowny.GetGlobalBounds(), 0.7f), out DoWyzerowania))
 			{
 				//SpriteGlowny.Position += new V;
 				switch(DoWyzerowania)
@@ -111,7 +113,7 @@ namespace ProjektObiektowe
 					Przesuniecie = new Vector2f(0f, Przesuniecie.Y);
 					break;
 				default:
-					throw new ArgumentOutOfRangeException();
+					throw new ArgumentOutOfRangeException(); //obecnie rzuca jesli v=0 i kolizja
 				}
 				SpriteGlowny.Position = PozycjaPoprzednia + Przesuniecie;
 			}

@@ -55,7 +55,7 @@ namespace ProjektObiektowe
 			ContextSettings Context = new ContextSettings(); //{ AntialiasingLevel = 4 };
 			OknoRenderowania = new RenderWindow(PowierzchniaRys.Handle, Context);
 			OknoRenderowania.SetVerticalSyncEnabled(true);
-			//OknoRenderowania.SetFramerateLimit(60);
+			//OknoRenderowania.SetFramerateLimit(60); //nigdy oba naraz
 			OknoRenderowania.SetView(new View(new Vector2f(PowierzchniaRys.Size.Width / 2, PowierzchniaRys.Height / 2),
 				new Vector2f(PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height)));
 		}
