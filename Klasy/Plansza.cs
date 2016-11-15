@@ -36,8 +36,9 @@ namespace ProjektObiektowe
 			float[] Odleglosci = new float[4];
 			int IndeksNajmniejszej = 0;
 			Vector2f Wypchniecie = new Vector2f(0f, 0f);
-			//float NajmniejszyCzasOgolem = float.MaxValue;
+			Vector2f NoweWypchniecie = new Vector2f(0f, 0f);
 			Vector2u MnoznikPrzesuniecia = new Vector2u(1, 1);
+			Vector2f MaxWypchniecieWOsi = new Vector2f(0f, 0f);
 			foreach (var sciana in Sciany)
 			{
 				FloatRect B = sciana.GetGlobalBounds();
@@ -46,7 +47,6 @@ namespace ProjektObiektowe
 				{
 					kolizja = true;
 					sciana.Color = SFML.Graphics.Color.Red;
-					//Kierunek KierunekNajmniejszego = Kierunek.NE;
 
 					Odleglosci[0] = B.Left - (A.Left + A.Width); //new Vector2f(B.Left - (A.Left + A.Width), 0f);
 					Odleglosci[1] = (B.Left + B.Width) - A.Left; //new Vector2f((B.Left + B.Width) - A.Left, 0f);
@@ -56,21 +56,12 @@ namespace ProjektObiektowe
 					IndeksNajmniejszej = 0;
 					for (int i = 0; i < 4; i++)
 						if (Math.Abs(Odleglosci[i]) < Math.Abs(Odleglosci[IndeksNajmniejszej])) IndeksNajmniejszej = i;
-					Wypchniecie += IndeksNajmniejszej <= 1 ? new Vector2f(Odleglosci[IndeksNajmniejszej], 0f)
+
+
+					NoweWypchniecie /*+*/= IndeksNajmniejszej <= 1 ? new Vector2f(Odleglosci[IndeksNajmniejszej], 0f)
 						: new Vector2f(0f, Odleglosci[IndeksNajmniejszej]);
-					//switch (KierunekNajmniejszego)
-					//{
-					//case Kierunek.W:
-					//case Kierunek.E:
-					//	//?
-					//	break;
-					//case Kierunek.N:
-					//case Kierunek.S:
-					//	//?
-					//	break;
-					////default:
-					//	//throw new InvalidOperationException("Kolizja, ale zadna sciana najszybciej");
-					//}
+					if (Math.Abs(NoweWypchniecie.X) > Math.Abs(Wypchniecie.X)) Wypchniecie.X = NoweWypchniecie.X;
+					if (Math.Abs(NoweWypchniecie.Y) > Math.Abs(Wypchniecie.Y)) Wypchniecie.Y = NoweWypchniecie.Y;
 
 				}
 				else sciana.Color = SFML.Graphics.Color.White;
