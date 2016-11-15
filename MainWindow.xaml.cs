@@ -23,21 +23,21 @@ namespace ProjektObiektowe
 	/// </summary>
 	public partial class MainWindow : System.Windows.Window
 	{
-		PostacGracza Gracz;
+		PostacGracza Gracz = new PostacGracza(Properties.Resources.kwadrat, 1, 1);
 		public MainWindow() //poczatek programu
 		{
 			InitializeComponent();
+			this.DataContext = Gracz;
 			//Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5);
-			Gracz = new PostacGracza(Properties.Resources.kwadrat, 1, 1);
 			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
 			Rysowanie.PowierzchniaRys = DrawSurface;
 			Rysowanie.Start();
 			this.Closed += MainWindow_Closed;
-			Rysowanie.LicznikRysowania.Tick += LicznikRysowania_Tick;
+			Rysowanie.LicznikRysowania.Tick += CoKlatke;
 			System.Diagnostics.Trace.WriteLine(Rysowanie.Rysowane.Count);
 		}
 
-		private void LicznikRysowania_Tick(object sender, EventArgs e)
+		private void CoKlatke(object sender, EventArgs e)
 		{
 			//TestLabel.Content = Gracz.KierunekSprita.ToString();
 		}

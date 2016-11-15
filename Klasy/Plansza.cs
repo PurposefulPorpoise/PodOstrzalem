@@ -30,15 +30,14 @@ namespace ProjektObiektowe
 						Sciany.Add(temp);
 					}
 		}
-		static public bool KolizjaZeSciana(FloatRect A, Vector2f v, FloatRect APrzed, out Kierunek Wyzeruj)
-		{ //korzystajac z t=s/v znalezc sciana z najszybsza kolizja, a potem krawedz z najszybsza (min(t))
-		  //przesuniecie = new Vector2f(0f, 0f);
+		static public Vector2f KolizjaZeSciana(FloatRect A, Vector2f pozycja)//Vector2f v, FloatRect APrzed) //nie dziala przy kolizji z gorną śc. przy ruchu skosnym (tzn v.X==v.Y)
+		{
 			bool kolizja = false;
-			Wyzeruj = Kierunek.NE; //niewazne
-										  //float[] Odleglosci = new float[4];
-										  //int IndeksNajmniejszej = 0;
-			float NajmniejszyCzasOgolem = float.MaxValue;
-			Dictionary<Sprite, float> CzasyKolizjiScian = new Dictionary<Sprite, float>();
+			float[] Odleglosci = new float[4];
+			int IndeksNajmniejszej = 0;
+			Vector2f Wypchniecie = new Vector2f(0f, 0f);
+			//float NajmniejszyCzasOgolem = float.MaxValue;
+			Vector2u MnoznikPrzesuniecia = new Vector2u(1, 1);
 			foreach (var sciana in Sciany)
 			{
 				FloatRect B = sciana.GetGlobalBounds();
@@ -47,65 +46,43 @@ namespace ProjektObiektowe
 				{
 					kolizja = true;
 					sciana.Color = SFML.Graphics.Color.Red;
-					float NajmniejszyCzas = float.MaxValue;
-					float temp = 0f;
-					Kierunek KierunekNajmniejszego = Kierunek.NE;
-					if (v.X != 0f)
-					{
-						temp = (B.Left - (APrzed.Left + APrzed.Width)) / v.X;
-						if (Math.Abs(temp) < NajmniejszyCzas) { NajmniejszyCzas = temp; KierunekNajmniejszego = Kierunek.W; }
-						temp = (APrzed.Left - (B.Left + B.Width)) / v.X;
-						if (Math.Abs(temp) < NajmniejszyCzas) { NajmniejszyCzas = temp; KierunekNajmniejszego = Kierunek.E; }
-					}
-					if (v.Y != 0f)
-					{
-						temp = (APrzed.Top - (B.Top + B.Height)) / v.Y;
-						if (Math.Abs(temp) < NajmniejszyCzas) { NajmniejszyCzas = temp; KierunekNajmniejszego = Kierunek.S; }
-						temp = (B.Top - (A.Top + A.Height)) / v.Y;
-						if (Math.Abs(temp) < NajmniejszyCzas) { NajmniejszyCzas = temp; KierunekNajmniejszego = Kierunek.N; }
-					}
-					if (NajmniejszyCzas < NajmniejszyCzasOgolem)
-					{
-						NajmniejszyCzasOgolem = NajmniejszyCzas;
-						Wyzeruj = KierunekNajmniejszego;
-					}
-					//Odleglosci[0] = Math.Abs((A.Left + A.Width) - B.Left); //-
-					//Odleglosci[1] = Math.Abs(A.Left - (B.Left + B.Width));
-					//Odleglosci[2] = Math.Abs((A.Top + A.Height) - B.Top); //-
-					//Odleglosci[3] = Math.Abs(A.Top - (B.Top + B.Height));
-					//for (int i = 1; i < 4; i++)
-					//	if (Odleglosci[i] < Odleglosci[IndeksNajmniejszej])
-					//		IndeksNajmniejszej = i;
-					//IndeksNajmniejszej = Array.IndexOf(Odleglosci, Odleglosci.Min());
+					//Kierunek KierunekNajmniejszego = Kierunek.NE;
 
-					//System.Diagnostics.Debug.WriteLine(IndeksNajmniejszej);
-					//switch (IndeksNajmniejszej)
+					Odleglosci[0] = B.Left - (A.Left + A.Width); //new Vector2f(B.Left - (A.Left + A.Width), 0f);
+					Odleglosci[1] = (B.Left + B.Width) - A.Left; //new Vector2f((B.Left + B.Width) - A.Left, 0f);
+					Odleglosci[2] = B.Top - (A.Top + A.Height); //new Vector2f(0f, B.Top - (A.Top + A.Height));
+					Odleglosci[3] = (B.Top + B.Height) - A.Top; //new Vector2f(0f, (B.Top + B.Height) - A.Top);
+
+					IndeksNajmniejszej = 0;
+					for (int i = 0; i < 4; i++)
+						if (Math.Abs(Odleglosci[i]) < Math.Abs(Odleglosci[IndeksNajmniejszej])) IndeksNajmniejszej = i;
+					Wypchniecie += IndeksNajmniejszej <= 1 ? new Vector2f(Odleglosci[IndeksNajmniejszej], 0f)
+						: new Vector2f(0f, Odleglosci[IndeksNajmniejszej]);
+					//switch (KierunekNajmniejszego)
 					//{
-					//case 0:
-					//	//przesuniecie = new Vector2f(-Odleglosci[0], 0f);
-					//	Wyzeruj = Kierunek.W;
+					//case Kierunek.W:
+					//case Kierunek.E:
+					//	//?
 					//	break;
-					//case 1:
-					//	//przesuniecie = new Vector2f(Odleglosci[1], 0f);
-					//	Wyzeruj = Kierunek.E;
+					//case Kierunek.N:
+					//case Kierunek.S:
+					//	//?
 					//	break;
-					//case 2:
-					//	//przesuniecie = new Vector2f(0f, Odleglosci[2]);
-					//	Wyzeruj = Kierunek.N;
-					//	break;
-					//case 3:
-					//	//przesuniecie = new Vector2f(0f, -Odleglosci[3]);
-					//	Wyzeruj = Kierunek.S;
-					//	break;
-					//default:
-					//	throw new ArgumentOutOfRangeException()
+					////default:
+					//	//throw new InvalidOperationException("Kolizja, ale zadna sciana najszybciej");
 					//}
-					//return true;
+
 				}
 				else sciana.Color = SFML.Graphics.Color.White;
 
 			}
-			return kolizja;
+			return pozycja + Wypchniecie;
+			/*if(!kolizja)
+				return pozycja; *///bez zmian
+		}
+		static bool FloatRownyZero(float a)
+		{
+			return Math.Abs(a) < 0.001;
 		}
 	}
 }

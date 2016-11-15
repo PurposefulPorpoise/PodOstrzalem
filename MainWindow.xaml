@@ -19,7 +19,7 @@
         </WindowsFormsHost>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Height="Auto">
-            <Label x:Name="TestLabel" Content="{Binding  }" VerticalAlignment="Center" FontSize="20"/>
+            <Label x:Name="TestLabel"  Content="{Binding Path=Kolumnyy}" VerticalAlignment="Center" FontSize="20"/>
             <Button x:Name="button" Content="Nie klikać"  VerticalAlignment="Center" Background="Red" />
         </StackPanel>
 
