@@ -23,7 +23,7 @@ namespace ProjektObiektowe
 	/// </summary>
 	public partial class MainWindow : System.Windows.Window
 	{
-		PostacGracza Gracz = new PostacGracza(Properties.Resources.kwadrat, 1, 1);
+		PostacGracza Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5);
 		public MainWindow() //poczatek programu
 		{
 			InitializeComponent();

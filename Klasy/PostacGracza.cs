@@ -40,17 +40,17 @@ namespace ProjektObiektowe
 		public PostacGracza(System.Drawing.Bitmap bitmapa, uint kolumny, uint wiersze) //konstruktor
 		{
 			//Stan = StanPostaci.Stoi;
-			PredkoscChodzenia = 80f;
+			PredkoscChodzenia = 100f;
 			kolumnAnim = kolumny;
 			Kolumnyy = kolumny;
 			wierszyAnim = wiersze;
 			Animacja = new Image(Rysowanie.BitmapaNaByte(bitmapa)); //konwersja Bitmapy .net na Image sfml'a
 			SpritePostaci = new Sprite(new Texture(Animacja));
 			//ustawia oś transformacji na srodek //domyslne to lewy gorny rog, co przesuwa przy odbiciu lustrzanym
-			//SpriteGlowny.Origin = new Vector2f(Animacja.Size.X / kolumny / 2, Animacja.Size.Y / wiersze / 2);
+			SpritePostaci.Origin = new Vector2f(Animacja.Size.X / kolumny / 2, Animacja.Size.Y / wiersze / 2);
 			SpritePostaci.Texture.Smooth = true; // filtrowanie tekstury
 			SpritePostaci.Position = new Vector2f(560, 560);
-			//SpriteGlowny.Scale = new Vector2f(0.3f, 0.3f);
+			SpritePostaci.Scale = new Vector2f(0.7f, 0.7f);
 			SpritePostaci.TextureRect = KolejnaKlatkaAnim(); //pierwsza klatka
 			if (!Rysowanie.Rysowane.Contains(SpritePostaci)) Rysowanie.Rysowane.Add(SpritePostaci);
 			Rysowanie.LicznikRysowania.Tick += CoKlatke; //wywolywanie CoKlatke co okolo 16ms
@@ -108,7 +108,7 @@ namespace ProjektObiektowe
 					break;
 				}
 			//float ObrotPoprzedni = SpriteGlowny.Rotation;
-			//SpriteGlowny.Rotation = (int)KierunekPostaci * 45f;
+			SpritePostaci.Rotation = (int)KierunekPostaci * 45f;
 			//Kierunek DoWyzerowania;
 			SpritePostaci.Position += Przesuniecie;
 			//Vector2f V = SpriteGlowny.Position - PozycjaPoprzednia;
@@ -132,7 +132,7 @@ namespace ProjektObiektowe
 			//}
 			//Vector2u WynikKolizji = Plansza.KolizjaZeSciana(SpriteGlowny.GetGlobalBounds(), V, Przed);
 			//Przesuniecie = new Vector2f(Przesuniecie.X * (float)WynikKolizji.X, Przesuniecie.Y * (float)WynikKolizji.Y);
-			SpritePostaci.Position = Plansza.KolizjaZeSciana(SpritePostaci.GetGlobalBounds(), SpritePostaci.Position);
+			SpritePostaci.Position = Plansza.KolizjaZeSciana(SkalowanyProstokat(SpritePostaci.GetGlobalBounds(), 0.8f), SpritePostaci.Position);
 			if (Idzie) //nastepna klatka jesli nie stoi
 			{
 				if (Rysowanie.NrKlatki % (ulong)DzielnikPredkosciAnim == 0) //nastepka klatka anim co np 2 klatki gry
@@ -177,11 +177,11 @@ namespace ProjektObiektowe
 		//{
 		//	SpriteGlowny.Scale = new Vector2f(-SpriteGlowny.Scale.X, 1f);
 		//}
-		//private FloatRect SkalowanyProstokat(FloatRect oryg, float skala)
-		//{
-		//	return new FloatRect(new Vector2f(oryg.Left + ((1f - skala) / 2) * oryg.Width, oryg.Top + ((1f - skala) / 2) * oryg.Height),
-		//		new Vector2f(oryg.Width * skala, oryg.Height * skala));
-		//}
+		private FloatRect SkalowanyProstokat(FloatRect oryg, float skala)
+		{
+			return new FloatRect(new Vector2f(oryg.Left + ((1f - skala) / 2) * oryg.Width, oryg.Top + ((1f - skala) / 2) * oryg.Height),
+				new Vector2f(oryg.Width * skala, oryg.Height * skala));
+		}
 		//private float DlugoscWektora(Vector2f wektor)
 		//{
 		//	double suma = wektor.X * wektor.X + wektor.Y * wektor.Y;
