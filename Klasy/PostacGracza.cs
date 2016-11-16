@@ -40,7 +40,7 @@ namespace ProjektObiektowe
 		public PostacGracza(System.Drawing.Bitmap bitmapa, uint kolumny, uint wiersze) //konstruktor
 		{
 			//Stan = StanPostaci.Stoi;
-			PredkoscChodzenia = 100f;
+			PredkoscChodzenia = 400f;
 			kolumnAnim = kolumny;
 			Kolumnyy = kolumny;
 			wierszyAnim = wiersze;
