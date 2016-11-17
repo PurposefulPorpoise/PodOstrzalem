@@ -13,11 +13,49 @@ namespace ProjektObiektowe
 {
 	//enum StanPostaci { Stoi, Idzie };
 	enum Kierunek { N, NE, E, SE, S, SW, W, NW };
-	class PostacGracza : INotifyPropertyChanged
+	class PostacGracza : INotifyPropertyChanged, ISmiertelny
 	{
 		/// <summary>
 		/// Gracz
 		/// </summary
+
+
+        private int _zdrowie = 3;
+        public int zdrowie
+        {
+            get
+            {
+                return _zdrowie;
+            }
+            set
+            {
+                if (value <= 0)
+                {
+                    _zdrowie = 0;
+                    
+                }
+                else if (value >= 3)
+                {
+                    _zdrowie = 3;
+                }
+                else
+                {
+                    _zdrowie = value;
+                }
+            }
+        }
+
+        //jesli pocisk dotknie gracza to wywolac ta metode(obrazenia zawsze = 1)?
+        public void PrzyjmijObrazenia(int obrazenia)
+        {
+           zdrowie = zdrowie - obrazenia;
+        }
+
+        public void Umrzyj()
+        {
+            //znikniecie postaci? nie ma sensu byc w interfejsie
+        } 
+
 
 		public bool Idzie;
 		public Kierunek KierunekPostaci;
@@ -187,5 +225,7 @@ namespace ProjektObiektowe
 		//	double suma = wektor.X * wektor.X + wektor.Y * wektor.Y;
 		//	return Convert.ToSingle(Math.Sqrt(suma));
 		//}
+
+
 	}
 }
