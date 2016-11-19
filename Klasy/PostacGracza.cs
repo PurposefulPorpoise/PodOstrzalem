@@ -11,7 +11,7 @@ using SFML.System;
 namespace ProjektObiektowe
 {
 	enum Kierunek { N, NE, E, SE, S, SW, W, NW };
-	class PostacGracza :IAnimowany
+	class PostacGracza :IAnimowany, ISmiertelny
 	{
 		/// <summary>
 		/// Gracz

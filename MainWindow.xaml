@@ -24,14 +24,13 @@
             </StackPanel.Resources>
             <Label x:Name="TestLabel"  Content="{Binding Path=Kolumnyy}" VerticalAlignment="Center" FontSize="20" Margin="{StaticResource margines}"/>
             <Button x:Name="button" Content="Nie klikać"  VerticalAlignment="Center" Background="Red" Margin="{StaticResource margines}" />
-            <Rectangle x:Name="PunktyZycia" Height="20" VerticalAlignment="Center" Width="80" Margin="{StaticResource margines}">
+            <Rectangle x:Name="PunktyZycia" Height="20" VerticalAlignment="Center" Width="60" Margin="{StaticResource margines}">
                 <Rectangle.Fill>
                     <ImageBrush ImageSource="Resources/sciana.png" AlignmentX="Left" TileMode="Tile" Stretch="Uniform" Viewport="0,0,20,20" ViewportUnits="Absolute" />
                 </Rectangle.Fill>
 
             </Rectangle>
         </StackPanel>
-        <Image x:Name="PasekZycia" HorizontalAlignment="Left" Height="12" Margin="80,5,0,0" VerticalAlignment="Top" Width="96" Source="pack://siteoforigin:,,,/Resources/hp_3na3.png" Grid.Row="1"/>
 
 
     </Grid>
