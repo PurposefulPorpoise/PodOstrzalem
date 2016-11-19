@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ProjektObiektowe
 {
-	interface Smiertelny
+	interface ISmiertelny
 	{
-		void PrzyjmijObrazenia(float obrazenia);
+		void PrzyjmijObrazenia(int obrazenia);
 		void Umrzyj();
 	}
 }

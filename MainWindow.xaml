@@ -31,6 +31,7 @@
 
             </Rectangle>
         </StackPanel>
+        <Image x:Name="PasekZycia" HorizontalAlignment="Left" Height="12" Margin="80,5,0,0" VerticalAlignment="Top" Width="96" Source="pack://siteoforigin:,,,/Resources/hp_3na3.png" Grid.Row="1"/>
 
 
     </Grid>
