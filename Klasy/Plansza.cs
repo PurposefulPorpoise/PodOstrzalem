@@ -11,7 +11,7 @@ namespace ProjektObiektowe
 {
 	static class Plansza
 	{
-		static List<Sprite> Sciany;
+		static List<Sprite> Sciany = new List<Sprite>();
 		static public void StworzZBitmapy(Bitmap mapaPlanszy, Bitmap teksturaSciany) //mapa 32x16
 		{
 			Texture TeksturaSciany = new Texture(Rysowanie.BitmapaNaByte(teksturaSciany));
@@ -30,22 +30,18 @@ namespace ProjektObiektowe
 						Sciany.Add(temp);
 					}
 		}
-		static public Vector2f KolizjaZeSciana(FloatRect A, Vector2f pozycja)//Vector2f v, FloatRect APrzed) //nie dziala przy kolizji z gorną śc. przy ruchu skosnym (tzn v.X==v.Y)
+		static public Vector2f ReakcjaNaKolizje(FloatRect A, Vector2f pozycja)//Vector2f v, FloatRect APrzed) //nie dziala przy kolizji z gorną śc. przy ruchu skosnym (tzn v.X==v.Y)
 		{
-			bool kolizja = false;
 			float[] Odleglosci = new float[4];
 			int IndeksNajmniejszej = 0;
 			Vector2f Wypchniecie = new Vector2f(0f, 0f);
 			Vector2f NoweWypchniecie = new Vector2f(0f, 0f);
-			Vector2u MnoznikPrzesuniecia = new Vector2u(1, 1);
-			Vector2f MaxWypchniecieWOsi = new Vector2f(0f, 0f);
+
 			foreach (var sciana in Sciany)
 			{
 				FloatRect B = sciana.GetGlobalBounds();
-				if (!((A.Left + A.Width) < B.Left || (B.Left + B.Width) < A.Left //Seperating Axis Theorem
-					|| (A.Top + A.Height) < B.Top || (B.Top + B.Height) < A.Top)) //jesli prostokaty na siebie nachodza
+				if (Kolizja(A,B))
 				{
-					kolizja = true;
 					sciana.Color = SFML.Graphics.Color.Red;
 
 					Odleglosci[0] = B.Left - (A.Left + A.Width); //new Vector2f(B.Left - (A.Left + A.Width), 0f);
@@ -58,7 +54,7 @@ namespace ProjektObiektowe
 						if (Math.Abs(Odleglosci[i]) < Math.Abs(Odleglosci[IndeksNajmniejszej])) IndeksNajmniejszej = i;
 
 
-					NoweWypchniecie /*+*/= IndeksNajmniejszej <= 1 ? new Vector2f(Odleglosci[IndeksNajmniejszej], 0f)
+					NoweWypchniecie = IndeksNajmniejszej <= 1 ? new Vector2f(Odleglosci[IndeksNajmniejszej], 0f)
 						: new Vector2f(0f, Odleglosci[IndeksNajmniejszej]);
 					if (Math.Abs(NoweWypchniecie.X) > Math.Abs(Wypchniecie.X)) Wypchniecie.X = NoweWypchniecie.X;
 					if (Math.Abs(NoweWypchniecie.Y) > Math.Abs(Wypchniecie.Y)) Wypchniecie.Y = NoweWypchniecie.Y;
@@ -68,8 +64,12 @@ namespace ProjektObiektowe
 
 			}
 			return pozycja + Wypchniecie;
-			/*if(!kolizja)
-				return pozycja; *///bez zmian
+		}
+		static bool Kolizja(FloatRect a, FloatRect b)
+		{
+			//true jesli prostakaty na siebie nachodzą, czyli nie mozna ich rozdzielić linią pion./poziom.
+			return (!((a.Left + a.Width) < b.Left || (b.Left + b.Width) < a.Left 
+					|| (a.Top + a.Height) < b.Top || (b.Top + b.Height) < a.Top)); //Twierdzenie o osi rozdzielającej (SAT)
 		}
 		static bool FloatRownyZero(float a)
 		{

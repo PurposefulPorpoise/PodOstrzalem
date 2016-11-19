@@ -99,6 +99,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Animacja.cs" />
+    <Compile Include="Interfejsy\IAnimowany.cs" />
     <Compile Include="Interfejsy\Smiertelny.cs" />
     <Compile Include="Klasy\PostacGracza.cs" />
     <Compile Include="Klasy\Rysowanie.cs" />
@@ -113,6 +115,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Klasy\LogikaGry.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -135,8 +138,8 @@
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="ClassDiagram1.cd" />
     <None Include="ClassDiagram2.cd" />
@@ -150,10 +153,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="sciana.png" />
-    <None Include="zgory_niskarozdz.png" />
-    <EmbeddedResource Include="zgory.png" />
-    <None Include="clayman.png" />
+    <Resource Include="Resources\zgory_niskarozdz.png" />
+    <Resource Include="Resources\mapa.bmp" />
+    <Resource Include="Resources\sciana.png" />
     <Content Include="csfml-audio-2.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -169,8 +171,6 @@
     <Content Include="csfml-window-2.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <None Include="debugZGory.png" />
-    <None Include="kwadrat.png" />
     <Content Include="libsndfile-1.dll" />
     <Content Include="lib\sfmlnet-audio-2.dll" />
     <Content Include="lib\sfmlnet-graphics-2.dll" />
@@ -178,9 +178,6 @@
     <Content Include="lib\sfmlnet-window-2.dll" />
     <None Include="mapa.bmp" />
     <Content Include="openal32.dll" />
-    <None Include="SpriteSheetDebug.png" />
-    <None Include="testowySpriteSheet.png" />
-    <None Include="stickman.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
@@ -194,9 +191,7 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

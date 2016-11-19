@@ -23,35 +23,20 @@ namespace ProjektObiektowe
 	/// </summary>
 	public partial class MainWindow : System.Windows.Window
 	{
-		PostacGracza Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5);
-		public MainWindow() //poczatek programu
+		
+		public MainWindow() 
 		{
 			InitializeComponent();
-			this.DataContext = Gracz;
-			//Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5);
-			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
+			this.DataContext = LogikaGry.Instancja;
+			LogikaGry.Instancja.RozpocznijGre(); //to pewnie trzeba bedzie przeniesc do OnClick przycisku start w menu glownym
 			Rysowanie.PowierzchniaRys = DrawSurface;
 			Rysowanie.Start();
-			this.Closed += MainWindow_Closed;
-			Rysowanie.LicznikRysowania.Tick += CoKlatke;
-			System.Diagnostics.Trace.WriteLine(Rysowanie.Rysowane.Count);
 		}
-
-		private void CoKlatke(object sender, EventArgs e)
-		{
-			//TestLabel.Content = Gracz.KierunekSprita.ToString();
-		}
-
-		private void MainWindow_Closed(object sender, EventArgs e)
-		{
-			Rysowanie.Zakoncz();
-		}
-
-		private Vector2f PozycjaMyszy()
-		{
-			Vector2i ScreenMouse = SFML.Window.Mouse.GetPosition();
-			return new Vector2f((float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).X,
-				(float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).Y);
-		}
+		//Vector2f PozycjaMyszy()
+		//{
+		//	Vector2i ScreenMouse = SFML.Window.Mouse.GetPosition();
+		//	return new Vector2f((float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).X,
+		//		(float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).Y);
+		//}
 	}
 }

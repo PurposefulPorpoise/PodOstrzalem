@@ -18,10 +18,20 @@
             </WindowsFormsHost.Child>
         </WindowsFormsHost>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Left" Height="Auto">
-            <Label x:Name="TestLabel"  Content="{Binding Path=Kolumnyy}" VerticalAlignment="Center" FontSize="20"/>
-            <Button x:Name="button" Content="Nie klikać"  VerticalAlignment="Center" Background="Red" />
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Height="Auto" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+            <StackPanel.Resources>
+                <Thickness x:Key="margines">5,0,0,0</Thickness>
+            </StackPanel.Resources>
+            <Label x:Name="TestLabel"  Content="{Binding Path=Kolumnyy}" VerticalAlignment="Center" FontSize="20" Margin="{StaticResource margines}"/>
+            <Button x:Name="button" Content="Nie klikać"  VerticalAlignment="Center" Background="Red" Margin="{StaticResource margines}" />
+            <Rectangle x:Name="PunktyZycia" Height="20" VerticalAlignment="Center" Width="80" Margin="{StaticResource margines}">
+                <Rectangle.Fill>
+                    <ImageBrush ImageSource="Resources/sciana.png" AlignmentX="Left" TileMode="Tile" Stretch="Uniform" Viewport="0,0,20,20" ViewportUnits="Absolute" />
+                </Rectangle.Fill>
+
+            </Rectangle>
         </StackPanel>
+
 
     </Grid>
 </Window>

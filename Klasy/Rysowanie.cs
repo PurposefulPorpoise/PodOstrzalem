@@ -25,13 +25,14 @@ namespace ProjektObiektowe
 		public static void Start()
 		{
 			StworzOknoRenderowania();
-			LicznikRysowania.Interval = 1000 / 60; //dla czestotliwosci odswiezania 60Hz
-			LicznikRysowania.Tick += Rysuj; //na tyle niedokładne że wychodzi średnio 22ms zamiast 16
+			LicznikRysowania.Interval = 1000 / 60; //fps 60
+			//LicznikRysowania.Tick += Rysuj; //na tyle niedokładne że wychodzi średnio 22ms zamiast 16
 			PowierzchniaRys.SizeChanged += Surface_SizeChanged;
 			LicznikRysowania.Start();
 			DeltaCzasu.Start();
 			Application.Current.MainWindow.Deactivated += Zminimalizowano;
 			Application.Current.MainWindow.Activated += Powrot;
+			Application.Current.MainWindow.Closed += Zakoncz;
 		}
 
 		private static void Powrot(object sender, EventArgs e)
@@ -52,7 +53,7 @@ namespace ProjektObiektowe
 				OknoRenderowania.Dispose(); //usuwa obecne okno, np przy zmianie rozmiaru
 			}
 
-			ContextSettings Context = new ContextSettings(); //{ AntialiasingLevel = 4 };
+			ContextSettings Context = new ContextSettings();
 			OknoRenderowania = new RenderWindow(PowierzchniaRys.Handle, Context);
 			OknoRenderowania.SetVerticalSyncEnabled(true);
 			//OknoRenderowania.SetFramerateLimit(60); //nigdy oba naraz
@@ -64,34 +65,30 @@ namespace ProjektObiektowe
 			StworzOknoRenderowania(); //tworzy nowe okno renderowania przy zmianie rozmiaru okna
 											  //zeby uniknac bledow
 		}
-		static private void Rysuj(object s, EventArgs e)
+		public static void Rysuj()
 		{
-			OknoRenderowania.DispatchEvents(); //przetwarza wydarzenia
-			OknoRenderowania.Clear(SFML.Graphics.Color.White); //czysci ekran
+			Color KolorTla = new Color(147, 169, 131);
+			OknoRenderowania.DispatchEvents(); //przetwarza wydarzenia sfml
+			OknoRenderowania.Clear(KolorTla); //czysci ekran
 
 			foreach (Drawable d in Rysowane) //rysuje
 				if (d != null) OknoRenderowania.Draw(d);
 			OknoRenderowania.Display();
 
-			//if (!File.Exists("DeltaCzasu.csv"))
-			//	File.CreateText("DeltaCzasu.csv").Close();
-			//File.AppendAllText("DeltaCzasu.csv", String.Format("{0};{1}\n", NrKlatki, DeltaCzasu.Elapsed.TotalSeconds));
-
-			DeltaCzasu.Reset();
+			DeltaCzasu.Reset(); //liczy czas od ostatniej klatki, z kazda klatką od nowa
 			DeltaCzasu.Start();
 			NrKlatki++;
 		}
-		public static byte[] BitmapaNaByte(System.Drawing.Bitmap img)
+		public static byte[] BitmapaNaByte(System.Drawing.Bitmap img) //konwersja Bitmapy .Net na Image sfml'a
 		{
 			System.Drawing.ImageConverter converter = new System.Drawing.ImageConverter();
 			return (byte[])converter.ConvertTo(img, typeof(byte[]));
 		}
-		public static void Zakoncz()
+		public static void Zakoncz(object s, EventArgs e)
 		{
 			LicznikRysowania.Stop();
 			DeltaCzasu.Stop();
 			OknoRenderowania.Close();
 		}
-
 	}
 }
