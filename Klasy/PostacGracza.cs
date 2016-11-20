@@ -10,7 +10,7 @@ using SFML.System;
 namespace ProjektObiektowe
 {
 	enum Kierunek { N, NE, E, SE, S, SW, W, NW };
-	class PostacGracza : IRuchomy, IAnimowany, ISmiertelny
+	class PostacGracza : JednostkaRysowana, IRuchomy, IAnimowany, ISmiertelny
 	{
 		/// <summary>
 		/// Postac gracza - poruszanie, animowanie i zdrowie
@@ -48,40 +48,30 @@ namespace ProjektObiektowe
 			zdrowie = zdrowie - obrazenia;
 		}
 
-		public void Umrzyj()
+		void Umrzyj()
 		{
-			//znikniecie postaci? nie ma sensu byc w interfejsie //moze miec
+			//znikniecie postaci? nie ma sensu byc w interfejsie
 		}
 
 
 		bool Idzie;
 		Kierunek KierunekRuchu;
-		Sprite SpritePostaci;
-		public Sprite sprite { get { return SpritePostaci; } }
+
 		public FloatRect ProstokatKolizji
-		{ get { return SkalowanyProstokat(SpritePostaci.GetGlobalBounds(), 0.8f); } }
-		public Vector2f Pozycja
-		{
-			get { return SpritePostaci.Position; }
-			set { SpritePostaci.Position = value; }
-		}
-		Image SpriteSheet;
+		{ get { return SkalowanyProstokat(Sprite.GetGlobalBounds(), 0.8f); } }
+
 		private Animacja Anim;
 		float PredkoscChodzenia;
 
-		public PostacGracza(System.Drawing.Bitmap bitmapa, int kolumny, int wiersze) //konstruktor
+		public PostacGracza(System.Drawing.Bitmap bitmapa, int kolumny, int wiersze, Vector2f pozycja)
+			:base(bitmapa, pozycja)
 		{
 			PredkoscChodzenia = 140f;
-			SpriteSheet = new Image(Rysowanie.BitmapaNaByte(bitmapa)); //konwersja Bitmapy .Net na Image sfml'a
 			Anim = new Animacja((int)SpriteSheet.Size.X, (int)SpriteSheet.Size.Y, kolumny, wiersze);
-			SpritePostaci = new Sprite(new Texture(SpriteSheet));
 			//ustawia oś obrotu na srodek //domyslne to lewy gorny rog
-			SpritePostaci.Origin = new Vector2f(SpriteSheet.Size.X / kolumny / 2, SpriteSheet.Size.Y / wiersze / 2);
-			SpritePostaci.Texture.Smooth = true; // filtrowanie tekstury
-			Pozycja = new Vector2f(560, 560);
-			SpritePostaci.Scale = new Vector2f(0.7f, 0.7f);
-			SpritePostaci.TextureRect = Anim.ObecnaKlatka(0); //pierwsza klatka
-			if (!Rysowanie.Rysowane.Contains(SpritePostaci)) Rysowanie.Rysowane.Add(SpritePostaci);
+			Sprite.Origin = new Vector2f(SpriteSheet.Size.X / kolumny / 2, SpriteSheet.Size.Y / wiersze / 2);
+			Sprite.Scale = new Vector2f(0.7f, 0.7f);
+			Sprite.TextureRect = Anim.ObecnaKlatka(0); //pierwsza klatka
 		}
 		public void Rusz()
 		{
@@ -119,13 +109,13 @@ namespace ProjektObiektowe
 					break;
 				}
 			Pozycja += Przesuniecie;
-			SpritePostaci.Rotation = (int)KierunekRuchu * 45f;
+			Sprite.Rotation = (int)KierunekRuchu * 45f;
 		}
 		public void Animuj(ulong numerKlatkiGry)
 		{
 			if (Idzie)
 			{
-				SpritePostaci.TextureRect = Anim.ObecnaKlatka(0);
+				Sprite.TextureRect = Anim.ObecnaKlatka(0);
 			}
 		}
 		private void StanZKlawiatury()

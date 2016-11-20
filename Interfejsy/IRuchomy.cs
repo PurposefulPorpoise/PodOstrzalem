@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ProjektObiektowe
 {
-	interface IRuchomy
+	interface IRuchomy //przesuniecie, obrot lub oba
 	{
 		void Rusz();
 	}

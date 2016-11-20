@@ -22,13 +22,23 @@ namespace ProjektObiektowe
 			int szerokoscMapy = mapaPlanszy.Size.Width;
 			for (int i = 0; i < wysokoscMapy; i++)
 				for (int j = 0; j < szerokoscMapy; j++)
-					if (mapaPlanszy.GetPixel(j, i).GetBrightness() == 0) //plansza z mapy-obrazka
+				{
+					Vector2f pozycja = new Vector2f(j * TeksturaSciany.Size.X, i * TeksturaSciany.Size.Y);
+					int kolor = mapaPlanszy.GetPixel(j, i).ToArgb();
+					if (kolor == System.Drawing.Color.Black.ToArgb()) //plansza z mapy-obrazka
 					{
 						temp = new Sprite(TeksturaSciany);
-						temp.Position = new SFML.System.Vector2f(j * TeksturaSciany.Size.X, i * TeksturaSciany.Size.Y);
+						temp.Position = pozycja;
 						Rysowanie.Rysowane.Add(temp);
 						Sciany.Add(temp);
 					}
+					else if(kolor == System.Drawing.Color.Red.ToArgb())
+					{
+
+						LogikaGry.Instancja.DodajDzialko(new Dzialko(Properties.Resources.sciana, pozycja));
+					}
+
+				}
 		}
 
 	}

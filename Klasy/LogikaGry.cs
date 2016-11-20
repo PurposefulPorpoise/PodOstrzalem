@@ -25,15 +25,16 @@ namespace ProjektObiektowe
 		public PostacGracza Gracz;
 		List<IRuchomy> Ruchome = new List<IRuchomy>();
 		List<IAnimowany> Animowane = new List<IAnimowany>();
+		List<Dzialko> Dzialka = new List<Dzialko>();
 		public void RozpocznijGre()
 		{
 			Rysowanie.LicznikRysowania.Tick += CoKlatke;
-			Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5);
+			Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5, new SFML.System.Vector2f(560,560));
 			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
 			Ruchome.Add(Gracz);
 			Animowane.Add(Gracz);
 		}
-		public void CoKlatke(object s, EventArgs e)
+		public void CoKlatke(object s, EventArgs e) //wywolywane co okolo 22ms (idealnie 16ms)
 		{
 			foreach (var element in Ruchome)
 				element.Rusz();
@@ -42,6 +43,10 @@ namespace ProjektObiektowe
 				element.Animuj(NrKlatkiGry);
 			Rysowanie.Rysuj();
 			NrKlatkiGry++;
+		}
+		public void DodajDzialko(Dzialko nowe)
+		{
+			Dzialka.Add(nowe);
 		}
 
 	}

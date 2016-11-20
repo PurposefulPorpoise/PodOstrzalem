@@ -9,6 +9,6 @@ namespace ProjektObiektowe
 	interface ISmiertelny
 	{
 		void PrzyjmijObrazenia(int obrazenia);
-		void Umrzyj();
+		//void Umrzyj();
 	}
 }
