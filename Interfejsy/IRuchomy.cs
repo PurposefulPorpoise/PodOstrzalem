@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ProjektObiektowe
 {
-	interface IAnimowany
+	interface IRuchomy
 	{
-		void Animuj(ulong numerKlatkiGry);
+		void Rusz();
 	}
 }

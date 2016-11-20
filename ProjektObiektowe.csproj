@@ -101,7 +101,9 @@
     </ApplicationDefinition>
     <Compile Include="Animacja.cs" />
     <Compile Include="Interfejsy\IAnimowany.cs" />
+    <Compile Include="Interfejsy\IRuchomy.cs" />
     <Compile Include="Interfejsy\ISmiertelny.cs" />
+    <Compile Include="Klasy\Kolizje.cs" />
     <Compile Include="Klasy\PostacGracza.cs" />
     <Compile Include="Klasy\Rysowanie.cs" />
     <Compile Include="Klasy\SfmlDrawingSurface.cs">

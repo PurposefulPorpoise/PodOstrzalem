@@ -18,7 +18,7 @@ namespace ProjektObiektowe
 		static private RenderWindow OknoRenderowania;
 		static public System.Windows.Forms.Timer LicznikRysowania = new System.Windows.Forms.Timer();
 		static public Stopwatch DeltaCzasu = new Stopwatch();
-		static public ulong NrKlatki = 0;
+
 		static public SfmlDrawingSurface PowierzchniaRys;
 
 
@@ -57,8 +57,9 @@ namespace ProjektObiektowe
 			OknoRenderowania = new RenderWindow(PowierzchniaRys.Handle, Context);
 			OknoRenderowania.SetVerticalSyncEnabled(true);
 			//OknoRenderowania.SetFramerateLimit(60); //nigdy oba naraz
-			OknoRenderowania.SetView(new View(new Vector2f(PowierzchniaRys.Size.Width / 2, PowierzchniaRys.Height / 2),
-				new Vector2f(PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height)));
+			//OknoRenderowania.SetView(new View(new Vector2f(PowierzchniaRys.Size.Width / 2, PowierzchniaRys.Height / 2),
+			//	new Vector2f(PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height)));
+			OknoRenderowania.SetView(new View(new FloatRect(0, 0, PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height)));
 		}
 		static private void Surface_SizeChanged(object s, EventArgs e)
 		{
@@ -77,7 +78,6 @@ namespace ProjektObiektowe
 
 			DeltaCzasu.Reset(); //liczy czas od ostatniej klatki, z kazda klatką od nowa
 			DeltaCzasu.Start();
-			NrKlatki++;
 		}
 		public static byte[] BitmapaNaByte(System.Drawing.Bitmap img) //konwersja Bitmapy .Net na Image sfml'a
 		{

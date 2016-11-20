@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 
 namespace ProjektObiektowe
 {
-	sealed class LogikaGry :INotifyPropertyChanged //interfejs do informowania okna o zmianie wlasciwosci
+	sealed class LogikaGry :INotifyPropertyChanged //interfejs do informowania okna o zmianie wlasciwosci (binding)
 	{
 		#region Singleton, max 1 instancja (konstruktor ukryty), potrzebne do bindingu
 		private static readonly LogikaGry instancja = new LogikaGry();
@@ -22,18 +21,27 @@ namespace ProjektObiektowe
 				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
 		#endregion
-		PostacGracza Gracz;
+		public ulong NrKlatkiGry = 0;
+		public PostacGracza Gracz;
+		List<IRuchomy> Ruchome = new List<IRuchomy>();
+		List<IAnimowany> Animowane = new List<IAnimowany>();
 		public void RozpocznijGre()
 		{
 			Rysowanie.LicznikRysowania.Tick += CoKlatke;
 			Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5);
 			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
+			Ruchome.Add(Gracz);
+			Animowane.Add(Gracz);
 		}
 		public void CoKlatke(object s, EventArgs e)
 		{
-			Gracz.Rusz();
-
+			foreach (var element in Ruchome)
+				element.Rusz();
+			Kolizje.ReakcjaPostaciNaKolizje();
+			foreach (var element in Animowane)
+				element.Animuj(NrKlatkiGry);
 			Rysowanie.Rysuj();
+			NrKlatkiGry++;
 		}
 
 	}
