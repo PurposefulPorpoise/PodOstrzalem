@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.ComponentModel;
+using System.Diagnostics;
 
 namespace ProjektObiektowe
 {
@@ -22,6 +23,7 @@ namespace ProjektObiektowe
 		}
 		#endregion
 		public ulong NrKlatkiGry = 0;
+		static public Stopwatch DeltaCzasu = Stopwatch.StartNew();
 		public PostacGracza Gracz;
 		List<IRuchomy> Ruchome = new List<IRuchomy>();
 		List<IAnimowany> Animowane = new List<IAnimowany>();
@@ -50,6 +52,9 @@ namespace ProjektObiektowe
 				}
 			Rysowanie.Rysuj();
 			NrKlatkiGry++;
+			Debug.Write(DeltaCzasu.ElapsedMilliseconds + " ");
+			DeltaCzasu.Reset(); //liczy czas od ostatniej klatki, z kazda klatką od nowa
+			DeltaCzasu.Start();
 		}
 		public void DodajDzialko(Dzialko nowe)
 		{

@@ -6,24 +6,25 @@
         xmlns:local="clr-namespace:ProjektObiektowe"
         xmlns:wpfSfmlHost="clr-namespace:ProjektObiektowe"
         mc:Ignorable="d"    
-        Title="Pod Ostrzałem" WindowStartupLocation="CenterScreen" ResizeMode="CanMinimize" SizeToContent="WidthAndHeight">
-    <Grid>
+        Title="Pod Ostrzałem" WindowStartupLocation="Manual" ResizeMode="CanMinimize" Left="0" Top="0" SizeToContent="WidthAndHeight">
+    <Grid x:Name="grid" Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="640"/>
+            <RowDefinition Height="*"/>
+            <!-- <RowDefinition Height="640"/> -->
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <WindowsFormsHost Grid.Row="0" Width="1280" x:Name="Host">
+        <WindowsFormsHost Grid.Row="0" x:Name="Host">
             <WindowsFormsHost.Child>
                 <wpfSfmlHost:SfmlDrawingSurface x:Name="DrawSurface"/>
             </WindowsFormsHost.Child>
         </WindowsFormsHost>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Height="Auto" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
             <StackPanel.Resources>
                 <Thickness x:Key="margines">5,0,0,0</Thickness>
             </StackPanel.Resources>
             <Label x:Name="TestLabel"  Content="{Binding Path=Kolumnyy}" VerticalAlignment="Center" FontSize="20" Margin="{StaticResource margines}"/>
-            <Button x:Name="button" Content="Nie klikać"  VerticalAlignment="Center" Background="Red" Margin="{StaticResource margines}" />
+            <Button x:Name="button" Content="Nie klikać" Background="Red" Margin="{StaticResource margines}" />
             <Rectangle x:Name="PunktyZycia" Height="20" VerticalAlignment="Center" Width="60" Margin="{StaticResource margines}">
                  <!--Powiazac Width z property zwracajacym obecne punkty zdrowia razy szerokosc tekstury (tu 40)-->
                 <Rectangle.Fill>

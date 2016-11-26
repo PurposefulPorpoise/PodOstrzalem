@@ -76,8 +76,8 @@ namespace ProjektObiektowe
 		public void Rusz()
 		{
 			StanZKlawiatury();
-			float odlegloscPrzesuniecia = PredkoscChodzenia *
-						(float)Rysowanie.DeltaCzasu.Elapsed.TotalSeconds; //odl zalezna od czasu nie od fps
+			float odlegloscPrzesuniecia = PredkoscChodzenia * 
+						(float)LogikaGry.DeltaCzasu.Elapsed.TotalSeconds; //odl zalezna od czasu nie od fps //cos nietak z deltą, im dluzej sie gra tym wolniej chodzi?
 			Vector2f PozycjaPoprzednia = Pozycja;
 			Vector2f Przesuniecie = new Vector2f(0f, 0f);
 			if (Idzie)

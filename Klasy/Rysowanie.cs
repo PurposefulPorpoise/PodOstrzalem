@@ -17,8 +17,6 @@ namespace ProjektObiektowe
 		static public List<Drawable> Rysowane = new List<Drawable>();
 		static private RenderWindow OknoRenderowania;
 		static public System.Windows.Forms.Timer LicznikRysowania = new System.Windows.Forms.Timer();
-		static public Stopwatch DeltaCzasu = new Stopwatch();
-
 		static public SfmlDrawingSurface PowierzchniaRys;
 
 
@@ -29,7 +27,6 @@ namespace ProjektObiektowe
 			//LicznikRysowania.Tick += Rysuj; //na tyle niedokładne że wychodzi średnio 22ms zamiast 16
 			PowierzchniaRys.SizeChanged += Surface_SizeChanged;
 			LicznikRysowania.Start();
-			DeltaCzasu.Start();
 			Application.Current.MainWindow.Deactivated += Zminimalizowano;
 			Application.Current.MainWindow.Activated += Powrot;
 			Application.Current.MainWindow.Closed += Zakoncz;
@@ -57,10 +54,9 @@ namespace ProjektObiektowe
 			OknoRenderowania = new RenderWindow(PowierzchniaRys.Handle, Context);
 			OknoRenderowania.SetVerticalSyncEnabled(true);
 			//OknoRenderowania.SetFramerateLimit(60); //nigdy oba naraz
-			//OknoRenderowania.SetView(new View(new Vector2f(PowierzchniaRys.Size.Width / 2, PowierzchniaRys.Height / 2),
-			//	new Vector2f(PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height)));
-			
-			//widok.Viewport = new FloatRect(0f, 0f, PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height);
+			View widok = new View(new Vector2f(1280f / 2, 640f / 2),
+				new Vector2f(1280, 640));
+			OknoRenderowania.SetView(widok);
 		}
 		static private void Surface_SizeChanged(object s, EventArgs e)
 		{
@@ -75,15 +71,13 @@ namespace ProjektObiektowe
 
 			foreach (Drawable d in Rysowane) //rysuje
 				if (d != null) OknoRenderowania.Draw(d);
-			OknoRenderowania.Display();
-
-			DeltaCzasu.Reset(); //liczy czas od ostatniej klatki, z kazda klatką od nowa
-			DeltaCzasu.Start();
+			OknoRenderowania.Display(); //przenosi z drugiego bufora na ekran (podwojne buforowanie)
 		}
-		public static void UstawWidok(object o, EventArgs e)
+		public static void UstawWidok(double szerokosc, double wysokosc)
 		{
-			View widok = new View(new FloatRect(0, 0, PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height));
-			OknoRenderowania.SetView(widok);
+
+			//OknoRenderowania.SetView(widok);
+
 		}
 		public static byte[] BitmapaNaByte(System.Drawing.Bitmap img) //konwersja Bitmapy .Net na Image sfml'a
 		{
@@ -93,7 +87,7 @@ namespace ProjektObiektowe
 		public static void Zakoncz(object s, EventArgs e)
 		{
 			LicznikRysowania.Stop();
-			DeltaCzasu.Stop();
+			LogikaGry.DeltaCzasu.Stop();
 			OknoRenderowania.Close();
 		}
 	}

@@ -28,9 +28,17 @@ namespace ProjektObiektowe
 		{
 			InitializeComponent();
 			this.DataContext = LogikaGry.Instancja;
+			
 			Rysowanie.PowierzchniaRys = DrawSurface;
-			this.Loaded += Rysowanie.UstawWidok;
+			this.Loaded += MainWindow_Loaded;
+						//dopiero po calkowitym zaladowaniu powierzchniarys ma wlasciwy rozmiar
 			LogikaGry.Instancja.RozpocznijGre(); //to pewnie trzeba bedzie przeniesc do OnClick przycisku start w menu glownym
+		}
+
+		private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+		{
+			grid.RowDefinitions[0].Height = new GridLength(DrawSurface.Width * 640 / 1280f);
+			//this.Height = this.Width * 640 / 1 -40;
 		}
 
 		//Vector2f PozycjaMyszy()
