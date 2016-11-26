@@ -99,12 +99,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Animacja.cs" />
+    <Compile Include="Klasy\Animacja.cs" />
     <Compile Include="Interfejsy\IAnimowany.cs" />
     <Compile Include="Interfejsy\IRuchomy.cs" />
     <Compile Include="Interfejsy\ISmiertelny.cs" />
     <Compile Include="Klasy\JednostkaRysowana.cs" />
     <Compile Include="Klasy\Kolizje.cs" />
+    <Compile Include="Klasy\Pocisk.cs" />
     <Compile Include="Klasy\PostacGracza.cs" />
     <Compile Include="Klasy\Rysowanie.cs" />
     <Compile Include="Klasy\SfmlDrawingSurface.cs">
@@ -157,6 +158,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\pocisk.png" />
     <Resource Include="Resources\zgory_niskarozdz.png" />
     <Resource Include="Resources\mapa.bmp" />
     <Resource Include="Resources\sciana.png" />

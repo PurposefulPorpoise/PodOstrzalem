@@ -22,6 +22,8 @@ namespace ProjektObiektowe
 		{
 			SpriteSheet = new Image(Rysowanie.BitmapaNaByte(bitmapa)); //konwersja Bitmapy .Net na Image sfml'a
 			Sprite = new Sprite(new Texture(SpriteSheet));
+			//domyslnie obrot wokol srodka, ale postac gracza wyjatkowo inaczej bo ma spritesheet
+			Sprite.Origin = new Vector2f(Sprite.Texture.Size.X / 2, Sprite.Texture.Size.Y / 2);
 			Sprite.Texture.Smooth = true; //wygladzanie tekstury
 			Pozycja = pozycja;
 			if (!Rysowanie.Rysowane.Contains(Sprite)) Rysowanie.Rysowane.Add(Sprite);

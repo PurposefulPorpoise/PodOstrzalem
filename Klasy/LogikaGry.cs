@@ -33,14 +33,21 @@ namespace ProjektObiektowe
 			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
 			Ruchome.Add(Gracz);
 			Animowane.Add(Gracz);
+			Rysowanie.Start();
 		}
 		public void CoKlatke(object s, EventArgs e) //wywolywane co okolo 22ms (idealnie 16ms)
 		{
 			foreach (var element in Ruchome)
 				element.Rusz();
+
 			Kolizje.ReakcjaPostaciNaKolizje();
 			foreach (var element in Animowane)
 				element.Animuj(NrKlatkiGry);
+			foreach (var dzialko in Dzialka)
+				if (dzialko.CzyWidziGracza())
+				{
+					Ruchome.Add(dzialko.Strzel()); //zwraca nowy pocisk i dodaje do listy rysowanych
+				}
 			Rysowanie.Rysuj();
 			NrKlatkiGry++;
 		}

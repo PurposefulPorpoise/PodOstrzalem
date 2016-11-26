@@ -54,6 +54,10 @@ namespace ProjektObiektowe
 			return (!((a.Left + a.Width) < b.Left || (b.Left + b.Width) < a.Left
 					|| (a.Top + a.Height) < b.Top || (b.Top + b.Height) < a.Top)); //Twierdzenie o osi rozdzielającej (SAT)
 		}
+		public static bool CzyPunktWScianie(Vector2f pkt)
+		{
+			return false;
+		}
 		static bool FloatRownyZero(float a)
 		{
 			return Math.Abs(a) < 0.001;

@@ -59,7 +59,8 @@ namespace ProjektObiektowe
 			//OknoRenderowania.SetFramerateLimit(60); //nigdy oba naraz
 			//OknoRenderowania.SetView(new View(new Vector2f(PowierzchniaRys.Size.Width / 2, PowierzchniaRys.Height / 2),
 			//	new Vector2f(PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height)));
-			OknoRenderowania.SetView(new View(new FloatRect(0, 0, PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height)));
+			
+			//widok.Viewport = new FloatRect(0f, 0f, PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height);
 		}
 		static private void Surface_SizeChanged(object s, EventArgs e)
 		{
@@ -78,6 +79,11 @@ namespace ProjektObiektowe
 
 			DeltaCzasu.Reset(); //liczy czas od ostatniej klatki, z kazda klatką od nowa
 			DeltaCzasu.Start();
+		}
+		public static void UstawWidok(object o, EventArgs e)
+		{
+			View widok = new View(new FloatRect(0, 0, PowierzchniaRys.Size.Width, PowierzchniaRys.Size.Height));
+			OknoRenderowania.SetView(widok);
 		}
 		public static byte[] BitmapaNaByte(System.Drawing.Bitmap img) //konwersja Bitmapy .Net na Image sfml'a
 		{

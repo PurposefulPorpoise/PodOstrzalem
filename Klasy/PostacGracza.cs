@@ -66,7 +66,7 @@ namespace ProjektObiektowe
 		public PostacGracza(System.Drawing.Bitmap bitmapa, int kolumny, int wiersze, Vector2f pozycja)
 			:base(bitmapa, pozycja)
 		{
-			PredkoscChodzenia = 140f;
+			PredkoscChodzenia = 200f;
 			Anim = new Animacja((int)SpriteSheet.Size.X, (int)SpriteSheet.Size.Y, kolumny, wiersze);
 			//ustawia oś obrotu na srodek //domyslne to lewy gorny rog
 			Sprite.Origin = new Vector2f(SpriteSheet.Size.X / kolumny / 2, SpriteSheet.Size.Y / wiersze / 2);

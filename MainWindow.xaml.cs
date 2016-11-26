@@ -28,10 +28,11 @@ namespace ProjektObiektowe
 		{
 			InitializeComponent();
 			this.DataContext = LogikaGry.Instancja;
-			LogikaGry.Instancja.RozpocznijGre(); //to pewnie trzeba bedzie przeniesc do OnClick przycisku start w menu glownym
 			Rysowanie.PowierzchniaRys = DrawSurface;
-			Rysowanie.Start();
+			this.Loaded += Rysowanie.UstawWidok;
+			LogikaGry.Instancja.RozpocznijGre(); //to pewnie trzeba bedzie przeniesc do OnClick przycisku start w menu glownym
 		}
+
 		//Vector2f PozycjaMyszy()
 		//{
 		//	Vector2i ScreenMouse = SFML.Window.Mouse.GetPosition();
