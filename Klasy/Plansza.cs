@@ -29,7 +29,8 @@ namespace ProjektObiektowe
 					{
 						temp = new Sprite(TeksturaSciany);
 						temp.Position = pozycja;
-						Rysowanie.Rysowane.Add(temp);
+						//Rysowanie.Rysowane.Add(temp);
+						LogikaGry.Instancja.DodajRysowane(temp);
 						Sciany.Add(temp);
 					}
 					else if(kolor == System.Drawing.Color.Red.ToArgb())

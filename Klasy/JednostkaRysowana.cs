@@ -26,7 +26,8 @@ namespace ProjektObiektowe
 			Sprite.Origin = new Vector2f(Sprite.Texture.Size.X / 2, Sprite.Texture.Size.Y / 2);
 			Sprite.Texture.Smooth = true; //wygladzanie tekstury
 			Pozycja = pozycja;
-			if (!Rysowanie.Rysowane.Contains(Sprite)) Rysowanie.Rysowane.Add(Sprite);
+			//if (!Rysowanie.Rysowane.Contains(Sprite)) Rysowanie.Rysowane.Add(Sprite);
+			if (!LogikaGry.Instancja.Rysowane.Contains(Sprite)) LogikaGry.Instancja.DodajRysowane(Sprite);
 		}
 	}
 }

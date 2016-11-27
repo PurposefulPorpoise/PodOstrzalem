@@ -14,7 +14,6 @@ namespace ProjektObiektowe
 {
 	static class Rysowanie
 	{
-		static public List<Drawable> Rysowane = new List<Drawable>();
 		static private RenderWindow OknoRenderowania;
 		static public System.Windows.Forms.Timer LicznikRysowania = new System.Windows.Forms.Timer();
 		static public SfmlDrawingSurface PowierzchniaRys;
@@ -24,7 +23,6 @@ namespace ProjektObiektowe
 		{
 			StworzOknoRenderowania();
 			LicznikRysowania.Interval = 1000 / 60; //fps 60
-			//LicznikRysowania.Tick += Rysuj; //na tyle niedokładne że wychodzi średnio 22ms zamiast 16
 			PowierzchniaRys.SizeChanged += Surface_SizeChanged;
 			LicznikRysowania.Start();
 			Application.Current.MainWindow.Deactivated += Zminimalizowano;
@@ -63,13 +61,12 @@ namespace ProjektObiektowe
 			StworzOknoRenderowania(); //tworzy nowe okno renderowania przy zmianie rozmiaru okna
 											  //zeby uniknac bledow
 		}
-		public static void Rysuj()
+		public static void Rysuj(List<Drawable> rysowane, Color kolorTla)
 		{
-			Color KolorTla = new Color(147, 169, 131);
 			OknoRenderowania.DispatchEvents(); //przetwarza wydarzenia sfml
-			OknoRenderowania.Clear(KolorTla); //czysci ekran
+			OknoRenderowania.Clear(kolorTla); //czysci ekran
 
-			foreach (Drawable d in Rysowane) //rysuje
+			foreach (Drawable d in rysowane) //rysuje
 				if (d != null) OknoRenderowania.Draw(d);
 			OknoRenderowania.Display(); //przenosi z drugiego bufora na ekran (podwojne buforowanie)
 		}
@@ -87,7 +84,7 @@ namespace ProjektObiektowe
 		public static void Zakoncz(object s, EventArgs e)
 		{
 			LicznikRysowania.Stop();
-			LogikaGry.DeltaCzasu.Stop();
+			//LogikaGry.LicznikDelty.Stop();
 			OknoRenderowania.Close();
 		}
 	}
