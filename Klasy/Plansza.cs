@@ -12,7 +12,7 @@ namespace ProjektObiektowe
 	{
 		private static List<Sprite> Sciany = new List<Sprite>();
 		public static List<Sprite> sciany { get { return Sciany; } }
-		static public void StworzZBitmapy(Bitmap mapaPlanszy, Bitmap teksturaSciany) //mapa 32x16
+		public static void StworzZBitmapy(Bitmap mapaPlanszy, Bitmap teksturaSciany) //mapa 32x16
 		{
 			Texture TeksturaSciany = new Texture(Rysowanie.BitmapaNaByte(teksturaSciany));
 			TeksturaSciany.Smooth = true;
@@ -36,7 +36,7 @@ namespace ProjektObiektowe
 					else if(kolor == System.Drawing.Color.Red.ToArgb())
 					{
 
-						LogikaGry.Instancja.DodajDzialko(new Dzialko(Properties.Resources.sciana, pozycja, new TimeSpan(0,0,0,1)) );
+						LogikaGry.Instancja.DodajDzialko(new Dzialko(Properties.Resources.sciana, pozycja, new TimeSpan(0,0,0,0,700)) );
 					}
 
 				}

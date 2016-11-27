@@ -1,4 +1,5 @@
-﻿using SFML.System;
+﻿using SFML.Graphics;
+using SFML.System;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -22,8 +23,24 @@ namespace ProjektObiektowe
 		}
 		public void Rusz()
 		{
-			Pozycja += WektoroweFunkcje.Normalizuj(PozycjaGracza - PozycjaPocz)
+			Pozycja +=	Narzedzia.Normalizuj(PozycjaGracza - PozycjaPocz)
 				* Predkosc * (float)LogikaGry.Instancja.DeltaCzasu;
+		}
+		public void ReagujNaKolizje()
+		{
+			FloatRect[] dotknieteSciany; //metoda wymaga, ale nieuzywane
+			if (Kolizje.Kolizja(Sprite.GetGlobalBounds(), LogikaGry.Instancja.Gracz.ProstokatKolizji))
+			{
+				LogikaGry.Instancja.Gracz.PrzyjmijObrazenia(1);
+				System.Diagnostics.Debug.WriteLine("Gracz przyjal obrazenia");
+				ZniszczSie();
+			}
+			else if (Kolizje.KolizjaZeScianami(Sprite.GetGlobalBounds(), out dotknieteSciany))
+				ZniszczSie();
+		}
+		void ZniszczSie()
+		{
+			LogikaGry.Instancja.ZniszczPocisk(this);
 		}
 	}
 }

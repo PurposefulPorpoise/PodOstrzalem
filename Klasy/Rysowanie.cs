@@ -15,8 +15,8 @@ namespace ProjektObiektowe
 	static class Rysowanie
 	{
 		static private RenderWindow OknoRenderowania;
-		static public System.Windows.Forms.Timer LicznikRysowania = new System.Windows.Forms.Timer();
-		static public SfmlDrawingSurface PowierzchniaRys;
+		public static System.Windows.Forms.Timer LicznikRysowania = new System.Windows.Forms.Timer();
+		public static SfmlDrawingSurface PowierzchniaRys;
 
 
 		public static void Start()

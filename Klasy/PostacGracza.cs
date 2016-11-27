@@ -17,7 +17,7 @@ namespace ProjektObiektowe
 		/// </summary
 
 
-		private int _zdrowie = 3;
+		private int _zdrowie;
 		public int zdrowie
 		{
 			get
@@ -46,11 +46,15 @@ namespace ProjektObiektowe
 		public void PrzyjmijObrazenia(int obrazenia)
 		{
 			zdrowie = zdrowie - obrazenia;
+			if (zdrowie == 0) Umrzyj();
+			if (zdrowie == 2) Sprite.Color = Color.Yellow;
+			if (zdrowie == 1) Sprite.Color = Color.Magenta;
 		}
 
 		void Umrzyj()
 		{
 			//znikniecie postaci? nie ma sensu byc w interfejsie
+			Sprite.Color = Color.Red;
 		}
 
 
@@ -58,7 +62,7 @@ namespace ProjektObiektowe
 		Kierunek KierunekRuchu;
 
 		public FloatRect ProstokatKolizji
-		{ get { return SkalowanyProstokat(Sprite.GetGlobalBounds(), 0.8f); } }
+		{ get { return Narzedzia.SkalowanyProstokat(Sprite.GetGlobalBounds(), 0.8f); } }
 
 		private Animacja Anim;
 		float PredkoscChodzenia;
@@ -66,6 +70,7 @@ namespace ProjektObiektowe
 		public PostacGracza(System.Drawing.Bitmap bitmapa, int kolumny, int wiersze, Vector2f pozycja)
 			:base(bitmapa, pozycja)
 		{
+			zdrowie = 3;
 			PredkoscChodzenia = 200f;
 			Anim = new Animacja((int)SpriteSheet.Size.X, (int)SpriteSheet.Size.Y, kolumny, wiersze);
 			//ustawia oś obrotu na srodek //domyslne to lewy gorny rog
@@ -144,14 +149,5 @@ namespace ProjektObiektowe
 			Idzie = (Keyboard.IsKeyDown(Key.D) || Keyboard.IsKeyDown(Key.A)
 						|| Keyboard.IsKeyDown(Key.S) || Keyboard.IsKeyDown(Key.W));
 		}
-		private FloatRect SkalowanyProstokat(FloatRect oryg, float skala)
-		{
-			return new FloatRect(
-				new Vector2f(
-					oryg.Left + ((1f - skala) / 2) * oryg.Width, 
-					oryg.Top + ((1f - skala) / 2) * oryg.Height),
-				new Vector2f(oryg.Width * skala, oryg.Height * skala) );
-		}
-
 	}
 }

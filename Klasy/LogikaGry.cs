@@ -34,6 +34,8 @@ namespace ProjektObiektowe
 		List<IRuchomy> Ruchome = new List<IRuchomy>();
 		List<IAnimowany> Animowane = new List<IAnimowany>();
 		List<Dzialko> Dzialka = new List<Dzialko>();
+		List<Pocisk> Pociski = new List<Pocisk>();
+		List<Pocisk> PociskiDoUsuniecia = new List<Pocisk>();
 		double sumaDelt = 0;
 		public void RozpocznijGre()
 		{
@@ -47,9 +49,13 @@ namespace ProjektObiektowe
 		}
 		public void CoKlatke(object s, EventArgs e) //wywolywane co okolo 23ms (idealnie 16ms), daje to ~43fps
 		{
+			foreach (var element in PociskiDoUsuniecia)
+				Pociski.Remove(element);
+			PociskiDoUsuniecia.Clear();
 			foreach (var element in Ruchome)
 				element.Rusz();
-
+			foreach (var pocisk in Pociski) //foreach otwiera liste tylko do odczytu
+				pocisk.ReagujNaKolizje();
 			Kolizje.ReakcjaPostaciNaKolizje();
 			foreach (var element in Animowane)
 				element.Animuj(NrKlatkiGry);
@@ -57,6 +63,7 @@ namespace ProjektObiektowe
 				if (dzialko.CzyWidziGracza() && DateTime.Now-dzialko.CzasOstatniegoStrzalu>=dzialko.OdstepStrzalow)
 				{
 					Ruchome.Add(dzialko.Strzel(Gracz.Pozycja)); //zwraca nowy pocisk i dodaje do listy rysowanych
+					Pociski.Add((Pocisk)Ruchome.Last());
 				}
 			Rysowanie.Rysuj(_Rysowane, new Color(147, 169, 131));
 			NrKlatkiGry++;
@@ -73,6 +80,13 @@ namespace ProjektObiektowe
 		public void DodajRysowane(Drawable element)
 		{
 			_Rysowane.Add(element);
+		}
+		public void ZniszczPocisk(Pocisk element)
+		{
+			/*if (_Rysowane.Contains(element.sprite))*/ _Rysowane.Remove(element.sprite);
+			/*if (Ruchome.Contains(element))*/ Ruchome.Remove(element);
+			/*if (Pociski.Contains(element))*/ PociskiDoUsuniecia.Add(element);
+
 		}
 
 	}

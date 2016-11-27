@@ -105,6 +105,7 @@
     <Compile Include="Interfejsy\ISmiertelny.cs" />
     <Compile Include="Klasy\JednostkaRysowana.cs" />
     <Compile Include="Klasy\Kolizje.cs" />
+    <Compile Include="Klasy\Narzedzia.cs" />
     <Compile Include="Klasy\Pocisk.cs" />
     <Compile Include="Klasy\PostacGracza.cs" />
     <Compile Include="Klasy\Rysowanie.cs" />
@@ -121,7 +122,6 @@
     </Compile>
     <Compile Include="Klasy\LogikaGry.cs" />
     <Compile Include="Klasy\Dzialko.cs" />
-    <Compile Include="Klasy\WektoroweFunkcje.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
