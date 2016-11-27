@@ -8,27 +8,28 @@ using SFML.System;
 
 namespace ProjektObiektowe
 {
-	class Dzialko :JednostkaRysowana, IRuchomy //wlasciwie obracany, ale to kwestia implementacji Rusz()
+	class Dzialko :JednostkaRysowana
 	{
-		public Dzialko(Bitmap bitmapa, Vector2f pozycja) : base(bitmapa, pozycja)
+		TimeSpan _OdstepStrzalow;
+		public TimeSpan OdstepStrzalow { get { return _OdstepStrzalow; } }
+		DateTime _CzasOstatniegoStrzalu;
+		public DateTime CzasOstatniegoStrzalu { get { return _CzasOstatniegoStrzalu; } }
+
+		public Dzialko(Bitmap bitmapa, Vector2f pozycja, TimeSpan odstepStrzalow) : base(bitmapa, pozycja)
 		{
 			Sprite.Color = SFML.Graphics.Color.Red;
-		}
-		public void Rusz()
-		{
-			if(CzyWidziGracza())
-			{
-			//tu obrot dzialka w strone gracza
-
-			}
+			_OdstepStrzalow = odstepStrzalow;
 		}
 		public bool CzyWidziGracza()
 		{
 			return true;
 		}
-		public IRuchomy Strzel()
+		public IRuchomy Strzel(Vector2f pozycjaGracza)
 		{
-			return new Pocisk(Properties.Resources.pocisk, Pozycja, 0f, 10f);
+			Sprite.Rotation = (float)Math.Atan2(pozycjaGracza.Y - Sprite.Position.Y, pozycjaGracza.X - Sprite.Position.X)
+				* 180f / (float)Math.PI + 90f; //z radianow na stopnie (sfml uzywa stopni), +90 bo atan2 daje kat od osi x, a sfml uzywa od osi y
+			_CzasOstatniegoStrzalu = DateTime.Now;
+			return new Pocisk(Properties.Resources.pocisk, Pozycja, 200f, LogikaGry.Instancja.Gracz.Pozycja);
 		}
 	}
 }

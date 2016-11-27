@@ -50,7 +50,7 @@ namespace ProjektObiektowe
 		}
 		static bool Kolizja(FloatRect a, FloatRect b)
 		{
-			//true jesli prostakaty na siebie nachodzą, czyli nie mozna ich rozdzielić linią pion./poziom.
+			//true jesli prostakaty na siebie nachodzą, czyli nie mozna ich rozgraniczyć linią pion./poziom.
 			return (!((a.Left + a.Width) < b.Left || (b.Left + b.Width) < a.Left
 					|| (a.Top + a.Height) < b.Top || (b.Top + b.Height) < a.Top)); //Twierdzenie o osi rozdzielającej (SAT)
 		}

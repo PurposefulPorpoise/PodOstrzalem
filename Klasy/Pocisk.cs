@@ -10,17 +10,20 @@ namespace ProjektObiektowe
 {
 	class Pocisk :JednostkaRysowana, IRuchomy
 	{
-		float Kierunek; //jako kąt
 		float Predkosc;
-		public Pocisk(Bitmap tekstura, Vector2f pozycjaPocz, float kierunek, float predkosc)
+		Vector2f PozycjaPocz;
+		Vector2f PozycjaGracza; //tylko pozycja z czasu wystrzlu
+		public Pocisk(Bitmap tekstura, Vector2f pozycjaPocz, float predkosc, Vector2f pozycjaGracza)
 			:base(tekstura, pozycjaPocz)
 		{
-			Kierunek = kierunek;
 			Predkosc = predkosc;
+			PozycjaPocz = pozycjaPocz;
+			PozycjaGracza = pozycjaGracza;
 		}
 		public void Rusz()
 		{
-
+			Pozycja += WektoroweFunkcje.Normalizuj(PozycjaGracza - PozycjaPocz)
+				* Predkosc * (float)LogikaGry.Instancja.DeltaCzasu;
 		}
 	}
 }

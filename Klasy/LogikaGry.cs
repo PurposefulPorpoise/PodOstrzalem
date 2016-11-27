@@ -54,15 +54,15 @@ namespace ProjektObiektowe
 			foreach (var element in Animowane)
 				element.Animuj(NrKlatkiGry);
 			foreach (var dzialko in Dzialka)
-				if (dzialko.CzyWidziGracza())
+				if (dzialko.CzyWidziGracza() && DateTime.Now-dzialko.CzasOstatniegoStrzalu>=dzialko.OdstepStrzalow)
 				{
-					Ruchome.Add(dzialko.Strzel()); //zwraca nowy pocisk i dodaje do listy rysowanych
+					Ruchome.Add(dzialko.Strzel(Gracz.Pozycja)); //zwraca nowy pocisk i dodaje do listy rysowanych
 				}
 			Rysowanie.Rysuj(_Rysowane, new Color(147, 169, 131));
 			NrKlatkiGry++;
 			_DeltaCzasu = LicznikDelty.Elapsed.TotalSeconds;
-			sumaDelt += _DeltaCzasu;
-			Debug.Write(sumaDelt/NrKlatkiGry + " ");
+			//sumaDelt += _DeltaCzasu;
+			//Debug.Write(sumaDelt/NrKlatkiGry + " ");
 			LicznikDelty.Reset(); //liczy czas od ostatniej klatki, z kazda klatką od nowa
 			LicznikDelty.Start();
 		}

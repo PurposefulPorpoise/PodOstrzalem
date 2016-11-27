@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Klasy\LogikaGry.cs" />
     <Compile Include="Klasy\Dzialko.cs" />
+    <Compile Include="Klasy\WektoroweFunkcje.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
