@@ -73,36 +73,6 @@ namespace ProjektObiektowe.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap hp_1na3 {
-            get {
-                object obj = ResourceManager.GetObject("hp_1na3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap hp_2na3 {
-            get {
-                object obj = ResourceManager.GetObject("hp_2na3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
-        internal static System.Drawing.Bitmap hp_3na3 {
-            get {
-                object obj = ResourceManager.GetObject("hp_3na3", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Bitmap.
-        /// </summary>
         internal static System.Drawing.Bitmap mapa {
             get {
                 object obj = ResourceManager.GetObject("mapa", resourceCulture);
@@ -166,6 +136,16 @@ namespace ProjektObiektowe.Properties {
         internal static System.Drawing.Bitmap zgory_niskarozdz {
             get {
                 object obj = ResourceManager.GetObject("zgory_niskarozdz", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap zycie {
+            get {
+                object obj = ResourceManager.GetObject("zycie", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

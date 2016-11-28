@@ -6258,19 +6258,13 @@
   <data name="hp_0na3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\hp_0na3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="hp_1na3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hp_1na3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hp_2na3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hp_2na3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hp_3na3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hp_3na3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="mapa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mapa.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pocisk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pocisk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zycie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zycie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

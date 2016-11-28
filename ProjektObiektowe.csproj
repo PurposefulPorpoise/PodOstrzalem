@@ -159,7 +159,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\pocisk.png" />
+    <Resource Include="Resources\zycie.png" />
+    <Resource Include="Resources\pocisk.png" />
     <Resource Include="Resources\zgory_niskarozdz.png" />
     <Resource Include="Resources\mapa.bmp" />
     <Resource Include="Resources\sciana.png" />

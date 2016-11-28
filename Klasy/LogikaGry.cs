@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace ProjektObiektowe
 {
-	sealed class LogikaGry :INotifyPropertyChanged //interfejs do informowania okna o zmianie wlasciwosci (binding)
+	sealed class LogikaGry : INotifyPropertyChanged //interfejs do informowania okna o zmianie wlasciwosci (binding)
 	{
 		#region Singleton, max 1 instancja (konstruktor ukryty), potrzebne do bindingu
 		private static readonly LogikaGry instancja = new LogikaGry();
@@ -18,10 +18,19 @@ namespace ProjektObiektowe
 		#endregion
 		#region Zmiana wlasciwosci, do bindingu
 		public event PropertyChangedEventHandler PropertyChanged;
-		private void OglosZmianeWlasciwosci(string propertyName)
+		int SzerokoscPaskaZycia;
+		public int PasekZyciaSzerokosc
 		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+			get
+			{
+				return SzerokoscPaskaZycia;
+			}
+			set
+			{
+				SzerokoscPaskaZycia = value *40;
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("PasekZyciaSzerokosc"));
+			}
 		}
 		#endregion
 		public ulong NrKlatkiGry = 0;
@@ -30,7 +39,7 @@ namespace ProjektObiektowe
 		public double DeltaCzasu { get { return _DeltaCzasu; } }
 		public PostacGracza Gracz;
 		List<Drawable> _Rysowane = new List<Drawable>();
-		public List<Drawable> Rysowane {get { return _Rysowane; } }
+		public List<Drawable> Rysowane { get { return _Rysowane; } }
 		List<IRuchomy> Ruchome = new List<IRuchomy>();
 		List<IAnimowany> Animowane = new List<IAnimowany>();
 		List<Dzialko> Dzialka = new List<Dzialko>();
@@ -40,7 +49,7 @@ namespace ProjektObiektowe
 		public void RozpocznijGre()
 		{
 			Rysowanie.LicznikRysowania.Tick += CoKlatke;
-			Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5, new SFML.System.Vector2f(560,560));
+			Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5, new SFML.System.Vector2f(560, 560));
 			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
 			Ruchome.Add(Gracz);
 			Animowane.Add(Gracz);
@@ -60,7 +69,7 @@ namespace ProjektObiektowe
 			foreach (var element in Animowane)
 				element.Animuj(NrKlatkiGry);
 			foreach (var dzialko in Dzialka)
-				if (dzialko.CzyWidziGracza() && DateTime.Now-dzialko.CzasOstatniegoStrzalu>=dzialko.OdstepStrzalow)
+				if (dzialko.CzyWidziGracza() && DateTime.Now - dzialko.CzasOstatniegoStrzalu >= dzialko.OdstepStrzalow)
 				{
 					Ruchome.Add(dzialko.Strzel(Gracz.Pozycja)); //zwraca nowy pocisk i dodaje do listy rysowanych
 					Pociski.Add((Pocisk)Ruchome.Last());
@@ -83,11 +92,9 @@ namespace ProjektObiektowe
 		}
 		public void ZniszczPocisk(Pocisk element)
 		{
-			/*if (_Rysowane.Contains(element.sprite))*/ _Rysowane.Remove(element.sprite);
-			/*if (Ruchome.Contains(element))*/ Ruchome.Remove(element);
-			/*if (Pociski.Contains(element))*/ PociskiDoUsuniecia.Add(element);
-
+			_Rysowane.Remove(element.sprite);
+			Ruchome.Remove(element);
+			PociskiDoUsuniecia.Add(element);
 		}
-
 	}
 }

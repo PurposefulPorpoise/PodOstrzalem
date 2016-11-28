@@ -46,9 +46,7 @@ namespace ProjektObiektowe
 		public void PrzyjmijObrazenia(int obrazenia)
 		{
 			zdrowie = zdrowie - obrazenia;
-			if (zdrowie == 0) Umrzyj();
-			if (zdrowie == 2) Sprite.Color = Color.Yellow;
-			if (zdrowie == 1) Sprite.Color = Color.Magenta;
+			LogikaGry.Instancja.PasekZyciaSzerokosc = zdrowie;
 		}
 
 		void Umrzyj()
@@ -71,6 +69,7 @@ namespace ProjektObiektowe
 			:base(bitmapa, pozycja)
 		{
 			zdrowie = 3;
+			LogikaGry.Instancja.PasekZyciaSzerokosc = zdrowie;
 			PredkoscChodzenia = 200f;
 			Anim = new Animacja((int)SpriteSheet.Size.X, (int)SpriteSheet.Size.Y, kolumny, wiersze);
 			//ustawia oś obrotu na srodek //domyslne to lewy gorny rog
