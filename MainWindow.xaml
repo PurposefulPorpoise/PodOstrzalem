@@ -7,33 +7,81 @@
         xmlns:wpfSfmlHost="clr-namespace:ProjektObiektowe"
         mc:Ignorable="d"    
         Title="Pod Ostrzałem" WindowStartupLocation="Manual" ResizeMode="CanMinimize" Left="0" Top="0" SizeToContent="WidthAndHeight">
-    <Grid x:Name="grid" Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <!-- <RowDefinition Height="640"/> -->
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <WindowsFormsHost Grid.Row="0" x:Name="Host">
-            <WindowsFormsHost.Child>
-                <wpfSfmlHost:SfmlDrawingSurface x:Name="DrawSurface"/>
-            </WindowsFormsHost.Child>
-        </WindowsFormsHost>
+    <TabControl>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
-            <StackPanel.Resources>
-                <Thickness x:Key="margines">5,0,0,0</Thickness>
-            </StackPanel.Resources>
-            <Label x:Name="TestLabel"  Content="{Binding Path=Kolumnyy}" VerticalAlignment="Center" FontSize="20" Margin="{StaticResource margines}"/>
-            <Button x:Name="button" Content="Nie klikać" Background="Red" Margin="{StaticResource margines}" />
-            <Rectangle x:Name="PunktyZycia" Height="20" VerticalAlignment="Center" Width="60" Margin="{StaticResource margines}">
-                 <!--Powiazac Width z property zwracajacym obecne punkty zdrowia razy szerokosc tekstury (tu 40)-->
-                <Rectangle.Fill>
-                    <ImageBrush ImageSource="Resources/sciana.png" AlignmentX="Left" TileMode="Tile" Stretch="Uniform" Viewport="0,0,20,20" ViewportUnits="Absolute" />
-                </Rectangle.Fill>
+        <TabItem Header="Oknogry">
+            <Grid x:Name="grid" Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <!-- <RowDefinition Height="640"/> -->
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <WindowsFormsHost Grid.Row="0" x:Name="Host">
+                    <WindowsFormsHost.Child>
+                        <wpfSfmlHost:SfmlDrawingSurface x:Name="DrawSurface"/>
+                    </WindowsFormsHost.Child>
+                </WindowsFormsHost>
 
-            </Rectangle>
-        </StackPanel>
+                <StackPanel Grid.Row="1" Orientation="Horizontal" Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}">
+                    <StackPanel.Resources>
+                        <Thickness x:Key="margines">5,0,0,0</Thickness>
+                    </StackPanel.Resources>
+                    <Label x:Name="TestLabel"  Content="{Binding Path=Kolumnyy}" VerticalAlignment="Center" FontSize="20" Margin="{StaticResource margines}"/>
+                    <Button x:Name="button" Content="Nie klikać" Background="Red" Margin="{StaticResource margines}" />
+                    <Rectangle x:Name="PunktyZycia" Height="20" VerticalAlignment="Center" Width="60" Margin="{StaticResource margines}">
+                        <!--Powiazac Width z property zwracajacym obecne punkty zdrowia razy szerokosc tekstury (tu 40)-->
+                        <Rectangle.Fill>
+                            <ImageBrush ImageSource="Resources/sciana.png" AlignmentX="Left" TileMode="Tile" Stretch="Uniform" Viewport="0,0,20,20" ViewportUnits="Absolute" />
+                        </Rectangle.Fill>
+                    </Rectangle>
+                </StackPanel>
+            </Grid>
+        </TabItem>
 
+        <TabItem Header="Oknomenu">
+            <Grid >
+                <Image Stretch="Fill" 
+               Source="C:\Users\Admin\Source\Repos\PodOstrzalem\Resources\tlo_menugry.png"/>
+                <StackPanel>
+                    <Button Height="100" 
+                		Margin="735,500,0,40"
+                		Content="START" FontFamily="Showcard Gothic" FontSize="72" FontWeight="Medium" HorizontalAlignment="Left" Width="400" BorderBrush="#FFB4B2B2" Foreground="Black" BorderThickness="1">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                <GradientStop Color="#FFF3F3F3"/>
+                                <GradientStop Color="#FFEBEBEB" Offset="0.028"/>
+                                <GradientStop Color="#FFDDDDDD" Offset="0.028"/>
+                                <GradientStop Color="#FF19191B" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Height="100" 
+                    	Margin="735,0,0,40"
+                    	Content="POMOC" FontFamily="Showcard Gothic" FontSize="72" FontWeight="Medium" HorizontalAlignment="Left" Width="400">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                <GradientStop Color="#FFEBEBEB" Offset="0.055"/>
+                                <GradientStop Color="#FFDDDDDD" Offset="0.098"/>
+                                <GradientStop Color="#FF0E0E11" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                    <Button Height="100" 
+                    	Margin="735,0,0,0"
+                    	Content="WYJSCIE" FontFamily="Showcard Gothic" FontSize="72" FontWeight="Medium" HorizontalAlignment="Left" Width="400">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
+                                <GradientStop Color="#FFF3F3F3" Offset="0"/>
+                                <GradientStop Color="#FFEBEBEB" Offset="0.013"/>
+                                <GradientStop Color="#FF16161D" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                    </Button>
+                </StackPanel>
+            </Grid>
 
-    </Grid>
+        </TabItem>
+
+    </TabControl>
 </Window>

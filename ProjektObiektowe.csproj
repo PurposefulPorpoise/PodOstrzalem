@@ -159,6 +159,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\tlo_menugry.png" />
     <None Include="Resources\pocisk.png" />
     <Resource Include="Resources\zgory_niskarozdz.png" />
     <Resource Include="Resources\mapa.bmp" />
