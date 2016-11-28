@@ -55,15 +55,10 @@ namespace ProjektObiektowe
             WysokoscOknaGry = this.Height;
             tabsy.SelectedIndex = 0;
         }
-        //mozna bindowaniem, to jest stara metoda, ale chyba sie uzywa, ta
         private void StartWcisnieto(object sender, EventArgs e)
         {
-            tabsy.SelectedItem = TabGry; //zrobie zeby dzialka zaczely strzelac po sekundzie od startu bo cos sie jebie
+            tabsy.SelectedItem = TabGry;
             LogikaGry.Instancja.RozpocznijGre();
-        }
-        private void PomocWcisnieto(object sender, EventArgs e)
-        {
-            //moze usunac calkowicie pomoc
         }
         private void WyjscieWcisnieto(object sender, EventArgs e)
         {

@@ -19,7 +19,7 @@ namespace ProjektObiektowe
 		#region Zmiana wlasciwosci, do bindingu
 		public event PropertyChangedEventHandler PropertyChanged;
 		int SzerokoscPaskaZycia;
-        bool Zdech = false;
+		Visibility GameOverWidocznosc = Visibility.Collapsed;
 		public int PasekZyciaSzerokosc
 		{
 			get
@@ -33,19 +33,19 @@ namespace ProjektObiektowe
 					PropertyChanged(this, new PropertyChangedEventArgs("PasekZyciaSzerokosc"));
 			}
 		}
-        public bool Umar
-        {
-            get
-            {
-                return Zdech;
-            }
-            set
-            {
-                Zdech = value;
-                if (PropertyChanged != null)
-                    PropertyChanged(this, new PropertyChangedEventArgs("Umar"));
-            }
-        }
+		  public Visibility Umar
+		  {
+				get
+				{
+					 return GameOverWidocznosc;
+				}
+				set
+				{
+					 GameOverWidocznosc = value;
+					 if (PropertyChanged != null)
+						  PropertyChanged(this, new PropertyChangedEventArgs("Umar"));
+				}
+		  }
 		#endregion
 		public ulong NrKlatkiGry = 0;
 		static Stopwatch LicznikDelty = Stopwatch.StartNew();
@@ -109,11 +109,11 @@ namespace ProjektObiektowe
 			Ruchome.Remove(element);
 			PociskiDoUsuniecia.Add(element);
 		}
-        public void ZakonczGre()
-        {
-            LicznikDelty.Stop();
-            Umar = true;
-            Rysowanie.Zakoncz(this,null);
-        }
+		  public void ZakonczGre()
+		  {
+				LicznikDelty.Stop();
+				Umar = Visibility.Visible;
+				Rysowanie.Zakoncz(this,null);
+		  }
 	}
 }

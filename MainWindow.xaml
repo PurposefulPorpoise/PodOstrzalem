@@ -19,7 +19,7 @@
                         <Thickness x:Key="margines">0,50,40,30</Thickness>
                         <!-- chyba lewo,gora,prawo,dol-->
                     </StackPanel.Resources>
-                    
+
 
                     <Button Click="StartWcisnieto" Height="100" 
                 	Margin="{StaticResource margines}"
@@ -30,18 +30,6 @@
                                 <GradientStop Color="#FFEBEBEB" Offset="0.028"/>
                                 <GradientStop Color="#FFDDDDDD" Offset="0.028"/>
                                 <GradientStop Color="#FF19191B" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                    </Button>
-                    <Button Click="PomocWcisnieto" Height="100" 
-                        Margin="{StaticResource margines}"
-                    	Content="POMOC" FontFamily="Showcard Gothic" FontSize="72" FontWeight="Medium" HorizontalAlignment="Right" Width="400">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
-                                <GradientStop Color="#FFF3F3F3" Offset="0"/>
-                                <GradientStop Color="#FFEBEBEB" Offset="0.055"/>
-                                <GradientStop Color="#FFDDDDDD" Offset="0.098"/>
-                                <GradientStop Color="#FF0E0E11" Offset="1"/>
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
@@ -68,19 +56,8 @@
                     <!-- <RowDefinition Height="640"/> -->
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                
-                <TextBlock Grid.Row="0" x:Name="NapisGameOver" FontFamily="Stencil" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1000" Text="GAME OVER">
-                    <TextBlock.Style>
-                        <Style>
-                        <Setter Property="TextBlock.Visibility" Value="Collapsed"/>
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Umar}" Value="True">
-                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                        </Style>
-                    </TextBlock.Style>
-                </TextBlock>
+
+                <TextBlock Grid.Row="0" Visibility="{Binding Path=Umar}" x:Name="NapisGameOver" FontFamily="Stencil" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1000" Text="GAME OVER"/>
                 <WindowsFormsHost Grid.Row="0" x:Name="Host">
                     <WindowsFormsHost.Child>
                         <wpfSfmlHost:SfmlDrawingSurface x:Name="DrawSurface"/>
