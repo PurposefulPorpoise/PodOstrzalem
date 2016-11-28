@@ -46,15 +46,14 @@ namespace ProjektObiektowe
 		public void PrzyjmijObrazenia(int obrazenia)
 		{
 			zdrowie = zdrowie - obrazenia;
-			if (zdrowie == 0) Umrzyj();
-			if (zdrowie == 2) Sprite.Color = Color.Yellow;
-			if (zdrowie == 1) Sprite.Color = Color.Magenta;
+			LogikaGry.Instancja.PasekZyciaSzerokosc = zdrowie;
+            if (zdrowie == 0) Umrzyj();
 		}
 
 		void Umrzyj()
 		{
-			//znikniecie postaci? nie ma sensu byc w interfejsie
 			Sprite.Color = Color.Red;
+            LogikaGry.Instancja.ZakonczGre();
 		}
 
 
@@ -71,6 +70,7 @@ namespace ProjektObiektowe
 			:base(bitmapa, pozycja)
 		{
 			zdrowie = 3;
+			LogikaGry.Instancja.PasekZyciaSzerokosc = zdrowie;
 			PredkoscChodzenia = 200f;
 			Anim = new Animacja((int)SpriteSheet.Size.X, (int)SpriteSheet.Size.Y, kolumny, wiersze);
 			//ustawia oś obrotu na srodek //domyslne to lewy gorny rog
@@ -125,29 +125,29 @@ namespace ProjektObiektowe
 		}
 		private void StanZKlawiatury()
 		{
-			if (Keyboard.IsKeyDown(Key.D))
+			if (Keyboard.IsKeyDown(Key.Right))
 			{
-				if (Keyboard.IsKeyDown(Key.W))
+				if (Keyboard.IsKeyDown(Key.Up))
 					KierunekRuchu = Kierunek.NE;
-				else if (Keyboard.IsKeyDown(Key.S))
+				else if (Keyboard.IsKeyDown(Key.Down))
 					KierunekRuchu = Kierunek.SE;
 				else KierunekRuchu = Kierunek.E;
 			}
-			else if (Keyboard.IsKeyDown(Key.A))
+			else if (Keyboard.IsKeyDown(Key.Left))
 			{
-				if (Keyboard.IsKeyDown(Key.W))
+				if (Keyboard.IsKeyDown(Key.Up))
 					KierunekRuchu = Kierunek.NW;
-				else if (Keyboard.IsKeyDown(Key.S))
+				else if (Keyboard.IsKeyDown(Key.Down))
 					KierunekRuchu = Kierunek.SW;
 				else KierunekRuchu = Kierunek.W;
 			}
-			else if (Keyboard.IsKeyDown(Key.W))
+			else if (Keyboard.IsKeyDown(Key.Up))
 				KierunekRuchu = Kierunek.N;
-			else if (Keyboard.IsKeyDown(Key.S))
+			else if (Keyboard.IsKeyDown(Key.Down))
 				KierunekRuchu = Kierunek.S;
 
-			Idzie = (Keyboard.IsKeyDown(Key.D) || Keyboard.IsKeyDown(Key.A)
-						|| Keyboard.IsKeyDown(Key.S) || Keyboard.IsKeyDown(Key.W));
+			Idzie = (Keyboard.IsKeyDown(Key.Right) || Keyboard.IsKeyDown(Key.Left)
+						|| Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.Up));
 		}
 	}
 }

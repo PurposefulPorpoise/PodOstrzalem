@@ -99,6 +99,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Klasy\Animacja.cs" />
     <Compile Include="Interfejsy\IAnimowany.cs" />
     <Compile Include="Interfejsy\IRuchomy.cs" />
@@ -159,6 +160,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\zycie.png" />
+    <Resource Include="Resources\pocisk.png" />
     <Resource Include="Resources\tlo_menugry.png" />
     <None Include="Resources\pocisk.png" />
     <Resource Include="Resources\zgory_niskarozdz.png" />

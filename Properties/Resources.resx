@@ -165,7 +165,7 @@
         RudN65tdA8sHzg46DF645Xrr8m2v29fvrLwzMBQydHc4cnjkLvvu5L2key/vZ9yff7DpIfph4SOpR+WP
         lR7X/aj3Y+uI5ciZUdfRvidBTx6Mscae/5T+04fx/Kfkp+UTqhONk2aTp6fcp24+W/1s/Hnq8/npgp+l
         f65+ofviu18cf+mbWTUz/pL/cuHX4lfyr468Xva6e9Z/9vGb5Dfzc4Vv5d8efcd41/s+7P3EfOYH7IeK
-        j3ofuz55f3q4kLyw8Bv3hPP74uYdwgAAAAlwSFlzAAALEgAACxIB0t1+/AAAAAd0SU1FB+AKGQ8XEkBX
+        j3ofuz55f3q4kLyw8Bv3hPP74uYdwgAAAAlwSFlzAAALEQAACxEBf2RfkQAAAAd0SU1FB+AKGQ8XEkBX
         A3UAAPUuSURBVHhe7J2Ltts4zqwn6dvMnPd/00nSSbr/Pvwkwy7BoC62fN1Va9Xa2zJFUTIJAUWI+tc/
         hmEYhmEYhmEYhmEYhmEYxkvCAq9hGIZhGIZhGIZhGIZhGMaLwgKvYRiGYRiGYRiGYRiGYRjGi8ICr2EY
         hmEYhmEYhmEYhmEYxovCAq9hGIZhGIZhGIZhGIZhGMaLwgKvYRiGYRiGYRiGYRiGYRjGi8ICr2EYhmEY
@@ -2374,7 +2374,7 @@
   <data name="stickman" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAisAAAYRCAYAAAB/ANnwAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAj
-        0AAAI9ABvT0ULAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAFgkSURBVHhe7d0J
+        zwAAI88Bgueq/AAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAFgkSURBVHhe7d0J
         tO3pWdf5W5V5NkAkIcx0EwYNqKgo2iiTEEOQoRHoRYMoBhLR1cigcUoziIhhEEUZRJpphVFABkEQCAQR
         kSFOgBARBGVICDNJIPTzkHPlX7d+/6o7nLPfd7//z7PWZ7n4pVI55+yz9/5ade+5137zN38T4F7qHlze
         uPyp8iHlWeXvlH9YPrd8Rfmm8l3lB8pPlF8ov37x//b/3Xv/5/3X9V/f/73+7/ffp/9+/fftv3//7zw4
@@ -2801,7 +2801,7 @@
         RudN65tdA8sHzg46DF645Xrr8m2v29fvrLwzMBQydHc4cnjkLvvu5L2key/vZ9yff7DpIfph4SOpR+WP
         lR7X/aj3Y+uI5ciZUdfRvidBTx6Mscae/5T+04fx/Kfkp+UTqhONk2aTp6fcp24+W/1s/Hnq8/npgp+l
         f65+ofviu18cf+mbWTUz/pL/cuHX4lfyr468Xva6e9Z/9vGb5Dfzc4Vv5d8efcd41/s+7P3EfOYH7IeK
-        j3ofuz55f3q4kLyw8Bv3hPP74uYdwgAAAAlwSFlzAAALEgAACxIB0t1+/AAA9UFJREFUeF7s/QmUXMWV
+        j3ofuz55f3q4kLyw8Bv3hPP74uYdwgAAAAlwSFlzAAALEQAACxEBf2RfkQAA9UFJREFUeF7s/QmUXMWV
         549T+77vq1SLSlJJpRXtK9oX0C60ICEhIaENhCQkJCQkBAKB2AQCmUVssrGxsWnTpo2hvdBDj9100023
         p+lmfvTgYZox8+M0c5g/M8zf5++Z+N9vVMareC9vZmVVZWblq7z3nM+RKl7key/zRcS7cePGvVcopQRB
         EARBEARBEARBEARBEAQfwhYKgiAIgiAIgiAIgiAIgiAIiQ9bKAiCIAiCIAiCIAiCIAiCICQ+bKEgCIIg
@@ -6255,22 +6255,16 @@
   <data name="zgory_niskarozdz" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\zgory_niskarozdz.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="hp_0na3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hp_0na3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hp_1na3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hp_1na3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hp_2na3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hp_2na3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="hp_3na3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\hp_3na3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="mapa" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\mapa.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="pocisk" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pocisk.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="zycie" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\zycie.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="tlo_menugry" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\tlo_menugry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

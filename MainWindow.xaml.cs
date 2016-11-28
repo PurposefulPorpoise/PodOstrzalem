@@ -18,34 +18,57 @@ using SFML.System;
 
 namespace ProjektObiektowe
 {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
-	public partial class MainWindow : System.Windows.Window
-	{
-		
-		public MainWindow() 
-		{
-			InitializeComponent();
-			this.DataContext = LogikaGry.Instancja;
-			
-			Rysowanie.PowierzchniaRys = DrawSurface;
-			this.Loaded += MainWindow_Loaded;
-						//dopiero po calkowitym zaladowaniu powierzchniarys ma wlasciwy rozmiar
-			LogikaGry.Instancja.RozpocznijGre(); //to pewnie trzeba bedzie przeniesc do OnClick przycisku start w menu glownym
-		}
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class MainWindow : System.Windows.Window
+    {
+        int SzerokoscPowierzchni;
+        double WysokoscOknaGry;
+        public TextBlock Napis;
+        public MainWindow()
+        {
 
-		private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-		{
-			grid.RowDefinitions[0].Height = new GridLength(DrawSurface.Width * 640 / 1280f);
-			//this.Height = this.Width * 640 / 1 -40;
-		}
+            InitializeComponent();
+            this.DataContext = LogikaGry.Instancja;
+            // tabsy.TabIndex = 0; //fail
+            Rysowanie.PowierzchniaRys = DrawSurface;
+            tabsy.Loaded += WczytaloSie;
+            tabsy.SelectionChanged += TabZmieniony;
+            Napis = NapisGameOver;
+            //dopiero po calkowitym zaladowaniu powierzchniarys ma wlasciwy rozmiar
+        }
 
-		//Vector2f PozycjaMyszy()
-		//{
-		//	Vector2i ScreenMouse = SFML.Window.Mouse.GetPosition();
-		//	return new Vector2f((float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).X,
-		//		(float)PointFromScreen(new Point(ScreenMouse.X, ScreenMouse.Y)).Y);
-		//}
-	}
+        private void TabZmieniony(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.Source is TabControl && !TabGry.IsSelected)
+            {
+                grid.RowDefinitions[0].Height = new GridLength(SzerokoscPowierzchni * 640 / 1280f - 20f);
+            }
+            //if (TabGry.IsSelected)
+                this.Height = WysokoscOknaGry;
+            GridMenu.Height= SzerokoscPowierzchni * 640 / 1280f -20f;
+        }
+        private void WczytaloSie(object sender, RoutedEventArgs e)
+        {
+            SzerokoscPowierzchni = DrawSurface.Width;
+            WysokoscOknaGry = this.Height;
+            tabsy.SelectedIndex = 0;
+        }
+        //mozna bindowaniem, to jest stara metoda, ale chyba sie uzywa, ta
+        private void StartWcisnieto(object sender, EventArgs e)
+        {
+            tabsy.SelectedItem = TabGry; //zrobie zeby dzialka zaczely strzelac po sekundzie od startu bo cos sie jebie
+            LogikaGry.Instancja.RozpocznijGre();
+        }
+        private void PomocWcisnieto(object sender, EventArgs e)
+        {
+            //moze usunac calkowicie pomoc
+        }
+        private void WyjscieWcisnieto(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+    }
 }

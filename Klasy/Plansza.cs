@@ -31,12 +31,12 @@ namespace ProjektObiektowe
 						temp.Position = pozycja;
 						//Rysowanie.Rysowane.Add(temp);
 						LogikaGry.Instancja.DodajRysowane(temp);
-						Sciany.Add(temp);
+                        Sciany.Add(temp);
 					}
 					else if(kolor == System.Drawing.Color.Red.ToArgb())
 					{
 
-						LogikaGry.Instancja.DodajDzialko(new Dzialko(Properties.Resources.sciana, pozycja, new TimeSpan(0,0,0,0,700)) );
+						LogikaGry.Instancja.DodajDzialko(new Dzialko(Properties.Resources.sciana, pozycja, new TimeSpan(0,0,0,0,400)) ); 
 					}
 
 				}
