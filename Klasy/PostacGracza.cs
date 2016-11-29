@@ -52,7 +52,6 @@ namespace ProjektObiektowe
 
 		void Umrzyj()
 		{
-			Sprite.Color = Color.Red;
             LogikaGry.Instancja.ZakonczGre();
 		}
 

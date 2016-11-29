@@ -35,7 +35,7 @@ namespace ProjektObiektowe
             Rysowanie.PowierzchniaRys = DrawSurface;
             tabsy.Loaded += WczytaloSie;
             tabsy.SelectionChanged += TabZmieniony;
-            Napis = NapisGameOver;
+            LogikaGry.Instancja.GraSkonczona += ZmienKarteNaMenu;
             //dopiero po calkowitym zaladowaniu powierzchniarys ma wlasciwy rozmiar
         }
 
@@ -63,6 +63,10 @@ namespace ProjektObiektowe
         private void WyjscieWcisnieto(object sender, EventArgs e)
         {
             this.Close();
+        }
+        public void ZmienKarteNaMenu(object o, EventArgs e)
+        {
+            tabsy.SelectedIndex = 1;
         }
 
     }
