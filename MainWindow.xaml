@@ -66,8 +66,6 @@
                     <StackPanel.Resources>
                         <Thickness x:Key="margines">5,0,0,0</Thickness>
                     </StackPanel.Resources>
-                    <Label x:Name="TestLabel"  Content="" VerticalAlignment="Center" FontSize="20" Margin="{StaticResource margines}"/>
-                    <Button x:Name="button" Content="Nie klikać" Background="Red" Margin="{StaticResource margines}" />
                     <Rectangle x:Name="PunktyZycia" Height="40" VerticalAlignment="Center" Width="{Binding Path=PasekZyciaSzerokosc, TargetNullValue=120}" Margin="5,0,0,0">
                         <!--Powiazac Width z property zwracajacym obecne punkty zdrowia razy szerokosc tekstury (tu 40)-->
                         <Rectangle.Fill>
