@@ -80,7 +80,7 @@ namespace ProjektObiektowe
 					Ruchome.Add(dzialko.Strzel(Gracz.Pozycja, 1.2f*(float)CzasGryS+230f)); //zwraca nowy pocisk i dodaje do listy rysowanych
 					Pociski.Add((Pocisk)Ruchome.Last());
 				}
-			Rysowanie.Rysuj(_Rysowane, new Color(147, 169, 131));
+            Rysowanie.Rysuj(_Rysowane, new Color(114, 123, 139));  //(147, 169, 131)); orginalny  (143, 143, 177)); fioletowoszary
 			NrKlatkiGry++;
 			_DeltaCzasu = LicznikDelty.Elapsed.TotalSeconds;
 			CzasGryS += _DeltaCzasu;
