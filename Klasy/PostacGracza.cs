@@ -47,14 +47,7 @@ namespace ProjektObiektowe
 		{
 			zdrowie = zdrowie - obrazenia;
 			LogikaGry.Instancja.PasekZyciaSzerokosc = zdrowie;
-				if (zdrowie == 0) Umrzyj();
 		}
-
-		void Umrzyj()
-		{
-				LogikaGry.Instancja.ZakonczGre();
-		}
-
 
 		bool Idzie;
 		Kierunek KierunekRuchu;
@@ -124,29 +117,29 @@ namespace ProjektObiektowe
 		}
 		private void StanZKlawiatury()
 		{
-            if (Keyboard.IsKeyDown(Key.Right) || Keyboard.IsKeyDown(Key.D))
+				if (Keyboard.IsKeyDown(Key.Right) || Keyboard.IsKeyDown(Key.D))
 			{
-                if (Keyboard.IsKeyDown(Key.Up) || Keyboard.IsKeyDown(Key.W))
+					 if (Keyboard.IsKeyDown(Key.Up) || Keyboard.IsKeyDown(Key.W))
 					KierunekRuchu = Kierunek.NE;
-                else if (Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.S)) 
+					 else if (Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.S)) 
 					KierunekRuchu = Kierunek.SE;
 				else KierunekRuchu = Kierunek.E;
 			}
-            else if (Keyboard.IsKeyDown(Key.Left) || Keyboard.IsKeyDown(Key.A))
+				else if (Keyboard.IsKeyDown(Key.Left) || Keyboard.IsKeyDown(Key.A))
 			{
-                if (Keyboard.IsKeyDown(Key.Up) || Keyboard.IsKeyDown(Key.W))
+					 if (Keyboard.IsKeyDown(Key.Up) || Keyboard.IsKeyDown(Key.W))
 					KierunekRuchu = Kierunek.NW;
-                else if (Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.S))
+					 else if (Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.S))
 					KierunekRuchu = Kierunek.SW;
 				else KierunekRuchu = Kierunek.W;
 			}
-            else if (Keyboard.IsKeyDown(Key.Up) || Keyboard.IsKeyDown(Key.W))
+				else if (Keyboard.IsKeyDown(Key.Up) || Keyboard.IsKeyDown(Key.W))
 				KierunekRuchu = Kierunek.N;
-            else if (Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.S))
+				else if (Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.S))
 				KierunekRuchu = Kierunek.S;
 
 			Idzie = (Keyboard.IsKeyDown(Key.Right) || Keyboard.IsKeyDown(Key.Left) || Keyboard.IsKeyDown(Key.Down) || Keyboard.IsKeyDown(Key.Up) 
-                    || Keyboard.IsKeyDown(Key.D) || Keyboard.IsKeyDown(Key.A) || Keyboard.IsKeyDown(Key.S) || Keyboard.IsKeyDown(Key.W));
+						  || Keyboard.IsKeyDown(Key.D) || Keyboard.IsKeyDown(Key.A) || Keyboard.IsKeyDown(Key.S) || Keyboard.IsKeyDown(Key.W));
 		}
 	}
 }

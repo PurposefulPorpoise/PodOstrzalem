@@ -61,7 +61,7 @@ namespace ProjektObiektowe
 		  }
 		  public void ZmienKarteNaMenu(object o, EventArgs e)
 		  {
-				tabsy.SelectedIndex = 1;
+				tabsy.SelectedIndex = 0;
 		  }
 
 	 }

@@ -12,12 +12,12 @@
         <TabItem Header="Oknomenu" Visibility="Collapsed">
             <Grid  x:Name="GridMenu" Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
                 <Grid.Background>
-                    <ImageBrush ImageSource="Resources/tlo_menugry.png"/>
+                    <ImageBrush ImageSource="Resources/tlo_menugry.png" Stretch="UniformToFill"/>
                 </Grid.Background>
                 <StackPanel Margin="100,100,100,70" VerticalAlignment="Bottom">
                     <StackPanel.Resources>
                         <Thickness x:Key="margines">0,50,40,30</Thickness>
-                        <!-- chyba lewo,gora,prawo,dol-->
+                        <!--lewo,gora,prawo,dol-->
                     </StackPanel.Resources>
 
 

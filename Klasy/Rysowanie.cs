@@ -16,6 +16,7 @@ namespace ProjektObiektowe
 	{
 		static private RenderWindow OknoRenderowania;
 		public static System.Windows.Forms.Timer LicznikRysowania = new System.Windows.Forms.Timer();
+
 		public static SfmlDrawingSurface PowierzchniaRys;
 
 
