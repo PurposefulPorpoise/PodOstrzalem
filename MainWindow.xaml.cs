@@ -24,7 +24,6 @@ namespace ProjektObiektowe
 	 public partial class MainWindow : System.Windows.Window
 	 {
 		  int SzerokoscPowierzchni;
-		  double WysokoscOknaGry;
 		  public TextBlock Napis;
 		  public MainWindow()
 		  {

@@ -6267,4 +6267,7 @@
   <data name="tlo_menugry" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\tlo_menugry.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="dzialko" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dzialko.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

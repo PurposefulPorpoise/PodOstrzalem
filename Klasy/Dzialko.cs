@@ -19,7 +19,6 @@ namespace ProjektObiektowe
 		{
 			//poprawka pozycji, bo widocznie zmiana origina przesuwa sprite'a
 			Pozycja = pozycja + new Vector2f(Sprite.Texture.Size.X / 2, Sprite.Texture.Size.Y / 2);
-			Sprite.Color = SFML.Graphics.Color.Red;
 			_OdstepStrzalow = odstepStrzalow;
 		}
 		public bool CzyWidziGracza() //TODO
@@ -31,7 +30,8 @@ namespace ProjektObiektowe
 			Sprite.Rotation = (float)Math.Atan2(pozycjaGracza.Y - Sprite.Position.Y, pozycjaGracza.X - Sprite.Position.X)
 				* 180f / (float)Math.PI + 90f; //z radianow na stopnie (sfml uzywa stopni), +90 bo atan2 daje kat od osi x, a sfml uzywa od osi y
 			_CzasOstatniegoStrzalu = DateTime.Now;
-			return new Pocisk(Properties.Resources.pocisk, Pozycja, 200f, LogikaGry.Instancja.Gracz.Pozycja);
+			return new Pocisk(Properties.Resources.pocisk, Pozycja,
+				200f, LogikaGry.Instancja.Gracz.Pozycja);
 		}
 	}
 }

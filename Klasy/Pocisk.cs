@@ -18,8 +18,9 @@ namespace ProjektObiektowe
 			:base(tekstura, pozycjaPocz)
 		{
 			Predkosc = predkosc;
-			PozycjaPocz = pozycjaPocz;
 			PozycjaGracza = pozycjaGracza;
+			PozycjaPocz = pozycjaPocz + (Narzedzia.Normalizuj(pozycjaGracza - pozycjaPocz) * 20f);
+			Sprite.Position = PozycjaPocz;
 		}
 		public void Rusz()
 		{
