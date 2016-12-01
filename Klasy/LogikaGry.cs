@@ -77,7 +77,7 @@ namespace ProjektObiektowe
 			foreach (var dzialko in Dzialka)
 				if (NrKlatkiGry > 100 && dzialko.CzyWidziGracza() && DateTime.Now - dzialko.CzasOstatniegoStrzalu >= dzialko.OdstepStrzalow)
 				{
-					Ruchome.Add(dzialko.Strzel(Gracz.Pozycja, 1.1f*(float)CzasGryS+200f)); //zwraca nowy pocisk i dodaje do listy rysowanych
+					Ruchome.Add(dzialko.Strzel(Gracz.Pozycja, 1.2f*(float)CzasGryS+230f)); //zwraca nowy pocisk i dodaje do listy rysowanych
 					Pociski.Add((Pocisk)Ruchome.Last());
 				}
 			Rysowanie.Rysuj(_Rysowane, new Color(147, 169, 131));
