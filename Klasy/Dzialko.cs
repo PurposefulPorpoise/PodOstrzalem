@@ -30,8 +30,7 @@ namespace ProjektObiektowe
 			Sprite.Rotation = (float)Math.Atan2(pozycjaGracza.Y - Sprite.Position.Y, pozycjaGracza.X - Sprite.Position.X)
 				* 180f / (float)Math.PI + 90f; //z radianow na stopnie (sfml uzywa stopni), +90 bo atan2 daje kat od osi x, a sfml uzywa od osi y
 			_CzasOstatniegoStrzalu = DateTime.Now;
-			return new Pocisk(Properties.Resources.pocisk, Pozycja,
-				200f, LogikaGry.Instancja.Gracz.Pozycja);
+			return new Pocisk(Properties.Resources.pocisk, Pozycja, 250f, LogikaGry.Instancja.Gracz.Pozycja);
 		}
 	}
 }
