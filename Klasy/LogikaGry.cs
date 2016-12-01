@@ -123,6 +123,7 @@ namespace ProjektObiektowe
 				Dzialka.Clear();
 				Pociski.Clear();
 				PociskiDoUsuniecia.Clear();
+				Gracz.zdrowie = 3;
 				Rysowanie.Zakoncz(this, null);
 			}
 		}
