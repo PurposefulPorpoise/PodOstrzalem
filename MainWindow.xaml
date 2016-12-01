@@ -22,7 +22,7 @@
                     
                     <Button Click="StartWcisnieto" Height="100" 
                 	Margin="{StaticResource margines}"
-                		Content="START" FontFamily="Stencil" FontSize="72" FontWeight="Medium" HorizontalAlignment="Right" Width="400" BorderBrush="#FFB4B2B2" Foreground="Black" BorderThickness="1">
+                		Content="START" FontFamily="Showcard Gothic" FontSize="72" FontWeight="Medium" HorizontalAlignment="Right" Width="400" BorderBrush="#FFB4B2B2" Foreground="Black" BorderThickness="1">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                 <GradientStop Color="#FFF3F3F3"/>
@@ -34,7 +34,7 @@
                     </Button>
                     <Button Click="WyjscieWcisnieto" Height="100" 
                             Margin="{StaticResource margines}"
-                    	Content="WYJSCIE" FontFamily="Stencil" FontSize="72" FontWeight="Medium" HorizontalAlignment="Right" Width="400">
+                    	Content="WYJSCIE" FontFamily="Showcard Gothic" FontSize="72" FontWeight="Medium" HorizontalAlignment="Right" Width="400">
                         <Button.Background>
                             <LinearGradientBrush EndPoint="0,1" StartPoint="0,0">
                                 <GradientStop Color="#FFF3F3F3" Offset="0"/>
@@ -43,7 +43,7 @@
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
-                    <TextBlock Text="{Binding Path=Najdluzej, StringFormat=Najdluzej przetrwales {0}s }" Width="400" FontSize="24" Margin="{StaticResource margines}" HorizontalAlignment="Right" FontFamily="Stencil" Foreground="White"/>
+                    <TextBlock Text="{Binding Path=Najdluzej, StringFormat=Najlepszy czas: {0}s }" Width="400" FontSize="24" Margin="{StaticResource margines}" HorizontalAlignment="Right" FontFamily="Showcard Gothic" Foreground="White"/>
                 </StackPanel>
             </Grid>
 
