@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using SFML.Graphics;
 using System.Windows;
+using System.IO;
 
 namespace ProjektObiektowe
 {
@@ -22,6 +23,7 @@ namespace ProjektObiektowe
 		#region Zmiana wlasciwosci, do bindingu
 		public event PropertyChangedEventHandler PropertyChanged;
 		int SzerokoscPaskaZycia;
+		int _Najdluzej;
 		public int PasekZyciaSzerokosc
 		{
 			get
@@ -35,6 +37,20 @@ namespace ProjektObiektowe
 					PropertyChanged(this, new PropertyChangedEventArgs("PasekZyciaSzerokosc"));
 			}
 		}
+		public int Najdluzej
+		{
+			get
+			{
+				return _Najdluzej;
+			}
+			set
+			{
+				_Najdluzej = (int)Math.Max(Convert.ToInt64(CzasGryS), WynikZPliku);
+				if (PropertyChanged != null)
+					PropertyChanged(this, new PropertyChangedEventArgs("Najdluzej"));
+			}
+		}
+
 		#endregion
 		public ulong NrKlatkiGry = 0;
 		static Stopwatch LicznikDelty;
@@ -49,7 +65,8 @@ namespace ProjektObiektowe
 		List<Pocisk> Pociski = new List<Pocisk>();
 		List<Pocisk> PociskiDoUsuniecia = new List<Pocisk>();
 		public event EventHandler GraSkonczona;
-		double CzasGryS;
+		double CzasGryS = 0;
+		long WynikZPliku;
 		public void RozpocznijGre()
 		{
 			CzasGryS = 0.0;
@@ -77,7 +94,7 @@ namespace ProjektObiektowe
 			foreach (var dzialko in Dzialka)
 				if (NrKlatkiGry > 100 && dzialko.CzyWidziGracza() && DateTime.Now - dzialko.CzasOstatniegoStrzalu >= dzialko.OdstepStrzalow)
 				{
-					Ruchome.Add(dzialko.Strzel(Gracz.Pozycja, 1.1f*(float)CzasGryS+200f)); //zwraca nowy pocisk i dodaje do listy rysowanych
+					Ruchome.Add(dzialko.Strzel(Gracz.Pozycja, 1.1f * (float)CzasGryS + 200f)); //zwraca nowy pocisk i dodaje do listy rysowanych
 					Pociski.Add((Pocisk)Ruchome.Last());
 				}
 			Rysowanie.Rysuj(_Rysowane, new Color(147, 169, 131));
@@ -108,7 +125,7 @@ namespace ProjektObiektowe
 			LicznikDelty.Stop();
 			Rysowanie.Zakoncz(this, null);
 			MessageBoxResult klikniete = MessageBox.Show
-				(string.Format("Umarłeś\nPrzetrwałeś {0}s",Convert.ToInt64(CzasGryS))
+				(string.Format("Umarłeś\nPrzetrwałeś {0}s", Convert.ToInt64(CzasGryS))
 				, "Game over", MessageBoxButton.OK);
 			if (klikniete == MessageBoxResult.OK)
 			{
@@ -125,7 +142,21 @@ namespace ProjektObiektowe
 				PociskiDoUsuniecia.Clear();
 				Gracz.zdrowie = 3;
 				Rysowanie.Zakoncz(this, null);
+				Wynik();
 			}
+
+		}
+		public void Wynik()
+		{
+			if (!File.Exists("najlepszywynik"))
+				File.CreateText("najlepszywynik").Close();
+			//utrudnia reczna zamiane kodujac w systemie 64
+			string wczytane = File.ReadAllText("najlepszywynik");
+			if(wczytane.Length>0)
+				wczytane = Encoding.Default.GetString(Convert.FromBase64String(wczytane));
+			Int64.TryParse(wczytane, out WynikZPliku);
+			Najdluzej = Convert.ToInt32(CzasGryS);
+			File.WriteAllText("najlepszywynik", Convert.ToBase64String(Encoding.Default.GetBytes(Najdluzej.ToString())));
 		}
 	}
 }

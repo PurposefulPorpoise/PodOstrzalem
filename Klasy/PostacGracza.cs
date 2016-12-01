@@ -53,7 +53,7 @@ namespace ProjektObiektowe
 		Kierunek KierunekRuchu;
 
 		public FloatRect ProstokatKolizji
-		{ get { return Narzedzia.SkalowanyProstokat(Sprite.GetGlobalBounds(), 0.7f); } }
+		{ get { return Narzedzia.SkalowanyProstokat(Sprite.GetGlobalBounds(), 0.75f); } }
 
 		private Animacja Anim;
 		float PredkoscChodzenia;

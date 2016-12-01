@@ -18,51 +18,52 @@ using SFML.System;
 
 namespace ProjektObiektowe
 {
-	 /// <summary>
-	 /// Interaction logic for MainWindow.xaml
-	 /// </summary>
-	 public partial class MainWindow : System.Windows.Window
-	 {
-		  int SzerokoscPowierzchni;
-		  public TextBlock Napis;
-		  public MainWindow()
-		  {
+	/// <summary>
+	/// Interaction logic for MainWindow.xaml
+	/// </summary>
+	public partial class MainWindow : System.Windows.Window
+	{
+		int SzerokoscPowierzchni;
+		public TextBlock Napis;
+		public MainWindow()
+		{
 
-				InitializeComponent();
-				this.DataContext = LogikaGry.Instancja;
-				// tabsy.TabIndex = 0; //fail
-				Rysowanie.PowierzchniaRys = DrawSurface;
-				tabsy.Loaded += WczytaloSie;
-				tabsy.SelectionChanged += TabZmieniony;
-				LogikaGry.Instancja.GraSkonczona += ZmienKarteNaMenu;
-				//dopiero po calkowitym zaladowaniu powierzchniarys ma wlasciwy rozmiar
-		  }
+			InitializeComponent();
+			LogikaGry.Instancja.Wynik(); //wczytuje z pliku
+			this.DataContext = LogikaGry.Instancja;
+			// tabsy.TabIndex = 0; //fail
+			Rysowanie.PowierzchniaRys = DrawSurface;
+			tabsy.Loaded += WczytaloSie;
+			tabsy.SelectionChanged += TabZmieniony;
+			LogikaGry.Instancja.GraSkonczona += ZmienKarteNaMenu;
+			//dopiero po calkowitym zaladowaniu powierzchniarys ma wlasciwy rozmiar
+		}
 
-		  private void TabZmieniony(object sender, SelectionChangedEventArgs e)
-		  {
+		private void TabZmieniony(object sender, SelectionChangedEventArgs e)
+		{
 			if (e.Source is TabControl && !TabGry.IsSelected)
 			{
 				//grid.RowDefinitions[0].Height = new GridLength(SzerokoscPowierzchni * 640 / 1280f - 20f);
 			}
 		}
-		  private void WczytaloSie(object sender, RoutedEventArgs e)
-		  {
-				SzerokoscPowierzchni = DrawSurface.Width;
-				tabsy.SelectedIndex = 0;
-		  }
-		  private void StartWcisnieto(object sender, EventArgs e)
-		  {
-				tabsy.SelectedItem = TabGry;
-				LogikaGry.Instancja.RozpocznijGre();
-		  }
-		  private void WyjscieWcisnieto(object sender, EventArgs e)
-		  {
-				this.Close();
-		  }
-		  public void ZmienKarteNaMenu(object o, EventArgs e)
-		  {
-				tabsy.SelectedIndex = 0;
-		  }
+		private void WczytaloSie(object sender, RoutedEventArgs e)
+		{
+			SzerokoscPowierzchni = DrawSurface.Width;
+			tabsy.SelectedIndex = 0;
+		}
+		private void StartWcisnieto(object sender, EventArgs e)
+		{
+			tabsy.SelectedItem = TabGry;
+			LogikaGry.Instancja.RozpocznijGre();
+		}
+		private void WyjscieWcisnieto(object sender, EventArgs e)
+		{
+			this.Close();
+		}
+		public void ZmienKarteNaMenu(object o, EventArgs e)
+		{
+			tabsy.SelectedIndex = 0;
+		}
 
-	 }
+	}
 }
