@@ -51,9 +51,9 @@ namespace ProjektObiektowe
 			ContextSettings Context = new ContextSettings();
 			OknoRenderowania = new RenderWindow(PowierzchniaRys.Handle, Context);
 			OknoRenderowania.SetVerticalSyncEnabled(true);
-			//OknoRenderowania.SetFramerateLimit(60); //nigdy oba naraz
-			int wysokosc = 1280 * PowierzchniaRys.Size.Height / PowierzchniaRys.Size.Width;
-			View widok = new View(new Vector2f(1280 / 2, wysokosc / 2),
+			//wysokosc z zachowaniem proporcji, zeby nie rozciagalo na innych rozdzielczosciach ekranu
+			int wysokosc = 1280 * PowierzchniaRys.Size.Height / PowierzchniaRys.Size.Width; 
+			View widok = new View(new Vector2f(1280 / 2, wysokosc / 2), //szerokosc stala, zeby sciany stykaly sie z oknem
 				new Vector2f(1280, wysokosc));
 			OknoRenderowania.SetView(widok);
 		}
