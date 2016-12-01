@@ -47,12 +47,12 @@ namespace ProjektObiektowe
 		{
 			zdrowie = zdrowie - obrazenia;
 			LogikaGry.Instancja.PasekZyciaSzerokosc = zdrowie;
-            if (zdrowie == 0) Umrzyj();
+				if (zdrowie == 0) Umrzyj();
 		}
 
 		void Umrzyj()
 		{
-            LogikaGry.Instancja.ZakonczGre();
+				LogikaGry.Instancja.ZakonczGre();
 		}
 
 

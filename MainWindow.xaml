@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjektObiektowe"
         xmlns:wpfSfmlHost="clr-namespace:ProjektObiektowe"
         mc:Ignorable="d"    
-        Title="Pod Ostrzałem" WindowStartupLocation="Manual" ResizeMode="CanMinimize" Left="0" Top="0" SizeToContent="WidthAndHeight">
+        Title="Pod Ostrzałem" WindowState="Maximized" MaxHeight="{Binding SystemParameters.MaximizedPrimaryScreenHeight}" ResizeMode="CanMinimize" SizeToContent="Manual">
     <TabControl SelectedIndex="1" x:Name="tabsy">
 
         <TabItem Header="Oknomenu" Visibility="Collapsed">
@@ -50,14 +50,13 @@
         </TabItem>
         
         <TabItem Header="Oknogry" x:Name="TabGry" Visibility="Collapsed">
-            <Grid x:Name="grid" Width="{Binding Source={x:Static SystemParameters.PrimaryScreenWidth}}">
+            <Grid x:Name="grid">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <!-- <RowDefinition Height="640"/> -->
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Visibility="{Binding Path=Umar}" x:Name="NapisGameOver" FontFamily="Stencil" FontSize="48" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1000" Text="GAME OVER"/>
                 <WindowsFormsHost Grid.Row="0" x:Name="Host">
                     <WindowsFormsHost.Child>
                         <wpfSfmlHost:SfmlDrawingSurface x:Name="DrawSurface"/>
