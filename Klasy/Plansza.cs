@@ -36,7 +36,7 @@ namespace ProjektObiektowe
 					else if (kolor == System.Drawing.Color.Red.ToArgb())
 					{
 
-						LogikaGry.Instancja.DodajDzialko(new Dzialko(Properties.Resources.sciana, pozycja, new TimeSpan(0, 0, 0, 0, 400)));
+						LogikaGry.Instancja.DodajDzialko(new Dzialko(Properties.Resources.sciana, pozycja, new TimeSpan(0, 0, 0, 0, 700)));
 					}
 
 				}
