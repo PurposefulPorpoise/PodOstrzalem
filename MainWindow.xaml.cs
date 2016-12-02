@@ -36,6 +36,7 @@ namespace ProjektObiektowe
 			tabsy.Loaded += WczytaloSie;
 			tabsy.SelectionChanged += TabZmieniony;
 			LogikaGry.Instancja.GraSkonczona += ZmienKarteNaMenu;
+
 			//dopiero po calkowitym zaladowaniu powierzchniarys ma wlasciwy rozmiar
 		}
 
