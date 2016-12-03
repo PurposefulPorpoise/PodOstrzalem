@@ -202,10 +202,18 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="libsndfile-1.dll" />
-    <Content Include="lib\sfmlnet-audio-2.dll" />
-    <Content Include="lib\sfmlnet-graphics-2.dll" />
-    <Content Include="lib\sfmlnet-system-2.dll" />
-    <Content Include="lib\sfmlnet-window-2.dll" />
+    <None Include="lib\sfmlnet-audio-2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lib\sfmlnet-graphics-2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lib\sfmlnet-system-2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="lib\sfmlnet-window-2.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <Content Include="openal32.dll" />
   </ItemGroup>
   <ItemGroup>

@@ -8,7 +8,6 @@ namespace ProjektObiektowe
 	/// </summary>
 	public partial class MainWindow : System.Windows.Window
 	{
-		bool PrzedPierwszaGra = true;
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -31,7 +30,6 @@ namespace ProjektObiektowe
 		{
 			tabsy.SelectedItem = TabGry;
 			LogikaGry.Instancja.RozpocznijGre();
-			PrzedPierwszaGra = false;
 		}
 		private void WyjscieWcisnieto(object sender, EventArgs e)
 		{

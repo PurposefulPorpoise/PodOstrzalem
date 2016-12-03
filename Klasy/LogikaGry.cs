@@ -75,7 +75,7 @@ namespace ProjektObiektowe
 			CzasGryS = 0.0;
 			Rysowanie.Start();
 			Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5, new SFML.System.Vector2f(560, 560));
-			Rysowanie.LicznikRysowania.Tick -= CoKlatke;
+			Rysowanie.LicznikRysowania.Tick -= CoKlatke; // -= zeby uniknac duplikowanych subskrybcji
 			Rysowanie.LicznikRysowania.Tick += CoKlatke;
 			LicznikDelty = Stopwatch.StartNew();
 			Ruchome.Add(Gracz);
@@ -85,12 +85,12 @@ namespace ProjektObiektowe
 		}
 		public void Subskrybcje(Window okno)
 		{
-			if (LicznikDelty != null)
+			if (LicznikDelty != null && okno != null)
 			{
-				okno.Deactivated -= (o, s) => LicznikDelty.Stop();
-				okno.Deactivated += (o, s) => LicznikDelty.Stop();
-				okno.Activated -= (o, s) => LicznikDelty.Start();
-				okno.Activated += (o, s) => LicznikDelty.Start();
+				okno.Deactivated -= Zminimalizowano; // -= zeby uniknac duplikowanych subskrybcji
+				okno.Deactivated += Zminimalizowano;
+				okno.Activated -= Przywrocono;
+				okno.Activated += Przywrocono;
 			}
 		}
 		public void CoKlatke(object s, EventArgs e) //wywolywane co okolo 23ms (idealnie 16ms), daje to ~43fps
@@ -177,6 +177,16 @@ namespace ProjektObiektowe
 				File.WriteAllText("najlepszywynik", Convert.ToBase64String(Encoding.Default.GetBytes(Najdluzej.ToString())));
 			}
 			catch { /*no trudno*/ }
+		}
+		void Zminimalizowano(object sender, EventArgs e)
+		{
+			if(LicznikDelty != null)
+				LicznikDelty.Stop();
+		}
+		void Przywrocono(object sender, EventArgs e)
+		{
+			if (LicznikDelty != null)
+				LicznikDelty.Start();
 		}
 	}
 }

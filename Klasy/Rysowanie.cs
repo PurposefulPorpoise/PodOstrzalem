@@ -45,7 +45,7 @@ namespace ProjektObiektowe
 
 		public static void Zminimalizowano(object sender, EventArgs e)
 		{
-			if(LicznikRysowania != null)
+			if (LicznikRysowania != null)
 				LicznikRysowania.Stop();
 		}
 
@@ -61,7 +61,7 @@ namespace ProjektObiektowe
 			OknoRenderowania = new RenderWindow(PowierzchniaRys.Handle, Context);
 			OknoRenderowania.SetVerticalSyncEnabled(true);
 			//wysokosc z zachowaniem proporcji, zeby nie rozciagalo na innych rozdzielczosciach ekranu
-			int wysokosc = 1280 * PowierzchniaRys.Size.Height / PowierzchniaRys.Size.Width; 
+			int wysokosc = 1280 * PowierzchniaRys.Size.Height / PowierzchniaRys.Size.Width;
 			View widok = new View(new Vector2f(1280 / 2, wysokosc / 2), //szerokosc stala, zeby sciany stykaly sie z oknem
 				new Vector2f(1280, wysokosc));
 			OknoRenderowania.SetView(widok);
@@ -93,8 +93,11 @@ namespace ProjektObiektowe
 		}
 		public static void Zakoncz(object s, EventArgs e)
 		{
-			LicznikRysowania.Stop();
-			LicznikRysowania = null;
+			if (LicznikRysowania != null)
+			{
+				LicznikRysowania.Stop();
+				LicznikRysowania = null;
+			}
 			//LogikaGry.LicznikDelty.Stop();
 			OknoRenderowania.Close();
 		}
