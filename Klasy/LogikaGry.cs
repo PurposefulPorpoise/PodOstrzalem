@@ -69,15 +69,29 @@ namespace ProjektObiektowe
 		long WynikZPliku;
 		public void RozpocznijGre()
 		{
+			Rysowane.AddRange(Plansza.sciany);
+			foreach (var d in Dzialka)
+				Rysowane.Add(d.sprite);
 			CzasGryS = 0.0;
+			Rysowanie.Start();
 			Gracz = new PostacGracza(Properties.Resources.zgory_niskarozdz, 4, 5, new SFML.System.Vector2f(560, 560));
+			Rysowanie.LicznikRysowania.Tick -= CoKlatke;
 			Rysowanie.LicznikRysowania.Tick += CoKlatke;
 			LicznikDelty = Stopwatch.StartNew();
-			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
 			Ruchome.Add(Gracz);
 			Animowane.Add(Gracz);
+			Subskrybcje(Application.Current.MainWindow);
 			//Application.Current.MainWindow.Closed += (s, e) => LicznikDelty.Stop();
-			Rysowanie.Start();
+		}
+		public void Subskrybcje(Window okno)
+		{
+			if (LicznikDelty != null)
+			{
+				okno.Deactivated -= (o, s) => LicznikDelty.Stop();
+				okno.Deactivated += (o, s) => LicznikDelty.Stop();
+				okno.Activated -= (o, s) => LicznikDelty.Start();
+				okno.Activated += (o, s) => LicznikDelty.Start();
+			}
 		}
 		public void CoKlatke(object s, EventArgs e) //wywolywane co okolo 23ms (idealnie 16ms), daje to ~43fps
 		{
@@ -103,8 +117,11 @@ namespace ProjektObiektowe
 			CzasGryS += _DeltaCzasu;
 			if (Gracz.zdrowie == 0)
 				ZakonczGre();
-			LicznikDelty.Reset(); //liczy czas od ostatniej klatki, z kazda klatką od nowa
-			LicznikDelty.Start();
+			else
+			{
+				LicznikDelty.Reset(); //liczy czas od ostatniej klatki, z kazda klatką od nowa
+				LicznikDelty.Start();
+			}
 		}
 		public void DodajDzialko(Dzialko nowe)
 		{
@@ -122,8 +139,9 @@ namespace ProjektObiektowe
 		}
 		public void ZakonczGre()
 		{
-			LicznikDelty.Stop();
 			Rysowanie.Zakoncz(this, null);
+			LicznikDelty.Stop();
+			Debug.WriteLine("ZakonczGre()");
 			MessageBoxResult klikniete = MessageBox.Show
 				(string.Format("Umarłeś\nPrzetrwałeś {0}s", Convert.ToInt64(CzasGryS))
 				, "Game over", MessageBoxButton.OK);
@@ -132,31 +150,33 @@ namespace ProjektObiektowe
 				if (GraSkonczona != null)
 					GraSkonczona(this, null);
 				NrKlatkiGry = 0;
-				LicznikDelty.Stop();
+				LicznikDelty = null;
 				_DeltaCzasu = 0.0;
 				_Rysowane.Clear();
 				Ruchome.Clear();
 				Animowane.Clear();
-				Dzialka.Clear();
+				//Dzialka.Clear();
 				Pociski.Clear();
 				PociskiDoUsuniecia.Clear();
 				Gracz.zdrowie = 3;
-				Rysowanie.Zakoncz(this, null);
 				Wynik();
 			}
-
 		}
 		public void Wynik()
 		{
-			if (!File.Exists("najlepszywynik"))
-				File.CreateText("najlepszywynik").Close();
-			//utrudnia reczna zamiane kodujac w systemie 64
-			string wczytane = File.ReadAllText("najlepszywynik");
-			if(wczytane.Length>0)
-				wczytane = Encoding.Default.GetString(Convert.FromBase64String(wczytane));
-			Int64.TryParse(wczytane, out WynikZPliku);
-			Najdluzej = Convert.ToInt32(CzasGryS);
-			File.WriteAllText("najlepszywynik", Convert.ToBase64String(Encoding.Default.GetBytes(Najdluzej.ToString())));
+			try
+			{
+				if (!File.Exists("najlepszywynik"))
+					File.CreateText("najlepszywynik").Close();
+				//utrudnia reczna zamiane kodujac w systemie 64
+				string wczytane = File.ReadAllText("najlepszywynik");
+				if (wczytane.Length > 0)
+					wczytane = Encoding.Default.GetString(Convert.FromBase64String(wczytane));
+				Int64.TryParse(wczytane, out WynikZPliku);
+				Najdluzej = Convert.ToInt32(CzasGryS);
+				File.WriteAllText("najlepszywynik", Convert.ToBase64String(Encoding.Default.GetBytes(Najdluzej.ToString())));
+			}
+			catch { /*no trudno*/ }
 		}
 	}
 }

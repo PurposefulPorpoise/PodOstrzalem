@@ -15,7 +15,7 @@ namespace ProjektObiektowe
 	static class Rysowanie
 	{
 		static private RenderWindow OknoRenderowania;
-		public static System.Windows.Forms.Timer LicznikRysowania = new System.Windows.Forms.Timer();
+		public static System.Windows.Forms.Timer LicznikRysowania;
 
 		public static SfmlDrawingSurface PowierzchniaRys;
 
@@ -23,22 +23,30 @@ namespace ProjektObiektowe
 		public static void Start()
 		{
 			StworzOknoRenderowania();
+			LicznikRysowania = new System.Windows.Forms.Timer();
 			LicznikRysowania.Interval = 1000 / 60; //fps 60
+			PowierzchniaRys.SizeChanged -= Surface_SizeChanged;
 			PowierzchniaRys.SizeChanged += Surface_SizeChanged;
 			LicznikRysowania.Start();
+			Application.Current.MainWindow.Deactivated -= Zminimalizowano;
 			Application.Current.MainWindow.Deactivated += Zminimalizowano;
+			Application.Current.MainWindow.Activated -= Powrot;
 			Application.Current.MainWindow.Activated += Powrot;
+			Application.Current.MainWindow.Closed -= Zakoncz;
 			Application.Current.MainWindow.Closed += Zakoncz;
+
 		}
 
-		private static void Powrot(object sender, EventArgs e)
+		public static void Powrot(object sender, EventArgs e)
 		{
-			LicznikRysowania.Start();
+			if (LicznikRysowania != null)
+				LicznikRysowania.Start();
 		}
 
-		private static void Zminimalizowano(object sender, EventArgs e)
+		public static void Zminimalizowano(object sender, EventArgs e)
 		{
-			LicznikRysowania.Stop();
+			if(LicznikRysowania != null)
+				LicznikRysowania.Stop();
 		}
 
 		private static void StworzOknoRenderowania()
@@ -86,6 +94,7 @@ namespace ProjektObiektowe
 		public static void Zakoncz(object s, EventArgs e)
 		{
 			LicznikRysowania.Stop();
+			LicznikRysowania = null;
 			//LogikaGry.LicznikDelty.Stop();
 			OknoRenderowania.Close();
 		}
