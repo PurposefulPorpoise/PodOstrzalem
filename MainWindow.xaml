@@ -43,7 +43,7 @@
                             </LinearGradientBrush>
                         </Button.Background>
                     </Button>
-                    <TextBlock Text="{Binding Path=Najdluzej, StringFormat=Najlepszy czas: {0}s }" Width="400" FontSize="24" Margin="{StaticResource margines}" HorizontalAlignment="Right" FontFamily="Showcard Gothic" Foreground="White"/>
+                    <TextBlock Text="{Binding Path=Najdluzej, StringFormat=Najlepszy czas: {0} s }" Width="400" FontSize="24" Margin="{StaticResource margines}" HorizontalAlignment="Right" FontFamily="Showcard Gothic" Foreground="White"/>
                 </StackPanel>
             </Grid>
 

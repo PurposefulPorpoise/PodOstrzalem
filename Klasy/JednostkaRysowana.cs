@@ -1,10 +1,5 @@
 ﻿using SFML.Graphics;
 using SFML.System;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjektObiektowe
 {
@@ -26,7 +21,6 @@ namespace ProjektObiektowe
 			Pozycja = pozycja;
 			Sprite.Origin = new Vector2f(Sprite.Texture.Size.X / 2, Sprite.Texture.Size.Y / 2);
 			Sprite.Texture.Smooth = true; //wygladzanie tekstury
-			//if (!Rysowanie.Rysowane.Contains(Sprite)) Rysowanie.Rysowane.Add(Sprite);
 			if (!LogikaGry.Instancja.Rysowane.Contains(Sprite)) LogikaGry.Instancja.DodajRysowane(Sprite);
 		}
 	}

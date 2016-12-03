@@ -76,7 +76,7 @@ namespace ProjektObiektowe
 			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
 			Ruchome.Add(Gracz);
 			Animowane.Add(Gracz);
-			Application.Current.MainWindow.Closed += (s, e) => LicznikDelty.Stop();
+			//Application.Current.MainWindow.Closed += (s, e) => LicznikDelty.Stop();
 			Rysowanie.Start();
 		}
 		public void CoKlatke(object s, EventArgs e) //wywolywane co okolo 23ms (idealnie 16ms), daje to ~43fps
@@ -97,7 +97,7 @@ namespace ProjektObiektowe
 					Ruchome.Add(dzialko.Strzel(Gracz.Pozycja, 1.2f*(float)CzasGryS+230f)); //zwraca nowy pocisk i dodaje do listy rysowanych
 					Pociski.Add((Pocisk)Ruchome.Last());
 				}
-            Rysowanie.Rysuj(_Rysowane, new Color(114, 123, 139));  //(147, 169, 131)); orginalny  (143, 143, 177)); fioletowoszary
+				Rysowanie.Rysuj(_Rysowane, new Color(114, 123, 139));  //(147, 169, 131)); orginalny  (143, 143, 177)); fioletowoszary
 			NrKlatkiGry++;
 			_DeltaCzasu = LicznikDelty.Elapsed.TotalSeconds;
 			CzasGryS += _DeltaCzasu;
@@ -132,7 +132,7 @@ namespace ProjektObiektowe
 				if (GraSkonczona != null)
 					GraSkonczona(this, null);
 				NrKlatkiGry = 0;
-				LicznikDelty = new Stopwatch();
+				LicznikDelty.Stop();
 				_DeltaCzasu = 0.0;
 				_Rysowane.Clear();
 				Ruchome.Clear();
