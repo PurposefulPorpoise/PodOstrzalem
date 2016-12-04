@@ -11,6 +11,7 @@ namespace ProjektObiektowe
 		public MainWindow()
 		{
 			InitializeComponent();
+			PrzyciskStart.IsDefault = true;
 			Plansza.StworzZBitmapy(Properties.Resources.mapa, Properties.Resources.sciana);
 			LogikaGry.Instancja.Wynik(); //wczytuje z pliku
 			this.DataContext = LogikaGry.Instancja;
@@ -38,7 +39,7 @@ namespace ProjektObiektowe
 		public void ZmienKarteNaMenu(object o, EventArgs e)
 		{
 			tabsy.SelectedIndex = 0;
-
+			
 		}
 
 	}

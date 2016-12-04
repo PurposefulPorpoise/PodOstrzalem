@@ -20,7 +20,7 @@
                         <!--lewo,gora,prawo,dol-->
                     </StackPanel.Resources>
                     
-                    <Button Click="StartWcisnieto" Height="100" 
+                    <Button Click="StartWcisnieto" x:Name="PrzyciskStart" Height="100" 
                 	Margin="{StaticResource margines}"
                 		Content="START" FontFamily="Showcard Gothic" FontSize="72" FontWeight="Medium" HorizontalAlignment="Right" Width="400" BorderBrush="#FFB4B2B2" Foreground="Black" BorderThickness="1">
                         <Button.Background>
