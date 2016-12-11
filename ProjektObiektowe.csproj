@@ -178,6 +178,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\muzyka.wav" />
+    <None Include="Resources\muzyka.mp3" />
     <Resource Include="Resources\dzialko.png" />
     <Resource Include="Resources\zycie.png" />
     <Resource Include="Resources\pocisk.png" />

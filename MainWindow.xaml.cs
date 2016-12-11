@@ -18,8 +18,6 @@ namespace ProjektObiektowe
 			Rysowanie.PowierzchniaRys = DrawSurface;
 
 			tabsy.Loaded += WczytaloSie;
-			//tabsy.SelectionChanged += TabZmieniony;
-			LogikaGry.Instancja.GraSkonczona -= ZmienKarteNaMenu;
 			LogikaGry.Instancja.GraSkonczona += ZmienKarteNaMenu;
 		}
 

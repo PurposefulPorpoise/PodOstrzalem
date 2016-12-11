@@ -7,6 +7,7 @@ using System.Diagnostics;
 using SFML.Graphics;
 using System.Windows;
 using System.IO;
+using System.Media;
 
 namespace ProjektObiektowe
 {
@@ -67,6 +68,7 @@ namespace ProjektObiektowe
 		public event EventHandler GraSkonczona;
 		double CzasGryS = 0;
 		long WynikZPliku;
+		SoundPlayer OdtwarzaczMuzyki = new SoundPlayer(Properties.Resources.muzyka);
 		public void RozpocznijGre()
 		{
 			Rysowane.AddRange(Plansza.sciany);
@@ -81,6 +83,7 @@ namespace ProjektObiektowe
 			Ruchome.Add(Gracz);
 			Animowane.Add(Gracz);
 			Subskrybcje(Application.Current.MainWindow);
+			OdtwarzaczMuzyki.PlayLooping();
 			//Application.Current.MainWindow.Closed += (s, e) => LicznikDelty.Stop();
 		}
 		public void Subskrybcje(Window okno)
@@ -141,7 +144,7 @@ namespace ProjektObiektowe
 		{
 			Rysowanie.Zakoncz(this, null);
 			LicznikDelty.Stop();
-			Debug.WriteLine("ZakonczGre()");
+			OdtwarzaczMuzyki.Stop();
 			MessageBoxResult klikniete = MessageBox.Show
 				(string.Format("Umarłeś\nPrzetrwałeś {0}s", Convert.ToInt64(CzasGryS))
 				, "Game over", MessageBoxButton.OK);
